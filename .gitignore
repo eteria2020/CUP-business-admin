@@ -1,0 +1,16 @@
+nbproject
+._*
+.~lock.*
+.buildpath
+.DS_Store
+Thumbs.db
+.idea
+.project
+.settings
+vendor
+module/SharengoCore
+module/Cartasi
+data/DoctrineORMModule
+data/DoctrineMongoODMModule
+public/cache
+node_modules
