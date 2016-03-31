@@ -9,7 +9,7 @@ use BjyAuthorize\Provider\Role\ProviderInterface;
 /**
  * Webuser
  *
- * @ORM\Table(name="business.webuser_business",uniqueConstraints={@ORM\UniqueConstraint(name="email_idx", columns={"email"})})
+ * @ORM\Table(name="webuser",schema="business",uniqueConstraints={@ORM\UniqueConstraint(name="email_idx", columns={"email"})})
  * @ORM\Entity(repositoryClass="Application\Entity\Repository\WebuserRepository", readOnly=true)
  */
 class Webuser implements ProviderInterface {
