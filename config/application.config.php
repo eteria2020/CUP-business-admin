@@ -13,8 +13,10 @@ $config = [
         'ZfcUserDoctrineORM',
         'BjyAuthorize',
         'AssetManager',
-        'Application',
         'MvLabsMultilanguage',
+        
+        'Application',
+        'SharengoAdminUI',
     ],
 
     // These are various options for the listeners attached to the ModuleManager

@@ -169,9 +169,17 @@ return [
             ],
         ],
     ],
+    
+    // assets
+    'asset_manager' => [
+        'resolver_configs' => [
+            'paths' => [
+                __DIR__ . '/../public',
+            ],
+        ],
+    ],
 
     // navigation
-
     'navigation' => [
         'default' => [
             [
@@ -189,4 +197,5 @@ return [
             ],
         ]
     ]
+    
 ];

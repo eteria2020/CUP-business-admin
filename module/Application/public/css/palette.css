@@ -1,15 +1,15 @@
 /* General */
 
 .palette-change {
-	background-color: #43a34c !important;
+	background-color: #4b4b4a !important;
 }
 
 .palette-change-dark {
-	background-color: #33933c !important;
+	background-color: black !important;
 }
 
 .palette-change-light {
-	background-color: #52e25f !important;
+	background-color: #eded15 !important;
 }
 
 /* Login page */
@@ -20,44 +20,44 @@
 
 .login-button:hover,
 .login-button:focus {
-	background-color: #33933c !important;
+	background-color: #848484 !important;
 }
 
 .copyright {
-	color: #7aca8c !important;
+	color: #848484 !important;
 }
 
 /* Admin page */
 
 .portlet.box.green > .portlet-title {
-	background-color: #43a34c !important; /* 4B8DF8 */
+	background-color: #4b4b4a !important; /* 4B8DF8 */
 }
 
 .js-search {
-	background-color: #43a34c !important;
+	background-color: #4b4b4a !important;
 }
 
 button.dropdown-toggle {
-	background-color: #43a34c !important;
+	background-color: #4b4b4a !important;
 }
 
 .portlet > .portlet-body.green, .portlet.green {
-	background-color: #43a34c !important;
+	background-color: #4b4b4a !important;
 }
 
 .portlet.box.green {
-	border: 1px solid #43a34c !important;
+	border: 1px solid #4b4b4a !important;
 }
 
 .btn-success {
-	background-color: #43a34c !important;
+	background-color: #4b4b4a !important;
 }
 
 .panel-default > .panel-heading {
     background-image: none !important;
-	background-color: #43a34c !important;
+	background-color: #4b4b4a !important;
 }
 
 .panel-default {
-	border-color: #43a34c;
+	border-color: #4b4b4a;
 }
