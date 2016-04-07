@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "17b0791b68e65b6c06b6d1f67335be6e",
-    "content-hash": "7f7338d7f9e7c924a3ee01772cc3e630",
+    "hash": "eafc2e664f7ed7ac2c970f60a8e33101",
+    "content-hash": "b31fa715e694cc5045c9a8493ea5e274",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -1191,6 +1191,28 @@
                 "zf2"
             ],
             "time": "2015-03-12 07:10:33"
+        },
+        {
+            "name": "sharengo-web/admin-ui",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-ui.git",
+                "reference": "17a219bda7cddcb27d2f8a588df560e00610aec9"
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "rwoverdijk/assetmanager": "1.4.*",
+                "zendframework/zendframework": "2.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "SharengoAdminUI": "src/"
+                }
+            },
+            "description": "UI branding for admin interface",
+            "time": "2016-04-04 09:18:08"
         },
         {
             "name": "symfony/console",
@@ -2883,6 +2905,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "mvlabs/zf2-multilanguage": 20,
+        "sharengo-web/admin-ui": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
