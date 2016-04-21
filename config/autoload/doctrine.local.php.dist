@@ -1,19 +1,19 @@
 <?php
 
-return array(
-    'doctrine' => array(
-        'connection' => array(
+return [
+    'doctrine' => [
+        'connection' => [
             // default connection name
-            'orm_default' => array(
+            'orm_default' => [
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOPgSql\Driver',
-                'params' => array(
+                'params' => [
                     'host'     => '127.0.0.1',
-                    'port'     => '5432',
+                    'port'     => 'port',
                     'user'     => 'user',
                     'password' => 'pass',
                     'dbname'   => 'db',
-                )
-            ),
-        ),
-    ),
-);
+                ]
+            ]
+        ]
+    ]
+];

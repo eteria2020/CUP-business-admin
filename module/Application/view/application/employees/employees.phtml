@@ -1,0 +1,44 @@
+<?php
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet('/css/employees.css');
+$this->headScript()
+    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/employees.js');
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+
+        <!-- BEGIN PAGE HEADER-->
+        <h3 class="page-title">
+            <?= $this->translate("ELENCO DIPENDENTI"); ?>
+        </h3>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php echo $this->partial('partials/employees-table.phtml', [
+                            'title' => $this->translate("Elenco dipendenti"),
+                            'tableId' => 'js-business-employees-table',
+                            'business' => $this->business,
+                            'list' => $this->business->getApprovedBusinessEmployees()
+                        ]); ?>
+
+                        <?php echo $this->partial('partials/employees-table.phtml', [
+                            'title' => $this->translate("In attesa di approvazione"),
+                            'tableId' => 'js-pending-business-employees-table',
+                            'business' => $this->business,
+                            'list' => $this->business->getPendingBusinessEmployees()
+                        ]); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>

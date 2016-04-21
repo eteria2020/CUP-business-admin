@@ -27,7 +27,7 @@ class Module
 
         $options = $serviceManager->get('zfcuser_module_options');
 
-        
+
         // BjyAuthorize redirection strategy
         $strategy = new RedirectionStrategy();
 
@@ -70,21 +70,6 @@ class Module
         
         $em = $e->getApplication()->getServiceManager()->get('Doctrine\ORM\EntityManager');
         $platform = $em->getConnection()->getDatabasePlatform();
-        $platform->registerDoctrineTypeMapping('gender', 'string');
-        $platform->registerDoctrineTypeMapping('car_status', 'string');
-        $platform->registerDoctrineTypeMapping('cleanliness', 'string');
-        $platform->registerDoctrineTypeMapping('_text', 'string');
-        $platform->registerDoctrineTypeMapping('_int4', 'string');
-        $platform->registerDoctrineTypeMapping('geometry', 'string');
-        $platform->registerDoctrineTypeMapping('jsonb', 'string');
-        $platform->registerDoctrineTypeMapping('reservations_archive_reason', 'string');
-        $platform->registerDoctrineTypeMapping('invoice_type', 'string');
-        $platform->registerDoctrineTypeMapping('trip_payment_status', 'string');
-        $platform->registerDoctrineTypeMapping('polygon', 'string');
-        $platform->registerDoctrineTypeMapping('extra_payments_types', 'string');
-        $platform->registerDoctrineTypeMapping('disabled_reason', 'string');
-        $platform->registerDoctrineTypeMapping('reactivation_reason', 'string');
-        $platform->registerDoctrineTypeMapping('csv_anomaly_type', 'string');
         $platform->registerDoctrineTypeMapping('gender', 'string');
         $platform->registerDoctrineTypeMapping('car_status', 'string');
         $platform->registerDoctrineTypeMapping('cleanliness', 'string');
