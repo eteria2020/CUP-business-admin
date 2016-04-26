@@ -35,7 +35,7 @@ $(function() {
     $('#js-group-add-employees-table').dataTable({
         order: orderSpecs,
         language: languageSpecs,
-        columnDef: columnDefs
+        columnDefs: columnDefs
     });
 
 });

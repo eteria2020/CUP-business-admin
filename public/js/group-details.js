@@ -35,7 +35,7 @@ $(function() {
     $('#js-employees-group-table').dataTable({
         order: orderSpecs,
         language: languageSpecs,
-        columnDef: columnDefs
+        columnDefs: columnDefs
     });
 
 });

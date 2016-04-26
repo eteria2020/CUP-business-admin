@@ -35,7 +35,7 @@ $(function() {
     $('#js-groups-table').dataTable({
         order: orderSpecs,
         language: languageSpecs,
-        columnDef : columnDefs
+        columnDefs : columnDefs
     });
 
 });
