@@ -5,9 +5,10 @@ use Application\Form\GroupForm;
 use BusinessCore\Entity\Business;
 use BusinessCore\Entity\Group;
 use BusinessCore\Entity\Webuser;
-use BusinessCore\Exception\InvalidGroupFormException;
 use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\GroupService;
+
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\I18n\Translator;
@@ -75,8 +76,8 @@ class GroupsController extends AbstractActionController
                 $this->groupService->createNewGroup($this->getCurrentBusiness(), $data);
                 $this->flashMessenger()->addSuccessMessage($this->translator->translate('Gruppo creato con successo'));
                 return $this->redirect()->toRoute('groups');
-            } catch (InvalidGroupFormException $e) {
-                $this->flashMessenger()->addSuccessMessage($e->getMessage());
+            } catch (UniqueConstraintViolationException $e) {
+                $this->flashMessenger()->addErrorMessage($this->translator->translate("Esiste già un gruppo con questo nome"));
                 return $this->redirect()->toRoute('groups/add');
             }
         }
@@ -97,8 +98,8 @@ class GroupsController extends AbstractActionController
         $group = $this->getCurrentGroup();
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost()->toArray();
-
-            $nInsert = $this->groupService->addEmployeesToGroup($data, $group);
+            $userIdsToAdd = $this->getUserIdsFromPostData($data);
+            $nInsert = $this->groupService->addEmployeesToGroup($userIdsToAdd, $group);
             if ($nInsert == 0) {
                 $this->flashMessenger()->addSuccessMessage($this->translator->translate('Nessun dipendente selezionato'));
                 return $this->redirect()->toRoute('groups/details/add-employees', ['id' => $group->getId()]);
@@ -134,7 +135,7 @@ class GroupsController extends AbstractActionController
         if ($user instanceof Webuser) {
             return $user->getBusiness();
         } else {
-            throw new AuthenticationEventException("Errore di autenticazione");
+            throw new AuthenticationEventException($this->translator->translate("Errore di autenticazione"));
         }
     }
 
@@ -145,5 +146,23 @@ class GroupsController extends AbstractActionController
     {
         $groupId = $this->params()->fromRoute('id', 0);
         return $this->groupService->getGroupById($groupId);
+    }
+
+    /**
+     * This function receive raw $data from the form post
+     * selected users come in $data as 'add-1234' => 'on' where 1234 is the id of the user
+     * @param $data
+     * @return array
+     */
+    private function getUserIdsFromPostData($data)
+    {
+        $userIds = [];
+        foreach ($data as $key => $value) {
+            if (substr($key, 0, 3) === 'add' && $value === 'on') {
+                $employeeId = substr($key, 4);
+                $userIds[] = $employeeId;
+            }
+        }
+        return $userIds;
     }
 }

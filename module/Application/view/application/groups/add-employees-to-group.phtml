@@ -51,7 +51,7 @@ $this->headScript()
                             <tr>
                                 <td><?= $employee->getName() . " " . $employee->getSurname(); ?></td>
                                 <td><?= $employee->getEmail(); ?></td>
-                                <td><?= $this->BusinessEmployeeStatus($be->getStatus()); ?></td>
+                                <td><?= $this->businessEmployeeStatus($be->getStatus()); ?></td>
                                 <td>
                                     <label><input type="checkbox" name="add-<?= $employee->getId() ?>"> seleziona</label>
                                 </td>
