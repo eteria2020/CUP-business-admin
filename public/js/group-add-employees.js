@@ -1,4 +1,4 @@
-/* global $ document Spinner translate */
+/* global $ translate */
 $(function() {
     'use strict';
 
@@ -37,5 +37,4 @@ $(function() {
         language: languageSpecs,
         columnDefs: columnDefs
     });
-
 });

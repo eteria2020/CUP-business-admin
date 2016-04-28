@@ -1,4 +1,4 @@
-/* global $ document Spinner translate */
+/* global $ translate */
 $(function() {
     'use strict';
 
