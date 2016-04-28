@@ -6,23 +6,30 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class TripsControllerFactory implements FactoryInterface
+class InvoicesControllerFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param ServiceLocatorInterface|ServiceLocatorAwareInterface $serviceLocator
-     * @return TripsController
+     * @return InvoicesController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $sl = $serviceLocator->getServiceLocator();
-        $authService = $sl->get('zfcuser_auth_service');
+        $businessInvoiceService = $sl->get('BusinessCore\Service\BusinessInvoiceService');
+        $invoicePdfService = $sl->get('BusinessCore\Service\InvoicePdfService');
         $datatableService = $sl->get('BusinessCore\Service\DatatableService');
-        $businessTripService = $sl->get('BusinessCore\Service\BusinessTripService');
+        $authService = $sl->get('zfcuser_auth_service');
         $translator = $sl->get('translator');
 
-        return new TripsController($translator, $businessTripService, $datatableService, $authService);
+        return new InvoicesController(
+            $translator,
+            $businessInvoiceService,
+            $invoicePdfService,
+            $datatableService,
+            $authService
+        );
     }
 
 }

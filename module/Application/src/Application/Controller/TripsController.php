@@ -1,12 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Application\Controller;
 
 use BusinessCore\Entity\Business;
@@ -28,10 +20,7 @@ class TripsController extends AbstractActionController
      * @var Translator
      */
     private $translator;
-    /**
-     * @var BusinessService
-     */
-    private $businessService;
+
     /**
      * @var AuthenticationService
      */
@@ -48,20 +37,17 @@ class TripsController extends AbstractActionController
     /**
      * EmployeesController constructor.
      * @param Translator $translator
-     * @param BusinessService $businessService
      * @param BusinessTripService $businessTripService
      * @param DatatableService $datatableService
      * @param AuthenticationService $authService
      */
     public function __construct(
         Translator $translator,
-        BusinessService $businessService,
         BusinessTripService $businessTripService,
         DatatableService $datatableService,
         AuthenticationService $authService
     ){
         $this->translator = $translator;
-        $this->businessService = $businessService;
         $this->datatableService = $datatableService;
         $this->authService = $authService;
         $this->businessTripService = $businessTripService;

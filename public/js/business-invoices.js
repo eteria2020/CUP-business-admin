@@ -1,21 +1,33 @@
 /* global $ translate */
 $(function() {
     "use strict";
-    var table = $('#js-business-trips-table');
+    var table = $('#js-business-invoices-table');
     var search = $('#js-value');
     var column = $('#js-column');
-    var from = $('#js-date-from');
-    var to = $('#js-date-to');
     search.val('');
     column.val('select');
 
+    function renderType(type)
+    {
+        switch (type) {
+            case 'FIRST_PAYMENT':
+                return translate("renderFirstPayment");
+            case 'TRIP':
+                return translate("renderTrip");
+            case 'PENALTY':
+                return translate("renderPenality");
+            case 'BONUS_PACKAGE':
+                return translate("renderBonusPackage");
+        }
+        return type;
+    }
 
     table.dataTable({
         "processing": true,
         "serverSide": true,
         "bStateSave": false,
         "bFilter": false,
-        "sAjaxSource": "/trips/datatable",
+        "sAjaxSource": "/invoices/datatable",
         "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
             oSettings.jqXHR = $.ajax( {
                 "dataType": 'json',
@@ -28,29 +40,44 @@ $(function() {
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
             aoData.push({ "name": "searchValue", "value": $(search).val().trim()});
-
-            aoData.push({ "name": "fromDate", "value": $(from).val().trim()});
-            aoData.push({ "name": "toDate", "value": $(to).val().trim()});
-            aoData.push({ "name": "columnFromDate", "value": "t.timestampBeginning"});
-            aoData.push({ "name": "columnToDate", "value": "t.timestampEnd"});
         },
-        "order": [[7, 'desc']],
+        "order": [[0, 'asc']],
         "columns": [
-            {data: 'e.surname'},
+            {data: 'i.invoiceNumber'},
+            {data: 'i.invoiceDate'},
             {data: 'e.name'},
-            {data: 'g.name'},
-            {data: 't.carPlate'},
-            {data: 't.distance'},
-            {data: 't.duration'},
-            {data: 't.parkSeconds'},
-            {data: 't.timestampBeginning'}
-
+            {data: 'e.surname'},
+            {data: 'i.type'},
+            {data: 'i.amount'},
+            {data: 'i.id'}
         ],
         "columnDefs": [
             {
-                targets: [4, 5, 6],
-                searchable: false,
-                sortable: false
+                targets: 1,
+                "render": function (data) {
+                    return renderDate(data);
+                }
+            },
+            {
+                targets: 4,
+                "render": function (data) {
+                    return renderType(data);
+                }
+            },
+            {
+                targets: 5,
+                className: "sng-dt-right",
+                "render": function (data) {
+                    return renderAmount(data);
+                }
+            },
+            {
+                targets: 6,
+                sortable: false,
+                className: "sng-dt-center",
+                "render": function (data) {
+                    return renderLink(data);
+                }
             }
         ],
         "lengthMenu": [
@@ -60,7 +87,7 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable": translate("sTripEmptyTable"),
+            "sEmptyTable": translate("sInvoicesEmptyTable"),
             "sInfo": translate("sInfo"),
             "sInfoEmpty": translate("sInfoEmpty"),
             "sInfoFiltered": translate("sInfoFiltered"),
@@ -90,21 +117,38 @@ $(function() {
 
     $('#js-clear').click(function() {
         search.val('');
-        from.val('');
-        to.val('');
-        column.val('select');
         search.prop('disabled', false);
+        column.val('select');
         search.show();
-    });
-
-    $('.date-picker').datepicker({
-        autoclose: true,
-        format: 'yyyy-mm-dd',
-        weekStart: 1
     });
 
     $(column).change(function() {
         search.show();
         search.val('');
     });
+
+    function renderDate(date)
+    {
+        return toStringKeepZero(date % 100) + '/' +
+            toStringKeepZero(Math.floor((date / 100) % 100)) + '/' +
+            (Math.floor(date / 10000));
+    }
+
+    function renderAmount(amount)
+    {
+        return (Math.floor(amount / 100)) +
+            ',' +
+            toStringKeepZero(amount % 100) +
+            ' \u20ac';
+    }
+
+    function renderLink(id)
+    {
+        return '<a href=invoices/download/' + id + '><i class="fa fa-download"></i></a>';
+    }
+
+    function toStringKeepZero(value)
+    {
+        return ((value < 10) ? '0' : '') + value;
+    }
 });

@@ -162,6 +162,37 @@ return [
                     ],
                 ],
             ],
+            'invoices' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/invoices',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Invoices',
+                        'action'     => 'invoices',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'pdf' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/download/:id',
+                            'defaults' => [
+                                'action' => 'pdf',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -211,6 +242,7 @@ return [
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
+            'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -317,6 +349,7 @@ return [
                 ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
             ],
         ],
     ],
@@ -360,6 +393,19 @@ return [
                     [
                         'label' => $translator->translate('Elenco'),
                         'route' => 'trips',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Fatture'),
+                'route'     => 'invoices',
+                'icon'      => 'fa fa-file-o',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'invoices',
                         'isVisible' => true
                     ],
                 ],
