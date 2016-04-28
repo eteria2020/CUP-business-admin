@@ -8,7 +8,9 @@ namespace Application;
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-$translator = new \Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\Translator;
+
+$translator = new Translator;
 return [
     'router' => [
         'routes' => [
@@ -138,6 +140,28 @@ return [
                     ],
                 ],
             ],
+            'trips' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/trips',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Trips',
+                        'action'     => 'trips',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -186,6 +210,7 @@ return [
         'factories' => [
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
+            'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -289,8 +314,9 @@ return [
 
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
                 ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Employees', 'roles' => []],
-                ['controller' => 'Application\Controller\Groups', 'roles' => []],
+                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
             ],
         ],
     ],
@@ -314,13 +340,26 @@ return [
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => $translator->translate('Lista'),
+                        'label' => $translator->translate('Elenco'),
                         'route' => 'employees',
                         'isVisible' => true
                     ],
                     [
                         'label' => $translator->translate('Gestione gruppi'),
                         'route' => 'groups',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Corse'),
+                'route'     => 'trips',
+                'icon'      => 'fa fa-road',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'trips',
                         'isVisible' => true
                     ],
                 ],
