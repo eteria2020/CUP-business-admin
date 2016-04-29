@@ -57,7 +57,8 @@ return [
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
-        ]
+            'doctrine.connection.orm_default' => 'Application\Service\OrmConnectionFactory',
+        ],
     ],
     'controllers' => [
         'invokables' => [
