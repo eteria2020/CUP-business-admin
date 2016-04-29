@@ -173,6 +173,7 @@ return [
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
+            'doctrine.connection.orm_default' => 'Application\Service\OrmConnectionFactory',
         ],
         'invokables' => [
             'Application\Form\GroupForm' => 'Application\Form\GroupForm'
@@ -181,7 +182,7 @@ return [
     'controllers' => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Error' => 'Application\Controller\ErrorController'
+            'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
@@ -325,6 +326,6 @@ return [
                     ],
                 ],
             ],
-        ]
-    ]
+        ],
+    ],
 ];
