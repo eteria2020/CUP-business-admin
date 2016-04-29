@@ -228,6 +228,7 @@ return [
         'factories' => [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
+            'doctrine.connection.orm_default' => 'Application\Service\OrmConnectionFactory',
         ],
         'invokables' => [
             'Application\Form\GroupForm' => 'Application\Form\GroupForm'
@@ -236,7 +237,7 @@ return [
     'controllers' => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Error' => 'Application\Controller\ErrorController'
+            'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
@@ -320,23 +321,6 @@ return [
             ],
         ],
     ],
-    
-    'doctrine'        => [
-        'driver' => [
-            __NAMESPACE__ . '_driver' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => [__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity']
-            ],
-            'orm_default'             => [
-                'class'   => 'Doctrine\ORM\Mapping\Driver\DriverChain',
-                'drivers' => [
-                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                ]
-            ],
-        ],
-    ],
-
     // ACL
     'bjyauthorize' => [
         'guards' => [
@@ -345,11 +329,11 @@ return [
                 ['controller' => 'zfcuser', 'roles' => []],
 
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
-                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Index', 'roles' => []],
+                ['controller' => 'Application\Controller\Employees', 'roles' => []],
+                ['controller' => 'Application\Controller\Groups', 'roles' => []],
+                ['controller' => 'Application\Controller\Trips', 'roles' => []],
+                ['controller' => 'Application\Controller\Invoices', 'roles' => []],
             ],
         ],
     ],
@@ -413,3 +397,4 @@ return [
         ]
     ]
 ];
+
