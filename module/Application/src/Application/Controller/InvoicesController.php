@@ -1,22 +1,16 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Application\Controller;
 
 use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessInvoice;
+use BusinessCore\Entity\Invoice;
 use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessInvoiceService;
-use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\DatatableService;
 use BusinessCore\Service\InvoicePdfService;
 use Zend\Authentication\AuthenticationService;
+use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\JsonModel;
@@ -78,7 +72,7 @@ class InvoicesController extends AbstractActionController
         $invoiceId = $this->params()->fromRoute('id', 0);
         $business = $this->getCurrentBusiness();
         $businessInvoice = $this->businessInvoiceService->findOneByIdAndBusiness($invoiceId, $business);
-        return $this->invoicePdfService->generatePdfFromInvoice($businessInvoice->getInvoice());
+        return $this->generatePdfResponse($businessInvoice->getInvoice());
     }
 
     /**
@@ -130,5 +124,22 @@ class InvoicesController extends AbstractActionController
                 ]
             ];
         }, $businessInvoices);
+    }
+
+    private function generatePdfResponse(Invoice $invoice)
+    {
+        $pdf = $this->invoicePdfService->generatePdfFromInvoice($invoice);
+        $response = new Response();
+        $headers  = $response->getHeaders();
+        $headers->addHeaderLine('Content-Type', 'application/pdf');
+        $headers->addHeaderLine(
+            'Content-Disposition',
+            "attachment; filename=\"Fattura-" . $invoice->getInvoiceNumber() . ".pdf\""
+        );
+        $headers->addHeaderLine('Content-Length', strlen($pdf));
+
+        $response->setContent($pdf);
+
+        return $response;
     }
 }
