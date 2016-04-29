@@ -193,6 +193,28 @@ return [
                     ],
                 ],
             ],
+            'time-packages' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/time-packages',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\TimePackages',
+                        'action'     => 'time-packages',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'buy' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/buy',
+                            'defaults' => [
+                                'action' => 'buy',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -244,6 +266,7 @@ return [
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
+            'Application\Controller\TimePackages' => 'Application\Controller\TimePackagesControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -334,6 +357,7 @@ return [
                 ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin']],
             ],
         ],
     ],
@@ -390,6 +414,19 @@ return [
                     [
                         'label' => $translator->translate('Elenco'),
                         'route' => 'invoices',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Pacchetti minuti'),
+                'route'     => 'time-packages',
+                'icon'      => 'fa fa-gift',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'time-packages',
                         'isVisible' => true
                     ],
                 ],

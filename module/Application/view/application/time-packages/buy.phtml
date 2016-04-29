@@ -1,0 +1,22 @@
+<?php
+$this->headLink()
+    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-12">
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title"><?= $this->translate("ACQUISTA NUOVO PACCHETTO"); ?></h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?php echo $this->url('time-packages'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("torna alla lista pacchetti"); ?></a>
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>
