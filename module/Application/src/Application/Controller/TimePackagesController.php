@@ -3,7 +3,7 @@ namespace Application\Controller;
 
 use BusinessCore\Entity\Business;
 use BusinessCore\Entity\Webuser;
-use BusinessCore\Service\BusinessTripService;
+use BusinessCore\Service\BusinessTimePackageService;
 use BusinessCore\Service\DatatableService;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -17,7 +17,6 @@ class TimePackagesController extends AbstractActionController
      * @var Translator
      */
     private $translator;
-
     /**
      * @var AuthenticationService
      */
@@ -27,40 +26,49 @@ class TimePackagesController extends AbstractActionController
      */
     private $datatableService;
     /**
-     * @var BusinessTripService
+     * @var BusinessTimePackageService
      */
-    private $businessTripService;
+    private $businessTimePackageService;
 
     /**
      * EmployeesController constructor.
      * @param Translator $translator
-     * @param BusinessTripService $businessTripService
+     * @param BusinessTimePackageService $businessTimePackageService
      * @param DatatableService $datatableService
      * @param AuthenticationService $authService
      */
     public function __construct(
         Translator $translator,
-        BusinessTripService $businessTripService,
+        BusinessTimePackageService $businessTimePackageService,
         DatatableService $datatableService,
         AuthenticationService $authService
-    ){
+    ) {
         $this->translator = $translator;
         $this->datatableService = $datatableService;
         $this->authService = $authService;
-        $this->businessTripService = $businessTripService;
+        $this->businessTimePackageService = $businessTimePackageService;
     }
 
     public function timePackagesAction()
     {
-
         return new ViewModel([
             'business' => $this->getCurrentBusiness()
         ]);
     }
     public function buyAction()
     {
+        $timePackageId = $this->params()->fromRoute('id', 0);
+        if ($timePackageId != 0) {
+
+            $this->businessTimePackageService->buyTimePackage($this->getCurrentBusiness(), $timePackageId);
+            $this->flashMessenger()->addSuccessMessage($this->translator->translate("Pacchetto minuti acquistato con sucesso"));
+
+            return $this->redirect()->toRoute('time-packages');
+        }
+
         return new ViewModel([
-            'business' => $this->getCurrentBusiness()
+            'business' => $this->getCurrentBusiness(),
+            'packages' => $this->businessTimePackageService->getBuyablePackages()
         ]);
     }
 

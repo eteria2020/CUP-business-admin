@@ -205,9 +205,12 @@ return [
                 'may_terminate' => true,
                 'child_routes' => [
                     'buy' => [
-                        'type'    => 'Literal',
+                        'type'    => 'Segment',
                         'options' => [
-                            'route'    => '/buy',
+                            'route'    => '/buy[/:id]',
+                            'constraint' => [
+                                'id' => '[0-9]*',
+                            ],
                             'defaults' => [
                                 'action' => 'buy',
                             ],

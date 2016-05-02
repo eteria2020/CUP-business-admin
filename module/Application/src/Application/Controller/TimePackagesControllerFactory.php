@@ -19,10 +19,10 @@ class TimePackagesControllerFactory implements FactoryInterface
         $sl = $serviceLocator->getServiceLocator();
         $authService = $sl->get('zfcuser_auth_service');
         $datatableService = $sl->get('BusinessCore\Service\DatatableService');
-        $businessTripService = $sl->get('BusinessCore\Service\BusinessTripService');
+        $businessTimePackageService = $sl->get('BusinessCore\Service\BusinessTimePackageService');
         $translator = $sl->get('translator');
 
-        return new TimePackagesController($translator, $businessTripService, $datatableService, $authService);
+        return new TimePackagesController($translator, $businessTimePackageService, $datatableService, $authService);
     }
 
 }
