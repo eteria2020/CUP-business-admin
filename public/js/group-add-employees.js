@@ -37,5 +37,4 @@ $(function() {
         language: languageSpecs,
         columnDefs: columnDefs
     });
-
 });

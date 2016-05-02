@@ -16,12 +16,11 @@ class EmployeesControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $sl = $serviceLocator->getServiceLocator();
-        $businessService = $sl->get('BusinessCore\Service\BusinessService');
-        $authService = $sl->get('zfcuser_auth_service');
-        $translator = $sl->get('translator');
+        $sharedServiceManager = $serviceLocator->getServiceLocator();
+        $businessService = $sharedServiceManager->get('BusinessCore\Service\BusinessService');
+        $authService = $sharedServiceManager->get('zfcuser_auth_service');
 
-        return new EmployeesController($translator, $businessService, $authService);
+        return new EmployeesController($businessService, $authService);
     }
 
 }

@@ -1,4 +1,4 @@
-/* global $ document Spinner translate */
+/* global $ document translate */
 $(function() {
     'use strict';
 
@@ -35,7 +35,7 @@ $(function() {
     $('#js-groups-table').dataTable({
         order: orderSpecs,
         language: languageSpecs,
-        columnDefs : columnDefs
+        columnDefs: columnDefs
     });
 
 });

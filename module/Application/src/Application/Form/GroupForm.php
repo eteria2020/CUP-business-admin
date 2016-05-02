@@ -27,6 +27,7 @@ class GroupForm extends Form
             'type'       => 'Zend\Form\Element\Text',
             'attributes' => [
                 'id'       => 'description',
+                'maxlength' => 255,
                 'class'    => 'form-control'
             ]
         ]);
