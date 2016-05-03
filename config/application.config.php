@@ -15,10 +15,10 @@ $config = [
         'AssetManager',
         'MvLabsMultilanguage',
 
-        'Application',
         'SharengoAdminUI',
         'MvlabsSnappy',
-        'BusinessCore'
+        'BusinessCore',
+        'Application'
     ],
 
     // These are various options for the listeners attached to the ModuleManager

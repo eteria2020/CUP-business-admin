@@ -18,10 +18,6 @@ use ZfcUser\Exception\AuthenticationEventException;
 class GroupsController extends AbstractActionController
 {
     /**
-     * @var Translator
-     */
-    private $translator;
-    /**
      * @var BusinessService
      */
     private $businessService;
@@ -40,20 +36,17 @@ class GroupsController extends AbstractActionController
 
     /**
      * GroupsController constructor.
-     * @param Translator $translator
      * @param BusinessService $businessService
      * @param GroupService $groupService
      * @param AuthenticationService $authService
      * @param GroupForm $groupForm
      */
     public function __construct(
-        Translator $translator,
         BusinessService $businessService,
         GroupService $groupService,
         AuthenticationService $authService,
         GroupForm $groupForm
     ) {
-        $this->translator = $translator;
         $this->businessService = $businessService;
         $this->groupService = $groupService;
         $this->authService = $authService;
@@ -63,21 +56,21 @@ class GroupsController extends AbstractActionController
     public function groupsAction()
     {
         return new ViewModel([
-            'business' => $this->getCurrentBusiness()
+            'business' => $business = $this->retrieveAuthenticatedUser()->getBusiness()
         ]);
     }
 
     public function addAction()
     {
         if ($this->getRequest()->isPost()) {
-            $data = $this->getRequest()->getPost()->toArray();
-
+            $data = $this->getRequest()->getPost();
             try {
-                $this->groupService->createNewGroup($this->getCurrentBusiness(), $data);
-                $this->flashMessenger()->addSuccessMessage($this->translator->translate('Gruppo creato con successo'));
+                $business = $business = $this->retrieveAuthenticatedUser()->getBusiness();
+                $this->groupService->createNewGroup($business, $data);
+                $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Gruppo creato con successo'));
                 return $this->redirect()->toRoute('groups');
             } catch (UniqueConstraintViolationException $e) {
-                $this->flashMessenger()->addErrorMessage($this->translator->translate("Esiste già un gruppo con questo nome"));
+                $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate("Esiste già un gruppo con questo nome"));
                 return $this->redirect()->toRoute('groups/add');
             }
         }
@@ -97,21 +90,24 @@ class GroupsController extends AbstractActionController
     {
         $group = $this->getCurrentGroup();
         if ($this->getRequest()->isPost()) {
-            $data = $this->getRequest()->getPost()->toArray();
+            $data = $this->getRequest()->getPost();
             $userIdsToAdd = $this->getUserIdsFromPostData($data);
             $nInsert = $this->groupService->addEmployeesToGroup($userIdsToAdd, $group);
             if ($nInsert == 0) {
-                $this->flashMessenger()->addSuccessMessage($this->translator->translate('Nessun dipendente selezionato'));
+                $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Nessun dipendente selezionato'));
                 return $this->redirect()->toRoute('groups/details/add-employees', ['id' => $group->getId()]);
             } else if ($nInsert == 1) {
-                $message = $this->translator->translate('1 dipendente aggiunto al gruppo ' . $group->getName());
+                $message = $this->translatorPlugin()->translate('1 dipendente aggiunto al gruppo %s');
+                $message = sprintf($message, $group->getName());
             } else {
-                $message = $this->translator->translate($nInsert .' dipendenti aggiunti al gruppo ' . $group->getName());
+                $message =  $this->translatorPlugin()->translate('%s dipendenti aggiunti al gruppo %s');
+                $message = sprintf($message, $nInsert, $group->getName());
             }
             $this->flashMessenger()->addSuccessMessage($message);
 
             return $this->redirect()->toRoute('groups/details', ['id' => $group->getId()]);
         }
+
         return new ViewModel([
             'group' => $group
         ]);
@@ -122,21 +118,8 @@ class GroupsController extends AbstractActionController
         $group = $this->getCurrentGroup();
         $employeeId = $this->params()->fromRoute('employee', 0);
         $this->groupService->removeEmployeeFromGroup($group, $employeeId);
-        $this->flashMessenger()->addSuccessMessage($this->translator->translate('Cliente eliminato dal gruppo'));
+        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Cliente eliminato dal gruppo'));
         return $this->redirect()->toRoute('groups/details', ['id' => $group->getId()]);
-    }
-
-    /**
-     * @return Business
-     */
-    private function getCurrentBusiness()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user->getBusiness();
-        } else {
-            throw new AuthenticationEventException($this->translator->translate("Errore di autenticazione"));
-        }
     }
 
     /**
@@ -164,5 +147,18 @@ class GroupsController extends AbstractActionController
             }
         }
         return $userIds;
+    }
+
+    /**
+     * @return Webuser
+     */
+    private function retrieveAuthenticatedUser()
+    {
+        $user = $this->authService->getIdentity();
+        if ($user instanceof Webuser) {
+            return $user;
+        } else {
+            throw new AuthenticationEventException($this->translatorPlugin("Errore di autenticazione"));
+        }
     }
 }

@@ -1,8 +1,8 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()->appendStylesheet($this->basePath() .'/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
 $this->headScript()
-    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
-    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile($this->basePath() .'/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() .'/js/group-add-employees.js');
 ?>
 <div class="page-content-wrapper">
@@ -46,7 +46,7 @@ $this->headScript()
                         </tr>
                         </thead>
                         <?php /** @var \BusinessCore\Entity\BusinessEmployee $be */
-                        foreach ($this->group->getBusiness()->getBusinessEmployeesWithoutGroup() as $be):
+                        foreach ($this->group->getBusiness()->getEnabledBusinessEmployeesWithoutGroup() as $be):
                             $employee = $be->getEmployee(); ?>
                             <tr>
                                 <td><?= $employee->getName() . " " . $employee->getSurname(); ?></td>

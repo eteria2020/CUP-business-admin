@@ -1,10 +1,10 @@
 <?php
 $this->headLink()
-    ->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
-    ->appendStylesheet('/css/employees.css');
+    ->appendStylesheet($this->basePath() .'/js/datatables/plugins/bootstrap/dataTables.bootstrap.css')
+    ->appendStylesheet($this->basePath() .'/css/employees.css');
 $this->headScript()
-    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
-    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile($this->basePath() .'/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() .'/js/employees.js');
 ?>
 <div class="page-content-wrapper">
