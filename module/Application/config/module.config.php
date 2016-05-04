@@ -218,6 +218,16 @@ return [
                     ],
                 ],
             ],
+            'rate' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/rate',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Rate',
+                        'action'     => 'rate',
+                    ],
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -270,6 +280,7 @@ return [
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
             'Application\Controller\TimePackages' => 'Application\Controller\TimePackagesControllerFactory',
+            'Application\Controller\Rate' => 'Application\Controller\RateControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -426,6 +437,7 @@ return [
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Rate', 'roles' => ['superadmin']],
             ],
         ],
     ],
@@ -457,6 +469,18 @@ return [
                         'label' => $translator->translate('Gestione gruppi'),
                         'route' => 'groups',
                         'isVisible' => true
+                    ],
+                    [
+                        'route' => 'groups/add',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'groups/details',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'groups/details/add-employees',
+                        'isVisible' => false
                     ],
                 ],
             ],
@@ -497,9 +521,26 @@ return [
                         'route' => 'time-packages',
                         'isVisible' => true
                     ],
+                    [
+                        'label' => $translator->translate('Acquista'),
+                        'route' => 'time-packages/buy',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Tariffa'),
+                'route'     => 'rate',
+                'icon'      => 'fa fa-bar-chart',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Visualizza'),
+                        'route' => 'rate',
+                        'isVisible' => true
+                    ],
                 ],
             ],
         ]
     ]
 ];
-
