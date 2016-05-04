@@ -2,27 +2,22 @@
 
 namespace Application\Controller;
 
-use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessInvoice;
 use BusinessCore\Entity\Invoice;
 use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessInvoiceService;
 use BusinessCore\Service\DatatableService;
 use BusinessCore\Service\InvoicePdfService;
+
 use Zend\Authentication\AuthenticationService;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use ZfcUser\Exception\AuthenticationEventException;
 
 class InvoicesController extends AbstractActionController
 {
-    /**
-     * @var Translator
-     */
-    private $translator;
     /**
      * @var AuthenticationService
      */
@@ -42,24 +37,21 @@ class InvoicesController extends AbstractActionController
 
     /**
      * EmployeesController constructor.
-     * @param Translator $translator
      * @param BusinessInvoiceService $businessInvoiceService
      * @param InvoicePdfService $invoicePdfService
      * @param DatatableService $datatableService
      * @param AuthenticationService $authService
      */
     public function __construct(
-        Translator $translator,
         BusinessInvoiceService $businessInvoiceService,
         InvoicePdfService $invoicePdfService,
         DatatableService $datatableService,
         AuthenticationService $authService
-    ){
-        $this->translator = $translator;
-        $this->datatableService = $datatableService;
-        $this->authService = $authService;
+    ) {
         $this->businessInvoiceService = $businessInvoiceService;
         $this->invoicePdfService = $invoicePdfService;
+        $this->datatableService = $datatableService;
+        $this->authService = $authService;
     }
 
     public function invoicesAction()
@@ -70,28 +62,15 @@ class InvoicesController extends AbstractActionController
     public function pdfAction()
     {
         $invoiceId = $this->params()->fromRoute('id', 0);
-        $business = $this->getCurrentBusiness();
+        $business = $this->retrieveAuthenticatedUser()->getBusiness();
         $businessInvoice = $this->businessInvoiceService->findOneByIdAndBusiness($invoiceId, $business);
         return $this->generatePdfResponse($businessInvoice->getInvoice());
-    }
-
-    /**
-     * @return Business
-     */
-    private function getCurrentBusiness()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user->getBusiness();
-        } else {
-            throw new AuthenticationEventException("Errore di autenticazione");
-        }
     }
 
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $business = $this->getCurrentBusiness();
+        $business = $this->retrieveAuthenticatedUser()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessInvoices = $this->businessInvoiceService->searchInvoicesByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessInvoicesToDatatable($businessInvoices);
@@ -141,5 +120,18 @@ class InvoicesController extends AbstractActionController
         $response->setContent($pdf);
 
         return $response;
+    }
+
+    /**
+     * @return Webuser
+     */
+    private function retrieveAuthenticatedUser()
+    {
+        $user = $this->authService->getIdentity();
+        if ($user instanceof Webuser) {
+            return $user;
+        } else {
+            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
+        }
     }
 }

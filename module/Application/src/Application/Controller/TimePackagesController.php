@@ -1,30 +1,20 @@
 <?php
 namespace Application\Controller;
 
-use BusinessCore\Entity\Business;
 use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessTimePackageService;
-use BusinessCore\Service\DatatableService;
+
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\ViewModel;
 use ZfcUser\Exception\AuthenticationEventException;
 
 class TimePackagesController extends AbstractActionController
 {
     /**
-     * @var Translator
-     */
-    private $translator;
-    /**
      * @var AuthenticationService
      */
     private $authService;
-    /**
-     * @var DatatableService
-     */
-    private $datatableService;
     /**
      * @var BusinessTimePackageService
      */
@@ -32,56 +22,50 @@ class TimePackagesController extends AbstractActionController
 
     /**
      * EmployeesController constructor.
-     * @param Translator $translator
      * @param BusinessTimePackageService $businessTimePackageService
-     * @param DatatableService $datatableService
      * @param AuthenticationService $authService
      */
     public function __construct(
-        Translator $translator,
         BusinessTimePackageService $businessTimePackageService,
-        DatatableService $datatableService,
         AuthenticationService $authService
     ) {
-        $this->translator = $translator;
-        $this->datatableService = $datatableService;
-        $this->authService = $authService;
         $this->businessTimePackageService = $businessTimePackageService;
+        $this->authService = $authService;
     }
 
     public function timePackagesAction()
     {
         return new ViewModel([
-            'business' => $this->getCurrentBusiness()
+            'business' => $this->retrieveAuthenticatedUser()->getBusiness()
         ]);
     }
     public function buyAction()
     {
         $timePackageId = $this->params()->fromRoute('id', 0);
         if ($timePackageId != 0) {
-
-            $this->businessTimePackageService->buyTimePackage($this->getCurrentBusiness(), $timePackageId);
-            $this->flashMessenger()->addSuccessMessage($this->translator->translate("Pacchetto minuti acquistato con sucesso"));
+            $business = $this->retrieveAuthenticatedUser()->getBusiness();
+            $this->businessTimePackageService->buyTimePackage($business, $timePackageId);
+            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Pacchetto minuti acquistato con sucesso"));
 
             return $this->redirect()->toRoute('time-packages');
         }
 
         return new ViewModel([
-            'business' => $this->getCurrentBusiness(),
+            'business' => $this->retrieveAuthenticatedUser()->getBusiness(),
             'packages' => $this->businessTimePackageService->getBuyablePackages()
         ]);
     }
 
     /**
-     * @return Business
+     * @return Webuser
      */
-    private function getCurrentBusiness()
+    private function retrieveAuthenticatedUser()
     {
         $user = $this->authService->getIdentity();
         if ($user instanceof Webuser) {
-            return $user->getBusiness();
+            return $user;
         } else {
-            throw new AuthenticationEventException("Errore di autenticazione");
+            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
         }
     }
 }

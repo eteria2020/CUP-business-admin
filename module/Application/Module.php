@@ -9,10 +9,9 @@
 
 namespace Application;
 
+use BjyAuthorize\View\RedirectionStrategy;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-use BjyAuthorize\View\RedirectionStrategy;
-use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Zend\Validator\AbstractValidator;
 
 class Module

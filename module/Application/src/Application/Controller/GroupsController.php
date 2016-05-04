@@ -2,25 +2,18 @@
 namespace Application\Controller;
 
 use Application\Form\GroupForm;
-use BusinessCore\Entity\Business;
 use BusinessCore\Entity\Group;
 use BusinessCore\Entity\Webuser;
-use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\GroupService;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\ViewModel;
 use ZfcUser\Exception\AuthenticationEventException;
 
 class GroupsController extends AbstractActionController
 {
-    /**
-     * @var BusinessService
-     */
-    private $businessService;
     /**
      * @var AuthenticationService
      */
@@ -36,18 +29,15 @@ class GroupsController extends AbstractActionController
 
     /**
      * GroupsController constructor.
-     * @param BusinessService $businessService
      * @param GroupService $groupService
      * @param AuthenticationService $authService
      * @param GroupForm $groupForm
      */
     public function __construct(
-        BusinessService $businessService,
         GroupService $groupService,
         AuthenticationService $authService,
         GroupForm $groupForm
     ) {
-        $this->businessService = $businessService;
         $this->groupService = $groupService;
         $this->authService = $authService;
         $this->groupForm = $groupForm;
@@ -56,7 +46,7 @@ class GroupsController extends AbstractActionController
     public function groupsAction()
     {
         return new ViewModel([
-            'business' => $business = $this->retrieveAuthenticatedUser()->getBusiness()
+            'business' => $this->retrieveAuthenticatedUser()->getBusiness()
         ]);
     }
 
@@ -65,7 +55,7 @@ class GroupsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost();
             try {
-                $business = $business = $this->retrieveAuthenticatedUser()->getBusiness();
+                $business = $this->retrieveAuthenticatedUser()->getBusiness();
                 $this->groupService->createNewGroup($business, $data);
                 $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Gruppo creato con successo'));
                 return $this->redirect()->toRoute('groups');
@@ -123,7 +113,7 @@ class GroupsController extends AbstractActionController
     }
 
     /**
-     * @return null|Group
+     * @return Group
      */
     private function getCurrentGroup()
     {
@@ -158,7 +148,7 @@ class GroupsController extends AbstractActionController
         if ($user instanceof Webuser) {
             return $user;
         } else {
-            throw new AuthenticationEventException($this->translatorPlugin("Errore di autenticazione"));
+            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
         }
     }
 }

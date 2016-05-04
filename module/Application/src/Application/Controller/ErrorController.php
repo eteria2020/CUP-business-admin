@@ -8,7 +8,7 @@ use Zend\View\Model\ViewModel;
 class ErrorController extends AbstractActionController
 {
 
-	public function indexAction()
+    public function indexAction()
     {
 
     }
@@ -26,4 +26,3 @@ class ErrorController extends AbstractActionController
         
     }
 }
-

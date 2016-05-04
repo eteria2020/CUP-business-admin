@@ -14,11 +14,10 @@ class GroupsControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $sharedServiceManager = $serviceLocator->getServiceLocator();
-        $businessService = $sharedServiceManager->get('BusinessCore\Service\BusinessService');
         $groupService = $sharedServiceManager->get('BusinessCore\Service\GroupService');
         $authService = $sharedServiceManager->get('zfcuser_auth_service');
         $groupForm = $serviceLocator->getServiceLocator()->get('Application\Form\GroupForm');
 
-        return new GroupsController($businessService, $groupService, $authService, $groupForm);
+        return new GroupsController($groupService, $authService, $groupForm);
     }
 }

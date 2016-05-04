@@ -4,7 +4,6 @@ namespace Application\Controller;
 use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessTrip;
 use BusinessCore\Entity\Webuser;
-use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\BusinessTripService;
 use BusinessCore\Service\DatatableService;
 use Zend\Authentication\AuthenticationService;
@@ -16,11 +15,6 @@ use ZfcUser\Exception\AuthenticationEventException;
 
 class TripsController extends AbstractActionController
 {
-    /**
-     * @var Translator
-     */
-    private $translator;
-
     /**
      * @var AuthenticationService
      */
@@ -36,47 +30,31 @@ class TripsController extends AbstractActionController
 
     /**
      * EmployeesController constructor.
-     * @param Translator $translator
      * @param BusinessTripService $businessTripService
      * @param DatatableService $datatableService
      * @param AuthenticationService $authService
      */
     public function __construct(
-        Translator $translator,
         BusinessTripService $businessTripService,
         DatatableService $datatableService,
         AuthenticationService $authService
-    ){
-        $this->translator = $translator;
+    ) {
+        $this->businessTripService = $businessTripService;
         $this->datatableService = $datatableService;
         $this->authService = $authService;
-        $this->businessTripService = $businessTripService;
     }
 
     public function tripsAction()
     {
         return new ViewModel([
-            'business' => $this->getCurrentBusiness()
+            'business' => $this->retrieveAuthenticatedUser()->getBusiness()
         ]);
-    }
-
-    /**
-     * @return Business
-     */
-    private function getCurrentBusiness()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user->getBusiness();
-        } else {
-            throw new AuthenticationEventException("Errore di autenticazione");
-        }
     }
 
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $business = $this->getCurrentBusiness();
+        $business = $this->retrieveAuthenticatedUser()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessTrips = $this->businessTripService->searchTripsByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessTripsToDatatable($businessTrips);
@@ -113,5 +91,18 @@ class TripsController extends AbstractActionController
                 ],
             ];
         }, $businessTrips);
+    }
+
+    /**
+     * @return Webuser
+     */
+    private function retrieveAuthenticatedUser()
+    {
+        $user = $this->authService->getIdentity();
+        if ($user instanceof Webuser) {
+            return $user;
+        } else {
+            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
+        }
     }
 }

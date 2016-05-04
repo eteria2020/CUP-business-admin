@@ -12,17 +12,14 @@ class TimePackagesControllerFactory implements FactoryInterface
      * Create service
      *
      * @param ServiceLocatorInterface|ServiceLocatorAwareInterface $serviceLocator
-     * @return TripsController
+     * @return TimePackagesController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $sl = $serviceLocator->getServiceLocator();
-        $authService = $sl->get('zfcuser_auth_service');
-        $datatableService = $sl->get('BusinessCore\Service\DatatableService');
-        $businessTimePackageService = $sl->get('BusinessCore\Service\BusinessTimePackageService');
-        $translator = $sl->get('translator');
+        $sharedServiceManager = $serviceLocator->getServiceLocator();
+        $authService = $sharedServiceManager->get('zfcuser_auth_service');
+        $businessTimePackageService = $sharedServiceManager->get('BusinessCore\Service\BusinessTimePackageService');
 
-        return new TimePackagesController($translator, $businessTimePackageService, $datatableService, $authService);
+        return new TimePackagesController($businessTimePackageService, $authService);
     }
-
 }

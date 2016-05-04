@@ -16,20 +16,17 @@ class InvoicesControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $sl = $serviceLocator->getServiceLocator();
-        $businessInvoiceService = $sl->get('BusinessCore\Service\BusinessInvoiceService');
-        $invoicePdfService = $sl->get('BusinessCore\Service\InvoicePdfService');
-        $datatableService = $sl->get('BusinessCore\Service\DatatableService');
-        $authService = $sl->get('zfcuser_auth_service');
-        $translator = $sl->get('translator');
+        $sharedServiceManager = $serviceLocator->getServiceLocator();
+        $businessInvoiceService = $sharedServiceManager->get('BusinessCore\Service\BusinessInvoiceService');
+        $invoicePdfService = $sharedServiceManager->get('BusinessCore\Service\InvoicePdfService');
+        $datatableService = $sharedServiceManager->get('BusinessCore\Service\DatatableService');
+        $authService = $sharedServiceManager->get('zfcuser_auth_service');
 
         return new InvoicesController(
-            $translator,
             $businessInvoiceService,
             $invoicePdfService,
             $datatableService,
             $authService
         );
     }
-
 }

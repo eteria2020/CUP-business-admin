@@ -100,7 +100,7 @@ class EmployeesController extends AbstractActionController
         if ($user instanceof Webuser) {
             return $user;
         } else {
-            throw new AuthenticationEventException($this->translatorPlugin("Errore di autenticazione"));
+            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
         }
     }
 }

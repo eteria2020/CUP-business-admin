@@ -22,5 +22,4 @@ class EmployeesControllerFactory implements FactoryInterface
 
         return new EmployeesController($businessService, $authService);
     }
-
 }
