@@ -239,6 +239,28 @@ return [
                     ]
                 ]
             ],
+            'payments' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/payments',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Payments',
+                        'action'     => 'payments',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'credit-card' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/cc',
+                            'defaults' => [
+                                'action' => 'credit-card',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'unauthorized' => [
                 'type'    => 'Literal',
                 'options' => [
@@ -281,6 +303,7 @@ return [
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
             'Application\Controller\TimePackages' => 'Application\Controller\TimePackagesControllerFactory',
             'Application\Controller\Fares' => 'Application\Controller\FaresControllerFactory',
+            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -438,6 +461,7 @@ return [
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Fares', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Payments', 'roles' => ['superadmin']],
             ],
         ],
     ],
@@ -537,6 +561,24 @@ return [
                     [
                         'label' => $translator->translate('Visualizza'),
                         'route' => 'fares',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Pagamenti'),
+                'route'     => 'payments',
+                'icon'      => 'fa fa-money',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Lista pagamenti'),
+                        'route' => 'payments',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Associazioni Carta di Credito'),
+                        'route' => 'payments/credit-card',
                         'isVisible' => true
                     ],
                 ],
