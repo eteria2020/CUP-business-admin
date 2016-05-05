@@ -15,10 +15,6 @@ use ZfcUser\Exception\AuthenticationEventException;
 class GroupsController extends AbstractActionController
 {
     /**
-     * @var AuthenticationService
-     */
-    private $authService;
-    /**
      * @var GroupService
      */
     private $groupService;
@@ -30,23 +26,20 @@ class GroupsController extends AbstractActionController
     /**
      * GroupsController constructor.
      * @param GroupService $groupService
-     * @param AuthenticationService $authService
      * @param GroupForm $groupForm
      */
     public function __construct(
         GroupService $groupService,
-        AuthenticationService $authService,
         GroupForm $groupForm
     ) {
         $this->groupService = $groupService;
-        $this->authService = $authService;
         $this->groupForm = $groupForm;
     }
 
     public function groupsAction()
     {
         return new ViewModel([
-            'business' => $this->retrieveAuthenticatedUser()->getBusiness()
+            'business' => $this->identity()->getBusiness()
         ]);
     }
 
@@ -55,7 +48,7 @@ class GroupsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost();
             try {
-                $business = $this->retrieveAuthenticatedUser()->getBusiness();
+                $business = $this->identity()->getBusiness();
                 $this->groupService->createNewGroup($business, $data);
                 $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Gruppo creato con successo'));
                 return $this->redirect()->toRoute('groups');
@@ -137,18 +130,5 @@ class GroupsController extends AbstractActionController
             }
         }
         return $userIds;
-    }
-
-    /**
-     * @return Webuser
-     */
-    private function retrieveAuthenticatedUser()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user;
-        } else {
-            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
-        }
     }
 }

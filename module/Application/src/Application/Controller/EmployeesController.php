@@ -9,12 +9,9 @@
 
 namespace Application\Controller;
 
-use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessService;
-use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
 class EmployeesController extends AbstractActionController
 {
@@ -22,34 +19,26 @@ class EmployeesController extends AbstractActionController
      * @var BusinessService
      */
     private $businessService;
-    /**
-     * @var AuthenticationService
-     */
-    private $authService;
 
     /**
      * EmployeesController constructor.
      * @param BusinessService $businessService
-     * @param AuthenticationService $authService
      */
-    public function __construct(
-        BusinessService $businessService,
-        AuthenticationService $authService
-    ) {
+    public function __construct(BusinessService $businessService)
+    {
         $this->businessService = $businessService;
-        $this->authService = $authService;
     }
 
     public function employeesAction()
     {
         return new ViewModel([
-            'business' => $business = $this->retrieveAuthenticatedUser()->getBusiness()
+            'business' => $business = $this->identity()->getBusiness()
         ]);
     }
 
     public function approveEmployeeAction()
     {
-        $business = $this->retrieveAuthenticatedUser()->getBusiness();
+        $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
 
         $this->businessService->approveEmployee($business, $employeeId);
@@ -60,7 +49,7 @@ class EmployeesController extends AbstractActionController
 
     public function removeEmployeeAction()
     {
-        $business = $this->retrieveAuthenticatedUser()->getBusiness();
+        $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
 
         $this->businessService->removeEmployee($business, $employeeId);
@@ -71,7 +60,7 @@ class EmployeesController extends AbstractActionController
 
     public function blockEmployeeAction()
     {
-        $business = $this->retrieveAuthenticatedUser()->getBusiness();
+        $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
 
         $this->businessService->blockEmployee($business, $employeeId);
@@ -82,25 +71,12 @@ class EmployeesController extends AbstractActionController
 
     public function unblockEmployeeAction()
     {
-        $business = $this->retrieveAuthenticatedUser()->getBusiness();
+        $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
 
         $this->businessService->approveEmployee($business, $employeeId);
         $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente sbloccato con successo'));
 
         return $this->redirect()->toRoute('employees');
-    }
-
-    /**
-     * @return Webuser
-     */
-    private function retrieveAuthenticatedUser()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user;
-        } else {
-            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
-        }
     }
 }

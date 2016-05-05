@@ -20,13 +20,11 @@ class InvoicesControllerFactory implements FactoryInterface
         $businessInvoiceService = $sharedServiceManager->get('BusinessCore\Service\BusinessInvoiceService');
         $invoicePdfService = $sharedServiceManager->get('BusinessCore\Service\InvoicePdfService');
         $datatableService = $sharedServiceManager->get('BusinessCore\Service\DatatableService');
-        $authService = $sharedServiceManager->get('zfcuser_auth_service');
 
         return new InvoicesController(
             $businessInvoiceService,
             $invoicePdfService,
-            $datatableService,
-            $authService
+            $datatableService
         );
     }
 }

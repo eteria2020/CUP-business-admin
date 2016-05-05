@@ -17,9 +17,8 @@ class TimePackagesControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $sharedServiceManager = $serviceLocator->getServiceLocator();
-        $authService = $sharedServiceManager->get('zfcuser_auth_service');
         $businessTimePackageService = $sharedServiceManager->get('BusinessCore\Service\BusinessTimePackageService');
 
-        return new TimePackagesController($businessTimePackageService, $authService);
+        return new TimePackagesController($businessTimePackageService);
     }
 }

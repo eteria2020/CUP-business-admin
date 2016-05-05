@@ -218,13 +218,13 @@ return [
                     ],
                 ],
             ],
-            'rate' => [
+            'fares' => [
                 'type' => 'Literal',
                 'options' => [
-                    'route'    => '/rate',
+                    'route'    => '/fares',
                     'defaults' => [
-                        'controller' => 'Application\Controller\Rate',
-                        'action'     => 'rate',
+                        'controller' => 'Application\Controller\Fares',
+                        'action'     => 'fares',
                     ],
                 ],
             ],
@@ -280,7 +280,7 @@ return [
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
             'Application\Controller\TimePackages' => 'Application\Controller\TimePackagesControllerFactory',
-            'Application\Controller\Rate' => 'Application\Controller\RateControllerFactory',
+            'Application\Controller\Fares' => 'Application\Controller\FaresControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -437,7 +437,7 @@ return [
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
                 ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Rate', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Fares', 'roles' => ['superadmin']],
             ],
         ],
     ],
@@ -530,13 +530,13 @@ return [
             ],
             [
                 'label'     => $translator->translate('Tariffa'),
-                'route'     => 'rate',
+                'route'     => 'fares',
                 'icon'      => 'fa fa-bar-chart',
                 'isRouteJs' => true,
                 'pages'     => [
                     [
                         'label' => $translator->translate('Visualizza'),
-                        'route' => 'rate',
+                        'route' => 'fares',
                         'isVisible' => true
                     ],
                 ],

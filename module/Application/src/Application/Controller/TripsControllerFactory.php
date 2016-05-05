@@ -17,10 +17,9 @@ class TripsControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $sharedServiceManager = $serviceLocator->getServiceLocator();
-        $authService = $sharedServiceManager->get('zfcuser_auth_service');
         $datatableService = $sharedServiceManager->get('BusinessCore\Service\DatatableService');
         $businessTripService = $sharedServiceManager->get('BusinessCore\Service\BusinessTripService');
 
-        return new TripsController($businessTripService, $datatableService, $authService);
+        return new TripsController($businessTripService, $datatableService);
     }
 }

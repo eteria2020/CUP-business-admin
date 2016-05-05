@@ -1,24 +1,15 @@
 <?php
 namespace Application\Controller;
 
-use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessTrip;
-use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessTripService;
 use BusinessCore\Service\DatatableService;
-use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
 class TripsController extends AbstractActionController
 {
-    /**
-     * @var AuthenticationService
-     */
-    private $authService;
     /**
      * @var DatatableService
      */
@@ -32,29 +23,26 @@ class TripsController extends AbstractActionController
      * EmployeesController constructor.
      * @param BusinessTripService $businessTripService
      * @param DatatableService $datatableService
-     * @param AuthenticationService $authService
      */
     public function __construct(
         BusinessTripService $businessTripService,
-        DatatableService $datatableService,
-        AuthenticationService $authService
+        DatatableService $datatableService
     ) {
         $this->businessTripService = $businessTripService;
         $this->datatableService = $datatableService;
-        $this->authService = $authService;
     }
 
     public function tripsAction()
     {
         return new ViewModel([
-            'business' => $this->retrieveAuthenticatedUser()->getBusiness()
+            'business' => $this->identity()->getBusiness()
         ]);
     }
 
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $business = $this->retrieveAuthenticatedUser()->getBusiness();
+        $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessTrips = $this->businessTripService->searchTripsByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessTripsToDatatable($businessTrips);
@@ -91,18 +79,5 @@ class TripsController extends AbstractActionController
                 ],
             ];
         }, $businessTrips);
-    }
-
-    /**
-     * @return Webuser
-     */
-    private function retrieveAuthenticatedUser()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user;
-        } else {
-            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
-        }
     }
 }

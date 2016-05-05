@@ -4,24 +4,17 @@ namespace Application\Controller;
 
 use BusinessCore\Entity\BusinessInvoice;
 use BusinessCore\Entity\Invoice;
-use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessInvoiceService;
 use BusinessCore\Service\DatatableService;
 use BusinessCore\Service\InvoicePdfService;
 
-use Zend\Authentication\AuthenticationService;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
 class InvoicesController extends AbstractActionController
 {
-    /**
-     * @var AuthenticationService
-     */
-    private $authService;
     /**
      * @var DatatableService
      */
@@ -40,18 +33,15 @@ class InvoicesController extends AbstractActionController
      * @param BusinessInvoiceService $businessInvoiceService
      * @param InvoicePdfService $invoicePdfService
      * @param DatatableService $datatableService
-     * @param AuthenticationService $authService
      */
     public function __construct(
         BusinessInvoiceService $businessInvoiceService,
         InvoicePdfService $invoicePdfService,
-        DatatableService $datatableService,
-        AuthenticationService $authService
+        DatatableService $datatableService
     ) {
         $this->businessInvoiceService = $businessInvoiceService;
         $this->invoicePdfService = $invoicePdfService;
         $this->datatableService = $datatableService;
-        $this->authService = $authService;
     }
 
     public function invoicesAction()
@@ -62,7 +52,7 @@ class InvoicesController extends AbstractActionController
     public function pdfAction()
     {
         $invoiceId = $this->params()->fromRoute('id', 0);
-        $business = $this->retrieveAuthenticatedUser()->getBusiness();
+        $business = $this->identity()->getBusiness();
         $businessInvoice = $this->businessInvoiceService->findOneByIdAndBusiness($invoiceId, $business);
         return $this->generatePdfResponse($businessInvoice->getInvoice());
     }
@@ -70,7 +60,7 @@ class InvoicesController extends AbstractActionController
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $business = $this->retrieveAuthenticatedUser()->getBusiness();
+        $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessInvoices = $this->businessInvoiceService->searchInvoicesByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessInvoicesToDatatable($businessInvoices);
@@ -109,7 +99,7 @@ class InvoicesController extends AbstractActionController
     {
         $pdf = $this->invoicePdfService->generatePdfFromInvoice($invoice);
         $response = new Response();
-        $headers  = $response->getHeaders();
+        $headers = $response->getHeaders();
         $headers->addHeaderLine('Content-Type', 'application/pdf');
         $headers->addHeaderLine(
             'Content-Disposition',
@@ -120,18 +110,5 @@ class InvoicesController extends AbstractActionController
         $response->setContent($pdf);
 
         return $response;
-    }
-
-    /**
-     * @return Webuser
-     */
-    private function retrieveAuthenticatedUser()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user;
-        } else {
-            throw new AuthenticationEventException($this->translatorPlugin()->translate("Errore di autenticazione"));
-        }
     }
 }

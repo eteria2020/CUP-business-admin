@@ -18,8 +18,7 @@ class EmployeesControllerFactory implements FactoryInterface
     {
         $sharedServiceManager = $serviceLocator->getServiceLocator();
         $businessService = $sharedServiceManager->get('BusinessCore\Service\BusinessService');
-        $authService = $sharedServiceManager->get('zfcuser_auth_service');
 
-        return new EmployeesController($businessService, $authService);
+        return new EmployeesController($businessService);
     }
 }
