@@ -43,13 +43,11 @@ $(function() {
         },
         "order": [[0, 'asc']],
         "columns": [
-            {data: 'i.invoiceNumber'},
-            {data: 'i.invoiceDate'},
-            {data: 'e.name'},
-            {data: 'e.surname'},
-            {data: 'i.type'},
-            {data: 'i.amount'},
-            {data: 'i.id'}
+            {data: 'bi.invoiceNumber'},
+            {data: 'bi.invoiceDate'},
+            {data: 'bi.type'},
+            {data: 'bi.amount'},
+            {data: 'bi.id'}
         ],
         "columnDefs": [
             {
@@ -59,20 +57,20 @@ $(function() {
                 }
             },
             {
-                targets: 4,
+                targets: 2,
                 "render": function (data) {
                     return renderType(data);
                 }
             },
             {
-                targets: 5,
+                targets: 3,
                 className: "sng-dt-right",
                 "render": function (data) {
                     return renderAmount(data);
                 }
             },
             {
-                targets: 6,
+                targets: 4,
                 sortable: false,
                 className: "sng-dt-center",
                 "render": function (data) {

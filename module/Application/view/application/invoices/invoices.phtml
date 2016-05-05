@@ -31,9 +31,7 @@ $this->headScript()
                             <div class="form-group">
                                 <select name="column" id="js-column" class="form-control">
                                     <option value="select" selected>-- <?= $this->translate("Seleziona"); ?> --</option>
-                                    <option value="i.invoiceNumber"><?= $this->translate("N° Fattura"); ?></option>
-                                    <option value="e.name"><?= $this->translate("Nome"); ?></option>
-                                    <option value="e.surname"><?= $this->translate("Cognome"); ?></option>
+                                    <option value="bi.invoiceNumber"><?= $this->translate("N° Fattura"); ?></option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -80,8 +78,6 @@ $this->headScript()
                             <tr>
                                 <th><?= $this->translate("N° Fattura"); ?></th>
                                 <th><?= $this->translate("Data"); ?></th>
-                                <th><?= $this->translate("Nome"); ?></th>
-                                <th><?= $this->translate("Cognome"); ?></th>
                                 <th><?= $this->translate("Tipo"); ?></th>
                                 <th><?= $this->translate("Totale"); ?></th>
                                 <th><?= $this->translate("Download"); ?></th>

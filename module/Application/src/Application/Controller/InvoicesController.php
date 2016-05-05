@@ -2,10 +2,7 @@
 
 namespace Application\Controller;
 
-use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessInvoice;
-use BusinessCore\Entity\Invoice;
-use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessInvoiceService;
 use BusinessCore\Service\DatatableService;
 use BusinessCore\Service\InvoicePdfService;
@@ -15,7 +12,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
 class InvoicesController extends AbstractActionController
 {
@@ -54,7 +50,7 @@ class InvoicesController extends AbstractActionController
         InvoicePdfService $invoicePdfService,
         DatatableService $datatableService,
         AuthenticationService $authService
-    ){
+    ) {
         $this->translator = $translator;
         $this->datatableService = $datatableService;
         $this->authService = $authService;
@@ -70,28 +66,15 @@ class InvoicesController extends AbstractActionController
     public function pdfAction()
     {
         $invoiceId = $this->params()->fromRoute('id', 0);
-        $business = $this->getCurrentBusiness();
+        $business = $this->identity()->getBusiness();
         $businessInvoice = $this->businessInvoiceService->findOneByIdAndBusiness($invoiceId, $business);
-        return $this->generatePdfResponse($businessInvoice->getInvoice());
-    }
-
-    /**
-     * @return Business
-     */
-    private function getCurrentBusiness()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user->getBusiness();
-        } else {
-            throw new AuthenticationEventException("Errore di autenticazione");
-        }
+        return $this->generatePdfResponse($businessInvoice);
     }
 
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $business = $this->getCurrentBusiness();
+        $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessInvoices = $this->businessInvoiceService->searchInvoicesByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessInvoicesToDatatable($businessInvoices);
@@ -108,29 +91,24 @@ class InvoicesController extends AbstractActionController
     private function mapBusinessInvoicesToDatatable(array $businessInvoices)
     {
         return array_map(function (BusinessInvoice $businessInvoice) {
-            $invoice = $businessInvoice->getInvoice();
-            $employee = $invoice->getEmployee();
+
             return [
-                'i' => [
-                    'id' => $invoice->getId(),
-                    'invoiceNumber' => $invoice->getInvoiceNumber(),
-                    'invoiceDate' => $invoice->getInvoiceDate(),
-                    'type' => $invoice->getType(),
-                    'amount' => $invoice->getAmount(),
+                'bi' => [
+                    'id' => $businessInvoice->getId(),
+                    'invoiceNumber' => $businessInvoice->getInvoiceNumber(),
+                    'invoiceDate' => $businessInvoice->getInvoiceDate(),
+                    'type' => $businessInvoice->getType(),
+                    'amount' => $businessInvoice->getAmount(),
                 ],
-                'e' => [
-                    'name' => $employee->getName(),
-                    'surname' => $employee->getSurname(),
-                ]
             ];
         }, $businessInvoices);
     }
 
-    private function generatePdfResponse(Invoice $invoice)
+    private function generatePdfResponse(BusinessInvoice $invoice)
     {
         $pdf = $this->invoicePdfService->generatePdfFromInvoice($invoice);
         $response = new Response();
-        $headers  = $response->getHeaders();
+        $headers = $response->getHeaders();
         $headers->addHeaderLine('Content-Type', 'application/pdf');
         $headers->addHeaderLine(
             'Content-Disposition',
