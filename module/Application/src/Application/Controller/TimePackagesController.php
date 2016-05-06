@@ -33,9 +33,9 @@ class TimePackagesController extends AbstractActionController
     }
     public function buyAction()
     {
+        $business = $this->identity()->getBusiness();
         $timePackageId = $this->params()->fromRoute('id', 0);
         if ($timePackageId != 0) {
-            $business = $this->identity()->getBusiness();
             $this->businessTimePackageService->buyTimePackage($business, $timePackageId);
             $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Pacchetto minuti acquistato con sucesso"));
 
@@ -43,8 +43,8 @@ class TimePackagesController extends AbstractActionController
         }
 
         return new ViewModel([
-            'business' => $this->identity()->getBusiness(),
-            'packages' => $this->businessTimePackageService->getBuyablePackages()
+            'business' => $business,
+            'packages' => $this->businessTimePackageService->findBuyablePackages($business)
         ]);
     }
 }
