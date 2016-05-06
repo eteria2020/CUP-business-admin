@@ -250,6 +250,15 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
                     'credit-card' => [
                         'type'    => 'Literal',
                         'options' => [
