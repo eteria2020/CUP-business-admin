@@ -22,10 +22,6 @@ class GroupsController extends AbstractActionController
      */
     private $businessService;
     /**
-     * @var AuthenticationService
-     */
-    private $authService;
-    /**
      * @var GroupService
      */
     private $groupService;
@@ -38,25 +34,22 @@ class GroupsController extends AbstractActionController
      * GroupsController constructor.
      * @param BusinessService $businessService
      * @param GroupService $groupService
-     * @param AuthenticationService $authService
      * @param GroupForm $groupForm
      */
     public function __construct(
         BusinessService $businessService,
         GroupService $groupService,
-        AuthenticationService $authService,
         GroupForm $groupForm
     ) {
         $this->businessService = $businessService;
         $this->groupService = $groupService;
-        $this->authService = $authService;
         $this->groupForm = $groupForm;
     }
 
     public function groupsAction()
     {
         return new ViewModel([
-            'business' => $business = $this->retrieveAuthenticatedUser()->getBusiness()
+            'business' => $business = $this->identity()->getBusiness()
         ]);
     }
 
@@ -65,7 +58,7 @@ class GroupsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost();
             try {
-                $business = $business = $this->retrieveAuthenticatedUser()->getBusiness();
+                $business = $business = $this->identity()->getBusiness();
                 $this->groupService->createNewGroup($business, $data);
                 $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Gruppo creato con successo'));
                 return $this->redirect()->toRoute('groups');
@@ -118,7 +111,7 @@ class GroupsController extends AbstractActionController
         $group = $this->getCurrentGroup();
         $employeeId = $this->params()->fromRoute('employee', 0);
         $this->groupService->removeEmployeeFromGroup($group, $employeeId);
-        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Cliente eliminato dal gruppo'));
+        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente eliminato dal gruppo'));
         return $this->redirect()->toRoute('groups/details', ['id' => $group->getId()]);
     }
 
@@ -147,18 +140,5 @@ class GroupsController extends AbstractActionController
             }
         }
         return $userIds;
-    }
-
-    /**
-     * @return Webuser
-     */
-    private function retrieveAuthenticatedUser()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user;
-        } else {
-            throw new AuthenticationEventException($this->translatorPlugin("Errore di autenticazione"));
-        }
     }
 }

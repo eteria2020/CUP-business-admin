@@ -64,7 +64,7 @@ return [
                             'block' => [
                                 'type' => 'Literal',
                                 'options' => [
-                                    'route' => '/block-employee',
+                                    'route' => '/block',
                                     'defaults' => [
                                         'action' => 'block-employee',
                                     ],
@@ -73,7 +73,7 @@ return [
                             'unblock' => [
                                 'type' => 'Literal',
                                 'options' => [
-                                    'route' => '/unblock-employee',
+                                    'route' => '/unblock',
                                     'defaults' => [
                                         'action' => 'unblock-employee',
                                     ],
@@ -128,7 +128,7 @@ return [
                             'remove-employee' => [
                                 'type' => 'Segment',
                                 'options' => [
-                                    'route' => '/remove/:employee',
+                                    'route' => '/remove-employee/:employee',
                                     'defaults' => [
                                         'action' => 'remove-employee-from-group',
                                     ],
