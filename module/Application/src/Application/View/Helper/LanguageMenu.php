@@ -34,5 +34,4 @@ class LanguageMenu
     {
         return $this->languages;
     }
-
 }

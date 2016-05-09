@@ -22,6 +22,122 @@ return [
                     ],
                 ],
             ],
+            'employees' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route'    => '/employees',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Employees',
+                        'action'     => 'employees',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'employee' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route'    => '/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                            ],
+                        ],
+                        'may_terminate' => false,
+                        'child_routes' => [
+                            'approve' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/approve',
+                                    'defaults' => [
+                                        'action' => 'approve-employee',
+                                    ],
+                                ],
+                            ],
+                            'remove' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/remove',
+                                    'defaults' => [
+                                        'action' => 'remove-employee',
+                                    ],
+                                ],
+                            ],
+                            'block' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/block',
+                                    'defaults' => [
+                                        'action' => 'block-employee',
+                                    ],
+                                ],
+                            ],
+                            'unblock' => [
+                                'type' => 'Literal',
+                                'options' => [
+                                    'route' => '/unblock',
+                                    'defaults' => [
+                                        'action' => 'unblock-employee',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                ]
+            ],
+            'groups' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route'    => '/groups',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Groups',
+                        'action'     => 'groups',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'add' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/add',
+                            'defaults' => [
+                                'action' => 'add',
+                            ],
+                        ],
+                    ],
+                    'details' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/:id',
+                            'constraints' => [
+                                'id' => '[0-9]*',
+                            ],
+                            'defaults' => [
+                                'action' => 'details',
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'add-employees' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/add-employees',
+                                    'defaults' => [
+                                        'action' => 'add-employees-to-group',
+                                    ],
+                                ],
+                            ],
+                            'remove-employee' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/remove-employee/:employee',
+                                    'defaults' => [
+                                        'action' => 'remove-employee-from-group',
+                                    ],
+                                ],
+                            ],
+                        ]
+                    ],
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -59,17 +175,29 @@ return [
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
             'doctrine.connection.orm_default' => 'Application\Service\OrmConnectionFactory',
         ],
+        'invokables' => [
+            'Application\Form\GroupForm' => 'Application\Form\GroupForm'
+        ]
     ],
     'controllers' => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
+        'factories' => [
+            'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
+            'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
+        ]
     ],
     'controller_plugins' => [
         'factories' => [
-            'TranslatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
+            'translatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
         ]
+    ],
+    'view_helpers'    => [
+        'factories' => [
+            'languageMenuHelper' => 'Application\View\Helper\LanguageMenuHelperFactory',
+        ],
     ],
     'translator' => [
         'locale' => 'it_IT',
@@ -94,6 +222,66 @@ return [
                 "lang_3chars" => "ita",
                 "label" => "Italiano"
             ],
+            'en' => [
+                "locale" => "en_US",
+                "lang" => "en",
+                "lang_3chars" => "eng",
+                "label" => "English"
+            ],
+            'fr' => [
+                "locale" => "fr_FR",
+                "lang" => "fr",
+                "lang_3chars" => "fra",
+                "label" => "Français"
+            ],
+            'zh' => [
+                "locale" => "zh_CN",
+                "lang" => "zh",
+                "lang_3chars" => "zho",
+                "label" => "中国"
+            ],
+            'de' => [
+                "locale" => "de_DE",
+                "lang" => "de",
+                "lang_3chars" => "deu",
+                "label" => "Deutsch"
+            ],
+            'es' => [
+                "locale" => "es_ES",
+                "lang" => "es",
+                "lang_3chars" => "spa",
+                "label" => "Español"
+            ],
+            'hu' => [
+                "locale" => "hu_HU",
+                "lang" => "hu",
+                "lang_3chars" => "hun",
+                "label" => "Magyar"
+            ],
+            'pl' => [
+                "locale" => "pl_PL",
+                "lang" => "pl",
+                "lang_3chars" => "pol",
+                "label" => "Polskie"
+            ],
+            'pt' => [
+                "locale" => "pt_PT",
+                "lang" => "pt",
+                "lang_3chars" => "por",
+                "label" => "Português"
+            ],
+            'ru' => [
+                "locale" => "ru_RU",
+                "lang" => "ru",
+                "lang_3chars" => "rus",
+                "label" => "Pусский"
+            ],
+            'tr' => [
+                "locale" => "tr_TR",
+                "lang" => "tr",
+                "lang_3chars" => "tur",
+                "label" => "Türk"
+            ]
         ],
         "language_folder" => __DIR__ . "/../language"
     ],
@@ -141,23 +329,6 @@ return [
             ],
         ],
     ],
-    
-    'doctrine'        => [
-        'driver' => [
-            __NAMESPACE__ . '_driver' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => [__DIR__ . '/../src/' . __NAMESPACE__ . '/Entity']
-            ],
-            'orm_default'             => [
-                'class'   => 'Doctrine\ORM\Mapping\Driver\DriverChain',
-                'drivers' => [
-                    __NAMESPACE__ . '\Entity' => __NAMESPACE__ . '_driver'
-                ]
-            ],
-        ],
-    ],
-
     // ACL
     'bjyauthorize' => [
         'guards' => [
@@ -166,7 +337,9 @@ return [
                 ['controller' => 'zfcuser', 'roles' => []],
 
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
-                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin', 'business']],
             ],
         ],
     ],
@@ -184,19 +357,23 @@ return [
     'navigation' => [
         'default' => [
             [
-                'label'     => $translator->translate('Example'),
-                'route'     => 'home',
+                'label'     => $translator->translate('Dipendenti'),
+                'route'     => 'employees',
                 'icon'      => 'fa fa-users',
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => $translator->translate('Link'),
-                        'route' => 'home',
+                        'label' => $translator->translate('Lista'),
+                        'route' => 'employees',
                         'isVisible' => true
-                    ]
+                    ],
+                    [
+                        'label' => $translator->translate('Gestione gruppi'),
+                        'route' => 'groups',
+                        'isVisible' => true
+                    ],
                 ],
             ],
-        ]
-    ]
-    
+        ],
+    ],
 ];
