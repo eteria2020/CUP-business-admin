@@ -337,9 +337,9 @@ return [
                 ['controller' => 'zfcuser', 'roles' => []],
 
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
-                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Employees', 'roles' => []],
-                ['controller' => 'Application\Controller\Groups', 'roles' => []],
+                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin', 'business']],
             ],
         ],
     ],
