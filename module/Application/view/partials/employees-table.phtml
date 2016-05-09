@@ -18,47 +18,13 @@
             </thead>
             <?php /** @var \BusinessCore\Entity\BusinessEmployee $be */
             foreach ($this->list as $be):
-                $employee = $be->getEmployee();
-                if (is_null($be->getGroup())) {
-                    $groupName = '-';
-                } else {
-                    $groupName = '<a href="'. $this->url('groups/details', ['id' => $be->getGroup()->getId()]) . '">' . $be->getGroup()->getName() . '</a>';
-                } ?>
+                $employee = $be->getEmployee(); ?>
                 <tr>
                     <td><?= $employee->getName() . " " . $employee->getSurname(); ?></td>
                     <td><?= $employee->getEmail(); ?></td>
-                    <td><?= $groupName ?></td>
+                    <td><?= $this->groupLink($be) ?></td>
                     <td><?= $this->businessEmployeeStatus($be->getStatus()); ?></td>
-                    <td>
-                        <?php
-                        if ($be->isBlocked()) { ?>
-                            <a href="<?= $this->url('employees/employee/unblock', ['id' => $employee->getId()]); ?>"
-                               onclick="return confirm('<?= $this->translate("Sei sicuro di voler sbloccare questo utente?"); ?>')"
-                               class="btn-margin validation-btn btn btn-primary btn-xs">
-                                <?= $this->translate("Sblocca"); ?>
-                            </a>
-                            <?php
-                            } else if ($be->isApproved()) { ?>
-                                <a href="<?= $this->url('employees/employee/block', ['id' => $employee->getId()]); ?>"
-                                   onclick="return confirm('<?= $this->translate("Sei sicuro di voler bloccare questo utente?"); ?>')"
-                                   class="btn-margin validation-btn btn btn-warning btn-xs">
-                                    <?= $this->translate("Blocca"); ?>
-                                </a>
-                            <?php
-                            } else { ?>
-                                <a href="<?= $this->url('employees/employee/approve', ['id' => $employee->getId()]); ?>"
-                                   onclick="return confirm('<?= $this->translate("Sei sicuro di voler approvare questo utente?"); ?>')"
-                                   class="btn-margin validation-btn btn btn-success btn-xs">
-                                    <?= $this->translate("Approva"); ?>
-                                </a>
-                            <?php
-                            }?>
-                        <a href="<?= $this->url('employees/employee/remove', ['id' => $employee->getId()]); ?>"
-                           onclick="return confirm('<?= $this->translate("Sei sicuro di voler eliminare questo utente?"); ?>')"
-                           class="validation-btn btn btn-danger btn-xs">
-                            <?= $this->translate("Elimina"); ?>
-                        </a>
-                    </td>
+                    <td><?= $this->businessEmployeeAvailableActionButtons($be) ?></td>
                 </tr>
                 <?php
             endforeach; ?>

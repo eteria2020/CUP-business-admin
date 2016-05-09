@@ -1,8 +1,8 @@
 <?php
-$this->headLink()->appendStylesheet('/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
+$this->headLink()->appendStylesheet($this->basePath() .'/js/datatables/plugins/bootstrap/dataTables.bootstrap.css');
 $this->headScript()
-    ->appendFile('/js/datatables/media/js/jquery.dataTables.min.js')
-    ->appendFile('/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
+    ->appendFile($this->basePath() .'/js/datatables/media/js/jquery.dataTables.min.js')
+    ->appendFile($this->basePath() .'/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() .'/js/groups.js');
 ?>
 <div class="page-content-wrapper">
@@ -35,7 +35,6 @@ $this->headScript()
                 <table class="table table-striped table-bordered table-hover" id="js-groups-table">
                     <thead>
                     <tr>
-                        <th><?= $this->translate("ID"); ?></th>
                         <th><?= $this->translate("Nome"); ?></th>
                         <th><?= $this->translate("Descrizione"); ?></th>
                         <th><?= $this->translate("N° dipendenti"); ?></th>
@@ -45,10 +44,9 @@ $this->headScript()
                     <?php /** @var \BusinessCore\Entity\Group $group */
                     foreach ($this->business->getBusinessGroups() as $group): ?>
                         <tr>
-                            <td><?= $group->getId() ?></td>
                             <td><?= $group->getName(); ?></td>
                             <td><?= $group->getDescription(); ?></td>
-                            <td><?= count($group->getBusinessEmployee()) ?></td>
+                            <td><?= count($group->getBusinessEmployees()) ?></td>
                             <td>
                                 <a href="<?= $this->url('groups/details', ['id' => $group->getId()]); ?>"
                                    class="validation-btn btn btn-default btn-xs">

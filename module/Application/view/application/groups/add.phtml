@@ -27,6 +27,8 @@ $form = $this->form->prepare();
                             <?php
                                 $field = $form->get('name');
                                 echo $this->formElement($field);
+                                echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+
                             ?>
                         </div>
                     </div>
@@ -36,6 +38,7 @@ $form = $this->form->prepare();
                             <?php
                             $field = $form->get('description');
                             echo $this->formElement($field);
+                            echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
                             ?>
                         </div>
                     </div>

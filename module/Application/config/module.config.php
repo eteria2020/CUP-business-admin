@@ -66,7 +66,7 @@ return [
                             'block' => [
                                 'type' => 'Literal',
                                 'options' => [
-                                    'route' => '/block-employee',
+                                    'route' => '/block',
                                     'defaults' => [
                                         'action' => 'block-employee',
                                     ],
@@ -75,7 +75,7 @@ return [
                             'unblock' => [
                                 'type' => 'Literal',
                                 'options' => [
-                                    'route' => '/unblock-employee',
+                                    'route' => '/unblock',
                                     'defaults' => [
                                         'action' => 'unblock-employee',
                                     ],
@@ -130,7 +130,7 @@ return [
                             'remove-employee' => [
                                 'type' => 'Segment',
                                 'options' => [
-                                    'route' => '/remove/:employee',
+                                    'route' => '/remove-employee/:employee',
                                     'defaults' => [
                                         'action' => 'remove-employee-from-group',
                                     ],
@@ -248,8 +248,13 @@ return [
     ],
     'controller_plugins' => [
         'factories' => [
-            'TranslatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
+            'translatorPlugin' => 'Application\Controller\Plugin\TranslatorPluginFactory'
         ]
+    ],
+    'view_helpers'    => [
+        'factories' => [
+            'languageMenuHelper' => 'Application\View\Helper\LanguageMenuHelperFactory',
+        ],
     ],
     'translator' => [
         'locale' => 'it_IT',
@@ -274,6 +279,66 @@ return [
                 "lang_3chars" => "ita",
                 "label" => "Italiano"
             ],
+            'en' => [
+                "locale" => "en_US",
+                "lang" => "en",
+                "lang_3chars" => "eng",
+                "label" => "English"
+            ],
+            'fr' => [
+                "locale" => "fr_FR",
+                "lang" => "fr",
+                "lang_3chars" => "fra",
+                "label" => "Français"
+            ],
+            'zh' => [
+                "locale" => "zh_CN",
+                "lang" => "zh",
+                "lang_3chars" => "zho",
+                "label" => "中国"
+            ],
+            'de' => [
+                "locale" => "de_DE",
+                "lang" => "de",
+                "lang_3chars" => "deu",
+                "label" => "Deutsch"
+            ],
+            'es' => [
+                "locale" => "es_ES",
+                "lang" => "es",
+                "lang_3chars" => "spa",
+                "label" => "Español"
+            ],
+            'hu' => [
+                "locale" => "hu_HU",
+                "lang" => "hu",
+                "lang_3chars" => "hun",
+                "label" => "Magyar"
+            ],
+            'pl' => [
+                "locale" => "pl_PL",
+                "lang" => "pl",
+                "lang_3chars" => "pol",
+                "label" => "Polskie"
+            ],
+            'pt' => [
+                "locale" => "pt_PT",
+                "lang" => "pt",
+                "lang_3chars" => "por",
+                "label" => "Português"
+            ],
+            'ru' => [
+                "locale" => "ru_RU",
+                "lang" => "ru",
+                "lang_3chars" => "rus",
+                "label" => "Pусский"
+            ],
+            'tr' => [
+                "locale" => "tr_TR",
+                "lang" => "tr",
+                "lang_3chars" => "tur",
+                "label" => "Türk"
+            ]
         ],
         "language_folder" => __DIR__ . "/../language"
     ],
@@ -329,11 +394,11 @@ return [
                 ['controller' => 'zfcuser', 'roles' => []],
 
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
-                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin', 'business']],
             ],
         ],
     ],
@@ -397,4 +462,3 @@ return [
         ]
     ]
 ];
-
