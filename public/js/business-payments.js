@@ -7,15 +7,6 @@ $(function() {
     search.val('');
     column.val('select');
 
-    function renderType(type)
-    {
-        switch (type) {
-            case 'FIRST_PAYMENT':
-                return translate("renderFirstPayment");
-        }
-        return type;
-    }
-
     table.dataTable({
         "processing": true,
         "serverSide": true,
@@ -37,43 +28,12 @@ $(function() {
         },
         "order": [[0, 'asc']],
         "columns": [
-            {data: 'i.invoiceNumber'},
-            {data: 'i.invoiceDate'},
-            {data: 'e.name'},
-            {data: 'e.surname'},
-            {data: 'i.type'},
-            {data: 'i.amount'},
-            {data: 'i.id'}
+            {data: 'bp.createdTs'},
+            {data: 'bp.type'},
+            {data: 'bp.amount'},
+            {data: 'bp.payedOnTs'}
         ],
-        "columnDefs": [
-            {
-                targets: 1,
-                "render": function (data) {
-                    return renderDate(data);
-                }
-            },
-            {
-                targets: 4,
-                "render": function (data) {
-                    return renderType(data);
-                }
-            },
-            {
-                targets: 5,
-                className: "sng-dt-right",
-                "render": function (data) {
-                    return renderAmount(data);
-                }
-            },
-            {
-                targets: 6,
-                sortable: false,
-                className: "sng-dt-center",
-                "render": function (data) {
-                    return renderLink(data);
-                }
-            }
-        ],
+        "columnDefs": [],
         "lengthMenu": [
             [100, 200, 300],
             [100, 200, 300]
@@ -81,7 +41,7 @@ $(function() {
         "pageLength": 100,
         "pagingType": "bootstrap_full_number",
         "language": {
-            "sEmptyTable": translate("sInvoicesEmptyTable"),
+            "sEmptyTable": translate("sEmptyTable"),
             "sInfo": translate("sInfo"),
             "sInfoEmpty": translate("sInfoEmpty"),
             "sInfoFiltered": translate("sInfoFiltered"),
@@ -121,28 +81,4 @@ $(function() {
         search.val('');
     });
 
-    function renderDate(date)
-    {
-        return toStringKeepZero(date % 100) + '/' +
-            toStringKeepZero(Math.floor((date / 100) % 100)) + '/' +
-            (Math.floor(date / 10000));
-    }
-
-    function renderAmount(amount)
-    {
-        return (Math.floor(amount / 100)) +
-            ',' +
-            toStringKeepZero(amount % 100) +
-            ' \u20ac';
-    }
-
-    function renderLink(id)
-    {
-        return '<a href=invoices/download/' + id + '><i class="fa fa-download"></i></a>';
-    }
-
-    function toStringKeepZero(value)
-    {
-        return ((value < 10) ? '0' : '') + value;
-    }
 });
