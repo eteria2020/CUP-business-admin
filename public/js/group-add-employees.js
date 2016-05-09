@@ -29,7 +29,7 @@ $(function() {
     };
 
     var columnDefs = [
-        { targets: [3], sortable: false}
+        { targets: [0], sortable: false}
     ];
 
     $('#js-group-add-employees-table').dataTable({

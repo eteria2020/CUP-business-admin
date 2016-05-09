@@ -29,7 +29,7 @@ $(function() {
     };
 
     var columnDefs = [
-        { targets: [4], sortable: false}
+        { targets: [3], sortable: false}
     ];
 
     $('#js-groups-table').dataTable({
