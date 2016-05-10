@@ -1,30 +1,16 @@
 <?php
 namespace Application\Controller;
 
-use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessTrip;
-use BusinessCore\Entity\Webuser;
-use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\BusinessTripService;
 use BusinessCore\Service\DatatableService;
-use Zend\Authentication\AuthenticationService;
+
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
 class TripsController extends AbstractActionController
 {
-    /**
-     * @var Translator
-     */
-    private $translator;
-
-    /**
-     * @var AuthenticationService
-     */
-    private $authService;
     /**
      * @var DatatableService
      */
@@ -36,47 +22,28 @@ class TripsController extends AbstractActionController
 
     /**
      * EmployeesController constructor.
-     * @param Translator $translator
      * @param BusinessTripService $businessTripService
      * @param DatatableService $datatableService
-     * @param AuthenticationService $authService
      */
     public function __construct(
-        Translator $translator,
         BusinessTripService $businessTripService,
-        DatatableService $datatableService,
-        AuthenticationService $authService
-    ){
-        $this->translator = $translator;
+        DatatableService $datatableService
+    ) {
         $this->datatableService = $datatableService;
-        $this->authService = $authService;
         $this->businessTripService = $businessTripService;
     }
 
     public function tripsAction()
     {
         return new ViewModel([
-            'business' => $this->getCurrentBusiness()
+            'business' => $this->identity()->getBusiness()
         ]);
-    }
-
-    /**
-     * @return Business
-     */
-    private function getCurrentBusiness()
-    {
-        $user = $this->authService->getIdentity();
-        if ($user instanceof Webuser) {
-            return $user->getBusiness();
-        } else {
-            throw new AuthenticationEventException("Errore di autenticazione");
-        }
     }
 
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
-        $business = $this->getCurrentBusiness();
+        $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessTrips = $this->businessTripService->searchTripsByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessTripsToDatatable($businessTrips);

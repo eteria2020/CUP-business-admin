@@ -1,28 +1,18 @@
 <?php
-
 namespace Application\Controller;
 
 use BusinessCore\Entity\BusinessInvoice;
 use BusinessCore\Service\BusinessInvoiceService;
 use BusinessCore\Service\DatatableService;
 use BusinessCore\Service\InvoicePdfService;
-use Zend\Authentication\AuthenticationService;
+
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class InvoicesController extends AbstractActionController
 {
-    /**
-     * @var Translator
-     */
-    private $translator;
-    /**
-     * @var AuthenticationService
-     */
-    private $authService;
     /**
      * @var DatatableService
      */
@@ -38,24 +28,18 @@ class InvoicesController extends AbstractActionController
 
     /**
      * EmployeesController constructor.
-     * @param Translator $translator
      * @param BusinessInvoiceService $businessInvoiceService
      * @param InvoicePdfService $invoicePdfService
      * @param DatatableService $datatableService
-     * @param AuthenticationService $authService
      */
     public function __construct(
-        Translator $translator,
         BusinessInvoiceService $businessInvoiceService,
         InvoicePdfService $invoicePdfService,
-        DatatableService $datatableService,
-        AuthenticationService $authService
+        DatatableService $datatableService
     ) {
-        $this->translator = $translator;
-        $this->datatableService = $datatableService;
-        $this->authService = $authService;
         $this->businessInvoiceService = $businessInvoiceService;
         $this->invoicePdfService = $invoicePdfService;
+        $this->datatableService = $datatableService;
     }
 
     public function invoicesAction()

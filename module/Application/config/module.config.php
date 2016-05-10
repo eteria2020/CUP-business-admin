@@ -429,7 +429,19 @@ return [
                     [
                         'label' => $translator->translate('Gestione gruppi'),
                         'route' => 'groups',
-                        'isVisible' => true
+                        'isVisible' => true,
+                    ],
+                    [
+                        'route' => 'groups/add',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'groups/details',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'groups/details/add-employees',
+                        'isVisible' => false
                     ],
                 ],
             ],
