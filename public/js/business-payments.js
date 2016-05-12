@@ -4,6 +4,9 @@ $(function() {
     var table = $('#js-business-payments-table');
     var search = $('#js-value');
     var column = $('#js-column');
+    var paymentType = $('#js-payment-type');
+
+    var searchByType = false;
     search.val('');
     column.val('select');
 
@@ -24,7 +27,11 @@ $(function() {
         },
         "fnServerParams": function ( aoData ) {
             aoData.push({ "name": "column", "value": $(column).val()});
-            aoData.push({ "name": "searchValue", "value": $(search).val().trim()});
+            var value = $(search).val().trim();
+            if (searchByType) {
+                value = paymentType.val();
+            }
+            aoData.push({ "name": "searchValue", "value": value });
         },
         "order": [[0, 'asc']],
         "columns": [
@@ -72,13 +79,25 @@ $(function() {
     $('#js-clear').click(function() {
         search.val('');
         search.prop('disabled', false);
+        paymentType.hide();
         column.val('select');
         search.show();
     });
 
     $(column).change(function() {
-        search.show();
-        search.val('');
-    });
+        var value = $(this).val();
+        searchByType = false;
+        paymentType.hide();
+        search.hide();
 
+        switch (value) {
+            case 'bp.type' :
+                paymentType.show();
+                searchByType = true;
+                break;
+            default:
+                search.show();
+                break;
+        }
+    });
 });
