@@ -1,4 +1,4 @@
-/* global $ document translate */
+/* global $ translate */
 $(function() {
     'use strict';
 

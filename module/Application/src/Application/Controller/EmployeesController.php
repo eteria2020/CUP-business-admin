@@ -9,10 +9,14 @@
 
 namespace Application\Controller;
 
+use Application\Controller\Plugin\TranslatorPlugin;
 use BusinessCore\Service\BusinessService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
+/**
+ * @method TranslatorPlugin translatorPlugin()
+ */
 class EmployeesController extends AbstractActionController
 {
     /**

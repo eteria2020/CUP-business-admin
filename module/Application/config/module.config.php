@@ -8,7 +8,9 @@ namespace Application;
  * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
-$translator = new \Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\Translator;
+
+$translator = new Translator;
 return [
     'router' => [
         'routes' => [
@@ -138,6 +140,59 @@ return [
                     ],
                 ],
             ],
+            'trips' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/trips',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Trips',
+                        'action'     => 'trips',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'invoices' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/invoices',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Invoices',
+                        'action'     => 'invoices',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'pdf' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/download/:id',
+                            'defaults' => [
+                                'action' => 'pdf',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -187,6 +242,8 @@ return [
         'factories' => [
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
+            'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
+            'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -340,6 +397,8 @@ return [
                 ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin', 'business']],
                 ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin', 'business']],
                 ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin', 'business']],
             ],
         ],
     ],
@@ -363,17 +422,55 @@ return [
                 'isRouteJs' => true,
                 'pages'     => [
                     [
-                        'label' => $translator->translate('Lista'),
+                        'label' => $translator->translate('Elenco'),
                         'route' => 'employees',
                         'isVisible' => true
                     ],
                     [
                         'label' => $translator->translate('Gestione gruppi'),
                         'route' => 'groups',
+                        'isVisible' => true,
+                    ],
+                    [
+                        'route' => 'groups/add',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'groups/details',
+                        'isVisible' => false
+                    ],
+                    [
+                        'route' => 'groups/details/add-employees',
+                        'isVisible' => false
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Corse'),
+                'route'     => 'trips',
+                'icon'      => 'fa fa-road',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'trips',
                         'isVisible' => true
                     ],
                 ],
             ],
-        ],
-    ],
+            [
+                'label'     => $translator->translate('Fatture'),
+                'route'     => 'invoices',
+                'icon'      => 'fa fa-file-o',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'invoices',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+        ]
+    ]
 ];

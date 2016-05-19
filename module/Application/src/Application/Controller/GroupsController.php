@@ -1,20 +1,19 @@
 <?php
 namespace Application\Controller;
 
+use Application\Controller\Plugin\TranslatorPlugin;
 use Application\Form\GroupForm;
-use BusinessCore\Entity\Business;
 use BusinessCore\Entity\Group;
-use BusinessCore\Entity\Webuser;
 use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\GroupService;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Mvc\I18n\Translator;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
+/**
+ * @method TranslatorPlugin translatorPlugin()
+ */
 class GroupsController extends AbstractActionController
 {
     /**
