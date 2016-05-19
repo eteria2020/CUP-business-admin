@@ -39,22 +39,23 @@ $this->headScript()
                     <table class="table table-striped table-bordered table-hover" id="js-group-add-employees-table">
                         <thead>
                         <tr>
+                            <th class="button-column"><?= $this->translate("Seleziona"); ?></th>
                             <th class="name-column"><?= $this->translate("Nome e cognome"); ?></th>
                             <th class="email-column"><?= $this->translate("Email"); ?></th>
                             <th class="status-column"><?= $this->translate("Stato"); ?></th>
-                            <th class="button-column"><?= $this->translate("Selezione"); ?></th>
                         </tr>
                         </thead>
                         <?php /** @var \BusinessCore\Entity\BusinessEmployee $be */
                         foreach ($this->group->getBusiness()->getEnabledBusinessEmployeesWithoutGroup() as $be):
                             $employee = $be->getEmployee(); ?>
                             <tr>
+                                <td>
+                                    <label><input type="checkbox" name="add-<?= $employee->getId() ?>"></label>
+                                </td>
                                 <td><?= $employee->getName() . " " . $employee->getSurname(); ?></td>
                                 <td><?= $employee->getEmail(); ?></td>
                                 <td><?= $this->businessEmployeeStatus($be->getStatus()); ?></td>
-                                <td>
-                                    <label><input type="checkbox" name="add-<?= $employee->getId() ?>"> seleziona</label>
-                                </td>
+
                             </tr>
                             <?php
                         endforeach; ?>

@@ -1,19 +1,25 @@
 <?php
 namespace Application\Controller;
 
+use Application\Controller\Plugin\TranslatorPlugin;
 use Application\Form\GroupForm;
 use BusinessCore\Entity\Group;
-use BusinessCore\Entity\Webuser;
+use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\GroupService;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
+/**
+ * @method TranslatorPlugin translatorPlugin()
+ */
 class GroupsController extends AbstractActionController
 {
+    /**
+     * @var BusinessService
+     */
+    private $businessService;
     /**
      * @var GroupService
      */
@@ -25,13 +31,16 @@ class GroupsController extends AbstractActionController
 
     /**
      * GroupsController constructor.
+     * @param BusinessService $businessService
      * @param GroupService $groupService
      * @param GroupForm $groupForm
      */
     public function __construct(
+        BusinessService $businessService,
         GroupService $groupService,
         GroupForm $groupForm
     ) {
+        $this->businessService = $businessService;
         $this->groupService = $groupService;
         $this->groupForm = $groupForm;
     }
@@ -101,12 +110,12 @@ class GroupsController extends AbstractActionController
         $group = $this->getCurrentGroup();
         $employeeId = $this->params()->fromRoute('employee', 0);
         $this->groupService->removeEmployeeFromGroup($group, $employeeId);
-        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Cliente eliminato dal gruppo'));
+        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente eliminato dal gruppo'));
         return $this->redirect()->toRoute('groups/details', ['id' => $group->getId()]);
     }
 
     /**
-     * @return Group
+     * @return null|Group
      */
     private function getCurrentGroup()
     {

@@ -1,9 +1,7 @@
 <?php
-
 namespace Application\Controller;
 
 use BusinessCore\Entity\BusinessInvoice;
-use BusinessCore\Entity\Invoice;
 use BusinessCore\Service\BusinessInvoiceService;
 use BusinessCore\Service\DatatableService;
 use BusinessCore\Service\InvoicePdfService;
@@ -54,7 +52,7 @@ class InvoicesController extends AbstractActionController
         $invoiceId = $this->params()->fromRoute('id', 0);
         $business = $this->identity()->getBusiness();
         $businessInvoice = $this->businessInvoiceService->findOneByIdAndBusiness($invoiceId, $business);
-        return $this->generatePdfResponse($businessInvoice->getInvoice());
+        return $this->generatePdfResponse($businessInvoice);
     }
 
     public function datatableAction()
@@ -77,25 +75,20 @@ class InvoicesController extends AbstractActionController
     private function mapBusinessInvoicesToDatatable(array $businessInvoices)
     {
         return array_map(function (BusinessInvoice $businessInvoice) {
-            $invoice = $businessInvoice->getInvoice();
-            $employee = $invoice->getEmployee();
+
             return [
-                'i' => [
-                    'id' => $invoice->getId(),
-                    'invoiceNumber' => $invoice->getInvoiceNumber(),
-                    'invoiceDate' => $invoice->getInvoiceDate(),
-                    'type' => $invoice->getType(),
-                    'amount' => $invoice->getAmount(),
+                'bi' => [
+                    'id' => $businessInvoice->getId(),
+                    'invoiceNumber' => $businessInvoice->getInvoiceNumber(),
+                    'invoiceDate' => $businessInvoice->getInvoiceDate(),
+                    'type' => $businessInvoice->getType(),
+                    'amount' => $businessInvoice->getAmount(),
                 ],
-                'e' => [
-                    'name' => $employee->getName(),
-                    'surname' => $employee->getSurname(),
-                ]
             ];
         }, $businessInvoices);
     }
 
-    private function generatePdfResponse(Invoice $invoice)
+    private function generatePdfResponse(BusinessInvoice $invoice)
     {
         $pdf = $this->invoicePdfService->generatePdfFromInvoice($invoice);
         $response = new Response();

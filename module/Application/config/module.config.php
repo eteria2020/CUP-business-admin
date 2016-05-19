@@ -66,7 +66,7 @@ return [
                             'block' => [
                                 'type' => 'Literal',
                                 'options' => [
-                                    'route' => '/block-employee',
+                                    'route' => '/block',
                                     'defaults' => [
                                         'action' => 'block-employee',
                                     ],
@@ -75,7 +75,7 @@ return [
                             'unblock' => [
                                 'type' => 'Literal',
                                 'options' => [
-                                    'route' => '/unblock-employee',
+                                    'route' => '/unblock',
                                     'defaults' => [
                                         'action' => 'unblock-employee',
                                     ],
@@ -130,7 +130,7 @@ return [
                             'remove-employee' => [
                                 'type' => 'Segment',
                                 'options' => [
-                                    'route' => '/remove/:employee',
+                                    'route' => '/remove-employee/:employee',
                                     'defaults' => [
                                         'action' => 'remove-employee-from-group',
                                     ],
@@ -454,14 +454,14 @@ return [
                 ['controller' => 'zfcuser', 'roles' => []],
 
                 ['controller' => 'Application\Controller\Error', 'roles' => []],
-                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Fares', 'roles' => ['superadmin']],
-                ['controller' => 'Application\Controller\Payments', 'roles' => ['superadmin']],
+                ['controller' => 'Application\Controller\Index', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Employees', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Fares', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Payments', 'roles' => ['superadmin', 'business']],
             ],
         ],
     ],

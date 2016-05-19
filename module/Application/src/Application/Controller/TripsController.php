@@ -4,6 +4,7 @@ namespace Application\Controller;
 use BusinessCore\Entity\BusinessTrip;
 use BusinessCore\Service\BusinessTripService;
 use BusinessCore\Service\DatatableService;
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -28,8 +29,8 @@ class TripsController extends AbstractActionController
         BusinessTripService $businessTripService,
         DatatableService $datatableService
     ) {
-        $this->businessTripService = $businessTripService;
         $this->datatableService = $datatableService;
+        $this->businessTripService = $businessTripService;
     }
 
     public function tripsAction()

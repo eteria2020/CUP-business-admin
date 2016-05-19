@@ -14,9 +14,8 @@ $config = [
         'BjyAuthorize',
         'AssetManager',
         'MvLabsMultilanguage',
-
-        'SharengoAdminUI',
         'MvlabsSnappy',
+        'SharengoAdminUI',
         'BusinessCore',
         'Application'
     ],
