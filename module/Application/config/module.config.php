@@ -259,15 +259,6 @@ return [
                             ],
                         ],
                     ],
-                    'credit-card' => [
-                        'type'    => 'Literal',
-                        'options' => [
-                            'route'    => '/cc',
-                            'defaults' => [
-                                'action' => 'credit-card',
-                            ],
-                        ],
-                    ],
                 ],
             ],
             'unauthorized' => [
@@ -583,11 +574,6 @@ return [
                     [
                         'label' => $translator->translate('Lista pagamenti'),
                         'route' => 'payments',
-                        'isVisible' => true
-                    ],
-                    [
-                        'label' => $translator->translate('Associazioni Carta di Credito'),
-                        'route' => 'payments/credit-card',
                         'isVisible' => true
                     ],
                 ],

@@ -47,13 +47,6 @@ class PaymentsController extends AbstractActionController
         ]);
     }
 
-    public function creditCardAction()
-    {
-        return new ViewModel([
-            'business' => $this->identity()->getBusiness()
-        ]);
-    }
-
     public function datatableAction()
     {
         $filters = $this->params()->fromPost();
