@@ -13,6 +13,7 @@
                 <th class="email-column"><?= $this->translate("Email"); ?></th>
                 <th class="group-column"><?= $this->translate("Gruppo"); ?></th>
                 <th class="status-column"><?= $this->translate("Stato"); ?></th>
+                <th class="pin-column"><?= $this->translate("PIN Aziendale"); ?></th>
                 <th class="button-column"><?= $this->translate("Azioni"); ?></th>
             </tr>
             </thead>
@@ -24,6 +25,7 @@
                     <td><?= $employee->getEmail(); ?></td>
                     <td><?= $this->groupLink($be) ?></td>
                     <td><?= $this->businessEmployeeStatus($be->getStatus()); ?></td>
+                    <td><?= $employee->getBusinessPin() ?></td>
                     <td><?= $this->businessEmployeeAvailableActionButtons($be) ?></td>
                 </tr>
                 <?php
