@@ -78,7 +78,7 @@ class EmployeesController extends AbstractActionController
         $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
 
-        $this->businessService->approveEmployee($business, $employeeId);
+        $this->businessService->unblockEmployee($business, $employeeId);
         $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente sbloccato con successo'));
 
         return $this->redirect()->toRoute('employees');
