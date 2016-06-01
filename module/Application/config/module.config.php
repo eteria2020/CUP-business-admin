@@ -281,7 +281,8 @@ return [
             'doctrine.connection.orm_default' => 'Application\Service\OrmConnectionFactory',
         ],
         'invokables' => [
-            'Application\Form\GroupForm' => 'Application\Form\GroupForm'
+            'Application\Form\GroupForm' => 'Application\Form\GroupForm',
+            'Application\Form\GroupMinutesLimitForm' => 'Application\Form\GroupMinutesLimitForm'
         ]
     ],
     'controllers' => [
