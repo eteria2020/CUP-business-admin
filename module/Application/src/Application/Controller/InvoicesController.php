@@ -61,13 +61,14 @@ class InvoicesController extends AbstractActionController
         $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessInvoices = $this->businessInvoiceService->searchInvoicesByBusiness($business, $searchCriteria);
+        $businessInvoicesNumber = $this->businessInvoiceService->countFilteredInvoicesByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessInvoicesToDatatable($businessInvoices);
         $totalInvoices = $this->businessInvoiceService->getTotalInvoicesByBusiness($business);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalInvoices,
-            'recordsFiltered' => count($dataDataTable),
+            'recordsFiltered' => $businessInvoicesNumber,
             'data'            => $dataDataTable
         ]);
     }

@@ -53,13 +53,14 @@ class PaymentsController extends AbstractActionController
         $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessPayments = $this->businessPaymentService->searchPaymentsByBusiness($business, $searchCriteria);
+        $businessPaymentsNumber = $this->businessPaymentService->countFilteredPaymentsByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessPaymentsToDatatable($businessPayments);
         $totalPayments = $this->businessPaymentService->getTotalPaymentsByBusiness($business);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalPayments,
-            'recordsFiltered' => count($dataDataTable),
+            'recordsFiltered' => $businessPaymentsNumber,
             'data'            => $dataDataTable
         ]);
     }

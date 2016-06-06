@@ -46,13 +46,14 @@ class TripsController extends AbstractActionController
         $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessTrips = $this->businessTripService->searchTripsByBusiness($business, $searchCriteria);
+        $businessTripsNumber = $this->businessTripService->countFilteredTripsByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessTripsToDatatable($businessTrips);
         $totalTrips = $this->businessTripService->getTotalTripsByBusiness($business);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalTrips,
-            'recordsFiltered' => count($dataDataTable),
+            'recordsFiltered' => $businessTripsNumber,
             'data'            => $dataDataTable
         ]);
     }
