@@ -65,7 +65,7 @@ class TripsController extends AbstractActionController
             $groupName = is_null($businessTrip->getGroup()) ? '-' : $businessTrip->getGroup()->getName();
             return [
                 'e' => [
-                    'name' => $employee->getId(),
+                    'name' => $employee->getName(),
                     'surname' => $employee->getSurname(),
                 ],
                 'g' => [
