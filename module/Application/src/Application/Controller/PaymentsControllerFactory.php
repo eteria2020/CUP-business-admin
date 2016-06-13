@@ -17,7 +17,8 @@ class PaymentsControllerFactory implements FactoryInterface
 
         $businessPaymentService = $sharedServiceManager->get('BusinessCore\Service\BusinessPaymentService');
         $datatableService = $sharedServiceManager->get('BusinessCore\Service\DatatableService');
+        $pdfService = $sharedServiceManager->get('BusinessCore\Service\PdfService');
 
-        return new PaymentsController($businessPaymentService, $datatableService);
+        return new PaymentsController($businessPaymentService, $datatableService, $pdfService);
     }
 }

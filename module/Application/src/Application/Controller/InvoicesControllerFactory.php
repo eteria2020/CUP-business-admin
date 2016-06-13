@@ -18,12 +18,12 @@ class InvoicesControllerFactory implements FactoryInterface
     {
         $sharedServiceManager = $serviceLocator->getServiceLocator();
         $businessInvoiceService = $sharedServiceManager->get('BusinessCore\Service\BusinessInvoiceService');
-        $invoicePdfService = $sharedServiceManager->get('BusinessCore\Service\InvoicePdfService');
+        $pdfService = $sharedServiceManager->get('BusinessCore\Service\PdfService');
         $datatableService = $sharedServiceManager->get('BusinessCore\Service\DatatableService');
 
         return new InvoicesController(
             $businessInvoiceService,
-            $invoicePdfService,
+            $pdfService,
             $datatableService
         );
     }

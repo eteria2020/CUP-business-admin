@@ -252,6 +252,24 @@ return [
                             ],
                         ],
                     ],
+                    'flag-as-payed' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/flag-as-payed/:type/:id',
+                            'defaults' => [
+                                'action' => 'flag-as-payed',
+                            ],
+                        ],
+                    ],
+                    'report' => [
+                        'type'    => 'literal',
+                        'options' => [
+                            'route'    => '/report',
+                            'defaults' => [
+                                'action' => 'download-report',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'unauthorized' => [

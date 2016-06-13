@@ -4,7 +4,7 @@ namespace Application\Controller;
 use BusinessCore\Entity\BusinessInvoice;
 use BusinessCore\Service\BusinessInvoiceService;
 use BusinessCore\Service\DatatableService;
-use BusinessCore\Service\InvoicePdfService;
+use BusinessCore\Service\PdfService;
 
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -22,23 +22,23 @@ class InvoicesController extends AbstractActionController
      */
     private $businessInvoiceService;
     /**
-     * @var InvoicePdfService
+     * @var PdfService
      */
-    private $invoicePdfService;
+    private $pdfService;
 
     /**
      * EmployeesController constructor.
      * @param BusinessInvoiceService $businessInvoiceService
-     * @param InvoicePdfService $invoicePdfService
+     * @param PdfService $pdfService
      * @param DatatableService $datatableService
      */
     public function __construct(
         BusinessInvoiceService $businessInvoiceService,
-        InvoicePdfService $invoicePdfService,
+        PdfService $pdfService,
         DatatableService $datatableService
     ) {
         $this->businessInvoiceService = $businessInvoiceService;
-        $this->invoicePdfService = $invoicePdfService;
+        $this->pdfService = $pdfService;
         $this->datatableService = $datatableService;
     }
 
@@ -91,7 +91,7 @@ class InvoicesController extends AbstractActionController
 
     private function generatePdfResponse(BusinessInvoice $invoice)
     {
-        $pdf = $this->invoicePdfService->generatePdfFromInvoice($invoice);
+        $pdf = $this->pdfService->generatePdfFromInvoice($invoice);
         $response = new Response();
         $headers = $response->getHeaders();
         $headers->addHeaderLine('Content-Type', 'application/pdf');
