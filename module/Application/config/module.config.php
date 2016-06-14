@@ -232,6 +232,16 @@ return [
                     ]
                 ]
             ],
+            'subscription' => [
+                'type'    => 'Literal',
+                'options' => [
+                    'route'    => '/subscription',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription',
+                    ],
+                ],
+            ],
             'payments' => [
                 'type' => 'Literal',
                 'options' => [
@@ -316,6 +326,7 @@ return [
             'Application\Controller\TimePackages' => 'Application\Controller\TimePackagesControllerFactory',
             'Application\Controller\Fares' => 'Application\Controller\FaresControllerFactory',
             'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
+            'Application\Controller\Subscription' => 'Application\Controller\SubscriptionControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -474,6 +485,7 @@ return [
                 ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin', 'business']],
                 ['controller' => 'Application\Controller\Fares', 'roles' => ['superadmin', 'business']],
                 ['controller' => 'Application\Controller\Payments', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Subscription', 'roles' => ['superadmin', 'business']],
             ],
         ],
     ],
@@ -589,6 +601,11 @@ return [
                         'isVisible' => true
                     ],
                 ],
+            ],
+            [
+                'label'     => $translator->translate('Sottoscrizione'),
+                'route'     => 'subscription',
+                'icon'      => 'fa fa-plug',
             ],
         ],
     ],

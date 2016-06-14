@@ -150,12 +150,14 @@ class PaymentsController extends AbstractActionController
     private function formatPaymentType($paymentType)
     {
         switch ($paymentType) {
-            case 'package':
+            case BusinessPayment::TYPE_PACKAGE:
                 return $this->translatorPlugin()->translate("Pacchetto minuti");
-            case 'extra':
+            case BusinessPayment::TYPE_EXTRA:
                 return $this->translatorPlugin()->translate("Extra / Penale");
-            case 'trip':
+            case BusinessPayment::TYPE_TRIP:
                 return $this->translatorPlugin()->translate("Corsa");
+            case BusinessPayment::TYPE_SUBSCRIPTION:
+                return $this->translatorPlugin()->translate("Sottoscrizione");
             default:
                 return $paymentType;
         }
