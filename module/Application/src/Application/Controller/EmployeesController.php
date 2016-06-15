@@ -10,6 +10,7 @@
 namespace Application\Controller;
 
 use Application\Controller\Plugin\TranslatorPlugin;
+use BusinessCore\Entity\Business;
 use BusinessCore\Service\BusinessService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -42,11 +43,16 @@ class EmployeesController extends AbstractActionController
 
     public function approveEmployeeAction()
     {
+        /** @var Business $business */
         $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
-
-        $this->businessService->approveEmployee($business, $employeeId);
-        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente approvato'));
+        if ($business->isEnabled()) {
+            $this->businessService->approveEmployee($business, $employeeId);
+            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente approvato'));
+        } else {
+            $this->businessService->approveEmployeeWithBusinessNotEnabled($business, $employeeId);
+            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Dipendente approvato, in attesa primo pagamento dell'azienda"));
+        }
 
         return $this->redirect()->toRoute('employees');
     }
