@@ -16,7 +16,8 @@ class GroupMinutesLimitForm extends Form
             'type'       => 'Zend\Form\Element\Number',
             'attributes' => [
                 'id'       => 'daily',
-                'class'    => 'form-control'
+                'class'    => 'form-control',
+                'min'      => 0
             ]
         ]);
 
@@ -25,7 +26,8 @@ class GroupMinutesLimitForm extends Form
             'type'       => 'Zend\Form\Element\Number',
             'attributes' => [
                 'id'       => 'weekly',
-                'class'    => 'form-control'
+                'class'    => 'form-control',
+                'min'      => 0
             ]
         ]);
 
@@ -34,7 +36,8 @@ class GroupMinutesLimitForm extends Form
             'type'       => 'Zend\Form\Element\Number',
             'attributes' => [
                 'id'       => 'monthly',
-                'class'    => 'form-control'
+                'class'    => 'form-control',
+                'min'      => 0
             ]
         ]);
 
