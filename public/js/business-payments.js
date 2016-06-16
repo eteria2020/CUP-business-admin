@@ -1,4 +1,4 @@
-/* global $ translate */
+/* global $ translate document */
 $(function() {
     "use strict";
     var table = $('#js-business-payments-table');
@@ -8,14 +8,33 @@ $(function() {
     var paymentStatus = $('#js-payment-status');
     var from = $('#js-date-from');
     var to = $('#js-date-to');
-
     var reportData = null;
-
     var searchByType = false;
     var searchByStatus = false;
+
+    var reportTable = $("#report-table");
+    var reportTotal = $("#report-total");
+
+    function updateReportInfo(data) {
+        reportData = data;
+        if ($.isEmptyObject(reportData.payments)) {
+            reportTable.hide();
+            return;
+        }
+
+        var reportTotalHtml = '';
+        $.each(data.totals, function (i, value) {
+            if (i > 0) {
+                reportTotalHtml += '<br>';
+            }
+            reportTotalHtml += value;
+        });
+        reportTotal.html(reportTotalHtml);
+        reportTable.show();
+    }
+
     search.val('');
     column.val('select');
-
     table.dataTable({
         "processing": true,
         "serverSide": true,
@@ -137,39 +156,22 @@ $(function() {
         }
     });
 
-
     var reportDownload = $("#report-download");
     reportDownload.click(function() {
         var form = document.createElement("form");
-        var element1 = document.createElement("input");
+        var input = document.createElement("input");
 
         form.method = "POST";
         form.action = "payments/report";
 
-        element1.value = JSON.stringify(reportData);
-        element1.name = "data";
-        element1.type = "hidden";
-        form.appendChild(element1);
+        input.value = JSON.stringify(reportData);
+        input.name = "data";
+        input.type = "hidden";
+        form.appendChild(input);
 
         document.body.appendChild(form);
 
         form.submit();
 
     });
-
-    var reportTable = $("#report-table");
-    var reportTotal = $("#report-total");
-    function updateReportInfo(data) {
-        reportTable.show();
-        reportData = data;
-        var reportTotalHtml = '';
-        $.each(data.totals, function (i, value) {
-            if (i > 0) {
-                reportTotalHtml += '<br>';
-            }
-            reportTotalHtml += value;
-        });
-
-        reportTotal.html(reportTotalHtml);
-    }
 });

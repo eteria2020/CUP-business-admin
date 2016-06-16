@@ -140,8 +140,12 @@ class PaymentsController extends AbstractActionController
             ];
         }, $businessPayments);
 
-        foreach ($totals as $total) {
-            $payments['totals'][] = $this->formatAmount($total['total'], $total['currency']);
+        if (empty($totals)) {
+            $payments['totals'][] = '0';
+        } else {
+            foreach ($totals as $total) {
+                $payments['totals'][] = $this->formatAmount($total['total'], $total['currency']);
+            }
         }
 
         return $payments;
