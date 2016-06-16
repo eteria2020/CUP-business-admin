@@ -10,9 +10,11 @@
 namespace Application;
 
 use BjyAuthorize\View\RedirectionStrategy;
+use Doctrine\DBAL\DBALException;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Validator\AbstractValidator;
+use Zend\View\Helper\Navigation;
 
 class Module
 {
@@ -23,9 +25,6 @@ class Module
         $serviceManager = $application->getServiceManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-
-        $options = $serviceManager->get('zfcuser_module_options');
-
 
         // BjyAuthorize redirection strategy
         $strategy = new RedirectionStrategy();
@@ -58,9 +57,9 @@ class Module
         // Add ACL information to Navigation view helper
         $authorize = $serviceManager->get('BjyAuthorize\Service\Authorize');
         try {
-            \Zend\View\Helper\Navigation::setDefaultAcl($authorize->getAcl());
-            \Zend\View\Helper\Navigation::setDefaultRole($authorize->getIdentity());
-        } catch (\Doctrine\DBAL\DBALException $exception) {
+            Navigation::setDefaultAcl($authorize->getAcl());
+            Navigation::setDefaultRole($authorize->getIdentity());
+        } catch (DBALException $exception) {
             // database tables not yet initialized
         }
 
@@ -71,16 +70,5 @@ class Module
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
-    }
-
-    public function getAutoloaderConfig()
-    {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
     }
 }
