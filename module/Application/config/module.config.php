@@ -315,10 +315,11 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
+
             'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
+            'Application\Controller\Index' => 'Application\Controller\IndexControllerFactory',
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
@@ -335,8 +336,12 @@ return [
         ]
     ],
     'view_helpers'    => [
+        'invokables' => [
+            'ParamsHelper' => 'Application\View\Helper\ParamsHelper',
+        ],
         'factories' => [
             'languageMenuHelper' => 'Application\View\Helper\LanguageMenuHelperFactory',
+            'infoPanelHelper' => 'Application\View\Helper\BusinessInfoPanelHelperFactory',
         ],
     ],
     'translator' => [
@@ -503,6 +508,11 @@ return [
     'navigation' => [
         'default' => [
             [
+                'label'     => $translator->translate('Dashboard'),
+                'route'     => 'home',
+                'icon'      => 'fa fa-briefcase',
+            ],
+            [
                 'label'     => $translator->translate('Dipendenti'),
                 'route'     => 'employees',
                 'icon'      => 'fa fa-users',
@@ -601,11 +611,6 @@ return [
                         'isVisible' => true
                     ],
                 ],
-            ],
-            [
-                'label'     => $translator->translate('Sottoscrizione'),
-                'route'     => 'subscription',
-                'icon'      => 'fa fa-plug',
             ],
         ],
     ],

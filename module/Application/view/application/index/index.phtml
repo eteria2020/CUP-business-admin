@@ -1,17 +1,74 @@
+<?php
+use BusinessCore\Entity\Business;
+
+/** @var Business $business */
+$business = $this->business
+?>
 <div class="page-content-wrapper">
     <div class="page-content">
-
-        <!-- BEGIN PAGE HEADER-->
-        <h3 class="page-title"><?= $this->translate("Dashboard"); ?></h3>
-
-        <div class="page-bar">
-        </div>
-
         <div class="row">
-            <div class="col-md-12">
-            </div>
-        </div>
+            <div class="col-lg-9">
 
-        <!-- END PAGE CONTENT-->
+                <?= $this->partial('partials/flash-messages.phtml', []); ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading"><?= $this->translate("Dashboard"); ?></div>
+                    <div style="font-size: medium" class="panel-body">
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal">
+                                <dt><?= $this->translate("Ragione Sociale"); ?></dt>
+                                <dd><?= $business->getName(); ?></dd>
+                                <dt><?= $this->translate("Domini"); ?></dt>
+                                <dd><?= implode(' ', $business->getDomains()); ?></dd>
+                                <dt><?= $this->translate("Email"); ?></dt>
+                                <dd><?= $business->getEmail(); ?></dd>
+                                <dt><?= $this->translate("Telefono"); ?></dt>
+                                <dd><?= $business->getPhone(); ?></dd>
+                                <dt><?= $this->translate("Fax"); ?></dt>
+                                <dd><?= $business->getFax(); ?></dd>
+                                <dt><?= $this->translate("Partita IVA"); ?></dt>
+                                <dd><?= $business->getVatNumber(); ?></dd>
+                                <dt><?= $this->translate("Email"); ?></dt>
+                                <dd><?= $business->getEmail(); ?></dd>
+                            </dl>
+                            <dl class="dl-horizontal">
+                                <dt><?= $this->translate("Indirizzo"); ?></dt>
+                                <dd><?= $business->getAddress(); ?></dd>
+                                <dt><?= $this->translate("CAP"); ?></dt>
+                                <dd><?= $business->getZipCode(); ?></dd>
+                                <dt><?= $this->translate("Provincia"); ?></dt>
+                                <dd><?= $business->getProvince(); ?></dd>
+                                <dt><?= $this->translate("Città"); ?></dt>
+                                <dd><?= $business->getCity(); ?></dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-6">
+                            <dl class="dl-horizontal">
+                                <dt><?= $this->translate("Tipo pagamento"); ?></dt>
+                                <dd><?= $this->ParamsHelper()->displayPaymentType($business) ?></dd>
+                                <dt><?= $this->translate("Frequenza pagamento"); ?></dt>
+                                <dd><?= $this->ParamsHelper()->displayPaymentFrequence($business) ?></dd>
+                                <dt><?= $this->translate("Controllo email aziendale"); ?></dt>
+                                <dd><?= $business->isBusinessMailControlEnabled() ? $this->translate("Attivo") : $this->translate("Non attivo") ; ?></dd>
+                                <dt><?= $this->translate("Quota d'iscrizione"); ?></dt>
+                                <dd><?= $business->getReadableSubscriptionFee(); ?> €</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading"><?= $this->translate("Altri dati"); ?></div>
+                    <div class="panel-body">
+                        <?= $this->infoPanelHelper($business) ?>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

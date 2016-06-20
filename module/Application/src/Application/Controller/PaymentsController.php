@@ -6,6 +6,7 @@ use BusinessCore\Entity\Base\BusinessPayment;
 use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessTripPayment;
 use BusinessCore\Entity\ExtraPayment;
+use BusinessCore\Entity\SubscriptionPayment;
 use BusinessCore\Entity\TimePackagePayment;
 use BusinessCore\Service\BusinessPaymentService;
 
@@ -94,6 +95,9 @@ class PaymentsController extends AbstractActionController
                 break;
             case BusinessPayment::TYPE_EXTRA:
                 $className = ExtraPayment::CLASS_NAME;
+                break;
+            case BusinessPayment::TYPE_SUBSCRIPTION:
+                $className = SubscriptionPayment::CLASS_NAME;
                 break;
             default:
                 throw new \Exception;
