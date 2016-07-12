@@ -42,6 +42,7 @@ $this->headScript()
                                     <option value="<?= BusinessPayment::TYPE_PACKAGE ?>"><?= $this->translate("Pacchetto minuti"); ?></option>
                                     <option value="<?= BusinessPayment::TYPE_TRIP ?>"><?= $this->translate("Corsa"); ?></option>
                                     <option value="<?= BusinessPayment::TYPE_EXTRA ?>"><?= $this->translate("Extra/penale"); ?></option>
+                                    <option value="<?= BusinessPayment::TYPE_SUBSCRIPTION ?>"><?= $this->translate("Sottoscrizione"); ?></option>
                                 </select>
                                 <select name="js-payment-status" id="js-payment-status" class="form-control" style="display: none;">
                                     <option value="<?= BusinessPayment::STATUS_PENDING ?>"><?= $this->translate("Non pagato"); ?></option>
