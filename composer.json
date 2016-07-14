@@ -19,6 +19,10 @@
         {
             "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
             "type": "git"
+        },
+        {
+            "url": "ssh://git@git.mvlabs.it:4222/internals/payments.git",
+            "type": "git"
         }
     ],
     "require": {
@@ -33,15 +37,30 @@
         "natxet/CssMin": "3.0.*",
         "mvlabs/zf2-multilanguage": "dev-master",
         "sharengo-web/admin-ui": "dev-master",
-        "cup-web/core-business": "dev-master"
+        "cup-web/core-business": "dev-master",
+        "mvlabs/mvlabs-payments": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
         "phpmd/phpmd": "@stable"
     },
+    "autoload": {
+        "psr-4": {
+            "Scripts\\": "scripts/"
+        }
+    },
     "autoload-dev": {
         "psr-0": {
             "BusinessCore": "module/BusinessCore/src"
+        },
+        "psr-4": {
+            "MvlabsPayments\\": "module/MvlabsPayments/src/"
         }
-    }
+    },
+    "scripts": {
+        "pre-dependencies-solving": "Scripts\\Composer::addSubreposDependencies",
+        "pre-install-cmd": "Scripts\\Composer::addSubreposRepositories",
+        "pre-update-cmd": "Scripts\\Composer::addSubreposRepositories"
+    },
+    "minimum-stability": "dev"
 }
