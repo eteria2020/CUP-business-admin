@@ -50,10 +50,11 @@
         }
     },
     "autoload-dev": {
-        "psr-0": {
-            "BusinessCore": "module/BusinessCore/src"
-        },
+        "classmap": [
+            "./module/BusinessCore/Module.php"
+        ],
         "psr-4": {
+            "BusinessCore\\": "module/BusinessCore/src/",
             "MvlabsPayments\\": "module/MvlabsPayments/src/"
         }
     },
