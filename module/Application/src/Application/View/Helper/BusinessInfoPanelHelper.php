@@ -2,6 +2,7 @@
 namespace Application\View\Helper;
 
 use BusinessCore\Entity\Business;
+use BusinessCore\Entity\SubscriptionPayment;
 use BusinessCore\Service\BusinessPaymentService;
 use Zend\View\Helper\AbstractHelper;
 
@@ -21,6 +22,10 @@ class BusinessInfoPanelHelper extends AbstractHelper
     {
 
         $subscriptionPayment = $this->businessPaymentService->getBusinessSubscriptionPayment($business);
+
+        if (!$subscriptionPayment instanceof SubscriptionPayment) {
+            return '';
+        }
 
         $html = '<div class="row"><div class="col-lg-12"><div>'
             . $this->getView()->translate("Stato abilitazione") . '</div>';

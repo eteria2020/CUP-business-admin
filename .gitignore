@@ -15,3 +15,4 @@ data/DoctrineMongoODMModule
 public/cache
 node_modules
 module/BusinessCore
+module/MvlabsPayments
