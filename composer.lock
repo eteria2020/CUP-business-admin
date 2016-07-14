@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5ff723391ff80bd8c8b917384a535ec",
-    "content-hash": "abbfa1bafd85dd4b1a87d216739d1415",
+    "hash": "d3a187ca35f10657aa541b447d813171",
+    "content-hash": "2c13b0b59631649dee3ff024290dbb2a",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -3838,6 +3838,7 @@
         "sharengo-web/admin-ui": 20,
         "cup-web/core-business": 20,
         "mvlabs/mvlabs-payments": 20,
+        "mvlabs/omnipay-cartasi": 20,
         "phpmd/phpmd": 0
     },
     "prefer-stable": false,
