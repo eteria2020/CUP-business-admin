@@ -39,7 +39,7 @@ $this->headScript()
                     </tr>
                     </thead>
                     <?php /** @var \BusinessCore\Entity\BusinessTimePackage $businessTimePackage */
-                    foreach ($this->business->getBusinessTimePackages() as $businessTimePackage):
+                    foreach ($this->businessTimePackages as $businessTimePackage):
                         $timePackage = $businessTimePackage->getTimePackage()
                         //@todo calculate residual time?>
 

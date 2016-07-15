@@ -1,13 +1,11 @@
 <?php
 namespace Application\Controller;
 
-use BusinessCore\Entity\Webuser;
+use BusinessCore\Entity\Business;
 use BusinessCore\Service\BusinessTimePackageService;
 
-use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use ZfcUser\Exception\AuthenticationEventException;
 
 class TimePackagesController extends AbstractActionController
 {
@@ -27,8 +25,10 @@ class TimePackagesController extends AbstractActionController
 
     public function timePackagesAction()
     {
+        /** @var Business $business */
+        $business = $this->identity()->getBusiness();
         return new ViewModel([
-            'business' => $this->identity()->getBusiness()
+            'businessTimePackages' => $business->getBusinessTimePackages()
         ]);
     }
     public function buyAction()
@@ -36,7 +36,8 @@ class TimePackagesController extends AbstractActionController
         $business = $this->identity()->getBusiness();
         $timePackageId = $this->params()->fromRoute('id', 0);
         if ($timePackageId != 0) {
-            $this->businessTimePackageService->buyTimePackage($business, $timePackageId);
+            $timePackage = $this->businessTimePackageService->findTimePackageById($timePackageId);
+            $this->businessTimePackageService->buyTimePackage($business, $timePackage);
             $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Pacchetto minuti acquistato con sucesso"));
 
             return $this->redirect()->toRoute('time-packages');
