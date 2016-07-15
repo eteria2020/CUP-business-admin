@@ -1,0 +1,17 @@
+<?php
+return [
+    'omnipay' => [
+        'first-payment' => [
+            'alias' => 'batman',
+            'returnUrl' => 'http://example.com/return/url',
+            'cancelUrl' => 'http://example.com/cancel/url',
+            'macKey' => 'ajfgarefaldfkjanliue560254i'
+        ],
+        'token-payment' => [
+            'alias' => 'batman',
+            'cardReference' => 'mycard',
+            'card' => '1234567890123456',
+            'requestType' => 'recurringPyament'
+        ]
+    ]
+];
