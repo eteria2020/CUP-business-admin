@@ -65,9 +65,6 @@ class Module
 
         $changeLanguageDetector = $serviceManager->get('ChangeLanguageDetector.listener');
         $eventManager->attachAggregate($changeLanguageDetector);
-
-        $paymentListener = $serviceManager->get('PaymentListener');
-        $eventManager->attachAggregate($paymentListener);
     }
 
     public function getConfig()

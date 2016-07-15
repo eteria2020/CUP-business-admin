@@ -307,8 +307,6 @@ return [
             'navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
             'ChangeLanguageDetector.listener' => 'Application\Listener\ChangeLanguageDetectorFactory',
             'doctrine.connection.orm_default' => 'Application\Service\OrmConnectionFactory',
-            'PaymentService' => 'Application\Service\PaymentServiceFactory',
-            'PaymentListener' => 'Application\Listener\PaymentListenerFactory'
         ],
         'invokables' => [
             'Application\Form\GroupForm' => 'Application\Form\GroupForm',
