@@ -25,7 +25,6 @@ class IndexController extends AbstractActionController
      */
     private $businessPaymentService;
 
-
     /**
      * IndexController constructor.
      * @param SubscriptionService $subscriptionService
@@ -50,5 +49,12 @@ class IndexController extends AbstractActionController
         return new ViewModel([
             'business' => $business
         ]);
+    }
+
+    public function redirectFromPaymentAction()
+    {
+
+        //TODO do something
+
     }
 }

@@ -17,6 +17,16 @@ return [
                     ],
                 ],
             ],
+            'payment-redirect' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/payment-completed',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'redirect-from-payment',
+                    ],
+                ],
+            ],
             'employees' => [
                 'type' => 'Segment',
                 'options' => [
