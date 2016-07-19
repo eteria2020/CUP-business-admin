@@ -18,6 +18,6 @@ class SubscriptionControllerFactory implements FactoryInterface
         $businessPaymentService = $sharedServiceManager->get('BusinessCore\Service\BusinessPaymentService');
         $subscriptionService = $sharedServiceManager->get('BusinessCore\Service\SubscriptionService');
 
-        return new SubscriptionController($subscriptionService);
+        return new SubscriptionController($subscriptionService, $businessPaymentService);
     }
 }

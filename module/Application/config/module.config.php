@@ -17,16 +17,6 @@ return [
                     ],
                 ],
             ],
-            'payment-redirect' => [
-                'type' => 'Segment',
-                'options' => [
-                    'route' => '/payment-completed',
-                    'defaults' => [
-                        'controller' => 'Application\Controller\Index',
-                        'action' => 'redirect-from-payment',
-                    ],
-                ],
-            ],
             'employees' => [
                 'type' => 'Segment',
                 'options' => [
@@ -252,6 +242,26 @@ return [
                     ],
                 ],
             ],
+            'subscription-payment-concluded' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/payment-concluded',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription-payment-concluded',
+                    ],
+                ],
+            ],
+            'subscription-payment-cancelled' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/payment-cancelled',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription-payment-cancelled',
+                    ],
+                ],
+            ],
             'payments' => [
                 'type' => 'Literal',
                 'options' => [
@@ -325,11 +335,10 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
-            'Application\Controller\Index' => 'Application\Controller\IndexControllerFactory',
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
