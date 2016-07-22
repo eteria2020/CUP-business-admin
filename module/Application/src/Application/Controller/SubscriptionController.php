@@ -2,20 +2,13 @@
 namespace Application\Controller;
 
 use Application\Controller\Plugin\TranslatorPlugin;
-use BusinessCore\Entity\Base\BusinessPayment;
 use BusinessCore\Entity\Business;
-use BusinessCore\Entity\BusinessTripPayment;
-use BusinessCore\Entity\ExtraPayment;
-use BusinessCore\Entity\TimePackagePayment;
 use BusinessCore\Service\BusinessPaymentService;
 
 use BusinessCore\Service\DatatableService;
-use BusinessCore\Service\PdfService;
 use BusinessCore\Service\SubscriptionService;
 use Zend\Http\Response;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\JsonModel;
-use Zend\View\Model\ViewModel;
 
 /**
  * @method TranslatorPlugin translatorPlugin()
@@ -46,10 +39,13 @@ class SubscriptionController extends AbstractActionController
 
     public function subscriptionAction()
     {
+        /** @var Business $business */
         $business = $this->identity()->getBusiness();
-        if ($business->payWithCreditCard()) {
+        if ($business->payWithCreditCard() && !$business->hasActiveContract()) {
             $subscriptionPayment = $this->businessPaymentService->getBusinessSubscriptionPayment($business);
             $this->subscriptionService->paySubscription($subscriptionPayment);
+        } else {
+            $this->redirect()->toRoute('home');
         }
     }
 
@@ -71,7 +67,11 @@ class SubscriptionController extends AbstractActionController
     public function subscriptionPaymentCancelledAction()
     {
         $params = $this->params()->fromQuery();
-        $this->subscriptionService->rejectedSubscriptionPayment($params);
+
+        $codTrans = $params['codTrans'];
+        if (isset($codTrans)) {
+            $this->subscriptionService->rejectedSubscriptionPayment($codTrans);
+        }
         $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate('Pagamento annullato'));
         $this->redirect()->toRoute('home');
     }

@@ -48,6 +48,7 @@ $this->headScript()
                                     <option value="<?= BusinessPayment::STATUS_EXPECTED_PAYED ?>"><?= $this->translate("Pagato ma in attesa di conferma"); ?></option>
                                     <option value="<?= BusinessPayment::STATUS_CONFIRMED_PAYED ?>"><?= $this->translate("Pagato"); ?></option>
                                     <option value="<?= BusinessPayment::STATUS_INVOICED ?>"><?= $this->translate("Fatturato"); ?></option>
+                                    <option value="<?= BusinessPayment::STATUS_CANCELLED ?>"><?= $this->translate("Cancellato"); ?></option>
                                 </select>
                                 <input type="text" name="value" value="" class="form-control" id="js-value"
                                        placeholder="<?= $this->translate("Filtra..."); ?>">

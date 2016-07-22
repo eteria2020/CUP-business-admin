@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3a187ca35f10657aa541b447d813171",
-    "content-hash": "2c13b0b59631649dee3ff024290dbb2a",
+    "hash": "3ffb454cebb8da6aba4d34487d271a54",
+    "content-hash": "e77930d703e5d354bcee07d6ffce29b5",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -299,12 +299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/collections.git",
-                "reference": "315485ae4bc22affb75be25709740949460b851a"
+                "reference": "a58af3fd579f850c09a41d4c9fc5be76e9c6a2ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/collections/zipball/315485ae4bc22affb75be25709740949460b851a",
-                "reference": "315485ae4bc22affb75be25709740949460b851a",
+                "url": "https://api.github.com/repos/doctrine/collections/zipball/a58af3fd579f850c09a41d4c9fc5be76e9c6a2ab",
+                "reference": "a58af3fd579f850c09a41d4c9fc5be76e9c6a2ab",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +357,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2016-06-16 12:51:43"
+            "time": "2016-07-15 10:02:57"
         },
         {
             "name": "doctrine/common",
@@ -438,12 +438,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "b896ddd6fa1271d7f2bf8936ce8d069f240cd9ff"
+                "reference": "e69d1cf3bddd269e76d68eb81823c01f02b230d0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/b896ddd6fa1271d7f2bf8936ce8d069f240cd9ff",
-                "reference": "b896ddd6fa1271d7f2bf8936ce8d069f240cd9ff",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/e69d1cf3bddd269e76d68eb81823c01f02b230d0",
+                "reference": "e69d1cf3bddd269e76d68eb81823c01f02b230d0",
                 "shasum": ""
             },
             "require": {
@@ -501,7 +501,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-07-11 12:35:56"
+            "time": "2016-07-15 21:22:45"
         },
         {
             "name": "doctrine/doctrine-module",
@@ -1383,16 +1383,18 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/internals/payments.git",
-                "reference": "50480b6a44e15afcf7722dd8f5a691b3a8178a8b"
+                "reference": "218aaec6464614cef1de3323b72ded248509b0b7"
             },
             "require": {
-                "mvlabs/omnipay-cartasi": "@dev",
                 "ramsey/uuid": "^3.4",
                 "zendframework/zend-eventmanager": "^2.4"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9.5",
                 "phpunit/phpunit": "^5.4"
+            },
+            "suggest": {
+                "omnipay/omnipay": "Payment processing library"
             },
             "type": "library",
             "autoload": {
@@ -1407,7 +1409,7 @@
             "keywords": [
                 "payment"
             ],
-            "time": "2016-07-13 16:55:08"
+            "time": "2016-07-14 16:05:16"
         },
         {
             "name": "mvlabs/mvlabs-snappy",
@@ -1469,7 +1471,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.mvlabs.it:4222/internals/omnipay-cartasi.git",
-                "reference": "bbc4d79776d94d0828bfe7d0f84d3e7457392726"
+                "reference": "bc7f0b3ddec263c30a19821948554d4b8a9bb423"
             },
             "require": {
                 "omnipay/common": "~2.0"
@@ -1515,7 +1517,7 @@
                 "cartasi",
                 "omnipay"
             ],
-            "time": "2016-07-12 14:52:50"
+            "time": "2016-07-19 13:06:32"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -1916,12 +1918,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "139e3be2f16f19babbebcaaed0f6771d98bc9307"
+                "reference": "cec9c5dd2939b420f11c5db64989d7320634996e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/139e3be2f16f19babbebcaaed0f6771d98bc9307",
-                "reference": "139e3be2f16f19babbebcaaed0f6771d98bc9307",
+                "url": "https://api.github.com/repos/symfony/console/zipball/cec9c5dd2939b420f11c5db64989d7320634996e",
+                "reference": "cec9c5dd2939b420f11c5db64989d7320634996e",
                 "shasum": ""
             },
             "require": {
@@ -1968,7 +1970,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-30 18:17:12"
+            "time": "2016-07-19 10:40:24"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1976,12 +1978,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "b180b70439dca70049b6b9b7e21d75e6e5d7aca9"
+                "reference": "6612e92d5572c1506e6e5412faab77a76bce6c2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b180b70439dca70049b6b9b7e21d75e6e5d7aca9",
-                "reference": "b180b70439dca70049b6b9b7e21d75e6e5d7aca9",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/6612e92d5572c1506e6e5412faab77a76bce6c2f",
+                "reference": "6612e92d5572c1506e6e5412faab77a76bce6c2f",
                 "shasum": ""
             },
             "require": {
@@ -2028,7 +2030,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-29 05:29:29"
+            "time": "2016-07-18 07:09:40"
         },
         {
             "name": "symfony/http-foundation",
@@ -2036,12 +2038,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "6bef10a6c7f06627db4d4dd6ab683b9f85387d6d"
+                "reference": "328c43e1fdd168ab4d9dce4695fc700e44e4cf7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/6bef10a6c7f06627db4d4dd6ab683b9f85387d6d",
-                "reference": "6bef10a6c7f06627db4d4dd6ab683b9f85387d6d",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/328c43e1fdd168ab4d9dce4695fc700e44e4cf7b",
+                "reference": "328c43e1fdd168ab4d9dce4695fc700e44e4cf7b",
                 "shasum": ""
             },
             "require": {
@@ -2083,7 +2085,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-01 15:02:03"
+            "time": "2016-07-17 09:06:15"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2313,12 +2315,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "b57a8d1b316b6aaf6dc77852fed4ddb8adac77a7"
+                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/b57a8d1b316b6aaf6dc77852fed4ddb8adac77a7",
-                "reference": "b57a8d1b316b6aaf6dc77852fed4ddb8adac77a7",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
+                "reference": "0ceab136f43ed9d3e97b3eea32a7855dc50c121d",
                 "shasum": ""
             },
             "require": {
@@ -2354,7 +2356,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-01 06:55:04"
+            "time": "2016-07-17 09:06:15"
         },
         {
             "name": "zendframework/zendframework",
@@ -3724,12 +3726,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "d20f7599e5c5715a1485658898c794bbfa33a52f"
+                "reference": "06fe55aa01d18e5727bf4a45a6e03636f1c06dee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/d20f7599e5c5715a1485658898c794bbfa33a52f",
-                "reference": "d20f7599e5c5715a1485658898c794bbfa33a52f",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/06fe55aa01d18e5727bf4a45a6e03636f1c06dee",
+                "reference": "06fe55aa01d18e5727bf4a45a6e03636f1c06dee",
                 "shasum": ""
             },
             "require": {
@@ -3741,7 +3743,7 @@
             "require-dev": {
                 "symfony/config": "~2.2|~3.0.0",
                 "symfony/expression-language": "~2.6|~3.0.0",
-                "symfony/yaml": "~2.1|~3.0.0"
+                "symfony/yaml": "~2.3.42|~2.7.14|~2.8.7|~3.0.9"
             },
             "suggest": {
                 "symfony/config": "",
@@ -3779,7 +3781,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-01 06:55:04"
+            "time": "2016-07-19 10:40:24"
         },
         {
             "name": "symfony/filesystem",

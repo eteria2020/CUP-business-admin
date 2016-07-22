@@ -48,7 +48,7 @@ class BusinessInfoPanelHelper extends AbstractHelper
         } else {
             $text = $this->getView()->translate("Per attivare l'azienda devi pagare la quota di iscrizione di euro %s");
             $html .= '<div class="alert alert-warning col-sm-12">' . sprintf($text, $business->getReadableSubscriptionFee());
-            if ($business->payWithCreditCard()) {
+            if ($business->payWithCreditCard() && !$business->hasActiveContract()) {
                 $html .= '<br><br><a href="'. $this->getView()->url('subscription') .'"/><input class="btn btn-success col-sm-12" type="submit" value="'
                     . $this->getView()->translate("Paga con carta di credito")
                     . '">';

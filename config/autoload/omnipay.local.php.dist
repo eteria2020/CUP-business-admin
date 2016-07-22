@@ -2,16 +2,17 @@
 return [
     'omnipay' => [
         'first-payment' => [
-            'alias' => 'batman',
-            'returnUrl' => 'http://example.com/return/url',
-            'cancelUrl' => 'http://example.com/cancel/url',
-            'macKey' => 'ajfgarefaldfkjanliue560254i'
+            'alias' => 'xxx',
+            'serviceType' => 'paga_rico',
+            'returnUrl' => 'http://business.dev.sharengo.it/payment-concluded',
+            'cancelUrl' => 'http://business.dev.sharengo.it/payment-cancelled',
+            'macKey' => 'xxx'
         ],
         'token-payment' => [
-            'alias' => 'batman',
-            'cardReference' => 'mycard',
-            'card' => '1234567890123456',
-            'requestType' => 'recurringPyament'
+            'alias' => 'xxx',
+            'serviceType' => 'paga_rico',
+            'requestType' => 'PR',
+            'macKey' => 'xxx'
         ]
     ]
 ];

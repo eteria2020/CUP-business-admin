@@ -23,6 +23,10 @@
         {
             "url": "ssh://git@git.mvlabs.it:4222/internals/payments.git",
             "type": "git"
+        },
+        {
+            "url": "ssh://git@git.mvlabs.it:4222/internals/omnipay-cartasi.git",
+            "type": "git"
         }
     ],
     "require": {
