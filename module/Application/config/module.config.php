@@ -242,6 +242,26 @@ return [
                     ],
                 ],
             ],
+            'subscription-payment-concluded' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/payment-concluded',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription-payment-concluded',
+                    ],
+                ],
+            ],
+            'subscription-payment-cancelled' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/payment-cancelled',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription-payment-cancelled',
+                    ],
+                ],
+            ],
             'payments' => [
                 'type' => 'Literal',
                 'options' => [
@@ -310,16 +330,15 @@ return [
         ],
         'invokables' => [
             'Application\Form\GroupForm' => 'Application\Form\GroupForm',
-            'Application\Form\GroupMinutesLimitForm' => 'Application\Form\GroupMinutesLimitForm'
+            'Application\Form\GroupMinutesLimitForm' => 'Application\Form\GroupMinutesLimitForm',
         ]
     ],
     'controllers' => [
         'invokables' => [
-
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
-            'Application\Controller\Index' => 'Application\Controller\IndexControllerFactory',
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',

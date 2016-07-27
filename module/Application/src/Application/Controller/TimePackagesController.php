@@ -33,13 +33,26 @@ class TimePackagesController extends AbstractActionController
     }
     public function buyAction()
     {
+        /** @var Business $business */
         $business = $this->identity()->getBusiness();
         $timePackageId = $this->params()->fromRoute('id', 0);
         if ($timePackageId != 0) {
             $timePackage = $this->businessTimePackageService->findTimePackageById($timePackageId);
-            $this->businessTimePackageService->buyTimePackage($business, $timePackage);
-            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Pacchetto minuti acquistato con sucesso"));
-
+            if ($business->canBuyTimePackage($timePackage)) {
+                if ($business->payWithCreditCard()) {
+                    if ($business->hasActiveContract()) {
+                        $timePackagePayment = $this->businessTimePackageService->createPackagePayment($business, $timePackage);
+                        $this->businessTimePackageService->payTimePackage($business, $timePackagePayment);
+                        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Acquisto pacchetto minuti preso in carico"));
+                    } else {
+                        $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate("Prima di poter acquistare pacchetti minuti con carta di credito devi pagare l'iscrizione dalla tua dashboard"));
+                    }
+                } else {
+                    $this->flashMessenger()->addWarningMessage($this->translatorPlugin()->translate("Pacchetto minuti aggiunto alla lista pagamenti, potrai utilizzarlo solamente quando il suo pagamento verrà confermato da Sharengo"));
+                }
+            } else {
+                $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate("Si é verificato un errore"));
+            }
             return $this->redirect()->toRoute('time-packages');
         }
 

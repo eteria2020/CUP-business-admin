@@ -193,6 +193,8 @@ class PaymentsController extends AbstractActionController
                 return $this->translatorPlugin()->translate("Pagato e fatturato");
             case BusinessPayment::STATUS_PENDING:
                 return $this->translatorPlugin()->translate("Non pagato");
+            case BusinessPayment::STATUS_CANCELLED:
+                return $this->translatorPlugin()->translate("Cancellato");
         }
         return $status;
     }

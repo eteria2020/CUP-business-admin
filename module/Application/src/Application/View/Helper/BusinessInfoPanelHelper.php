@@ -2,6 +2,7 @@
 namespace Application\View\Helper;
 
 use BusinessCore\Entity\Business;
+use BusinessCore\Entity\SubscriptionPayment;
 use BusinessCore\Service\BusinessPaymentService;
 use Zend\View\Helper\AbstractHelper;
 
@@ -21,6 +22,10 @@ class BusinessInfoPanelHelper extends AbstractHelper
     {
 
         $subscriptionPayment = $this->businessPaymentService->getBusinessSubscriptionPayment($business);
+
+        if (!$subscriptionPayment instanceof SubscriptionPayment) {
+            return '';
+        }
 
         $html = '<div class="row"><div class="col-lg-12"><div>'
             . $this->getView()->translate("Stato abilitazione") . '</div>';
@@ -42,12 +47,11 @@ class BusinessInfoPanelHelper extends AbstractHelper
             $html .= '<div class="alert alert-info">' . $text;
         } else {
             $text = $this->getView()->translate("Per attivare l'azienda devi pagare la quota di iscrizione di euro %s");
-            $html .= '<div class="alert alert-warning">' . sprintf($text, $business->getReadableSubscriptionFee());
-            if ($business->payWithCreditCard()) {
-
-                $html .= '<form method="post"><input class="btn btn-success" type="submit" value="'
+            $html .= '<div class="alert alert-warning col-sm-12">' . sprintf($text, $business->getReadableSubscriptionFee());
+            if ($business->payWithCreditCard() && !$business->hasActiveContract()) {
+                $html .= '<br><br><a href="'. $this->getView()->url('subscription') .'"/><input class="btn btn-success col-sm-12" type="submit" value="'
                     . $this->getView()->translate("Paga con carta di credito")
-                    . '"></form>';
+                    . '">';
             } else {
 
                 $html .= '<br>' . $this->getView()->translate("Una volta pagato l'importo attraverso bonifico bancario, vai nel menu pagamenti e segnalalo come pagato ");
