@@ -11,6 +11,8 @@ namespace Application\Controller;
 
 use Application\Controller\Plugin\TranslatorPlugin;
 use BusinessCore\Entity\Business;
+use BusinessCore\Entity\BusinessEmployee;
+use BusinessCore\Helper\EmployeeLimits;
 use BusinessCore\Service\BusinessService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -37,7 +39,29 @@ class EmployeesController extends AbstractActionController
     public function employeesAction()
     {
         return new ViewModel([
-            'business' => $business = $this->identity()->getBusiness()
+            'business' => $this->identity()->getBusiness()
+        ]);
+    }
+
+    public function employeeDetailAction()
+    {
+        $business = $this->identity()->getBusiness();
+        $employeeId = $this->params()->fromRoute('id', 0);
+        $businessEmployee = $this->businessService->getBusinessEmployee($business, $employeeId);
+
+        if ($this->getRequest()->isPost()) {
+            $limits = $this->params()->fromPost();
+            $employeeLimits = EmployeeLimits::fromArray($limits);
+            $this->businessService->updateEmployeeLimits($businessEmployee, $employeeLimits);
+            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Limiti aggiornati"));
+            return $this->redirect()->toRoute('employees/employee', ['id' => $employeeId]);
+        }
+
+        $limits = $businessEmployee->getTimeLimits();
+
+        return new ViewModel([
+            'employee' => $businessEmployee,
+            'limits' => EmployeeLimits::fromString($limits)
         ]);
     }
 

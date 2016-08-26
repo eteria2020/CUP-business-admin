@@ -35,8 +35,11 @@ return [
                             'constraints' => [
                                 'id' => '[0-9]*',
                             ],
+                            'defaults' => [
+                                'action' => 'employee-detail',
+                            ],
                         ],
-                        'may_terminate' => false,
+                        'may_terminate' => true,
                         'child_routes' => [
                             'approve' => [
                                 'type' => 'Segment',
