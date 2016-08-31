@@ -1,6 +1,7 @@
 <?php
 namespace Application\Controller;
 
+use Application\Controller\Plugin\TranslatorPlugin;
 use BusinessCore\Entity\BusinessInvoice;
 use BusinessCore\Service\BusinessInvoiceService;
 use BusinessCore\Service\DatatableService;
@@ -11,6 +12,9 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
+/**
+ * @method TranslatorPlugin translatorPlugin()
+ */
 class InvoicesController extends AbstractActionController
 {
     /**
@@ -82,11 +86,27 @@ class InvoicesController extends AbstractActionController
                     'id' => $businessInvoice->getId(),
                     'invoiceNumber' => $businessInvoice->getInvoiceNumber(),
                     'invoiceDate' => $businessInvoice->getInvoiceDate(),
-                    'type' => $businessInvoice->getType(),
+                    'type' => $this->formatInvoiceType($businessInvoice->getType()),
                     'amount' => $businessInvoice->getAmount(),
                 ],
             ];
         }, $businessInvoices);
+    }
+
+    private function formatInvoiceType($paymentType)
+    {
+        switch ($paymentType) {
+            case BusinessInvoice::TYPE_TIME_PACKAGE:
+                return $this->translatorPlugin()->translate("Pacchetto minuti");
+            case BusinessInvoice::TYPE_EXTRA:
+                return $this->translatorPlugin()->translate("Extra / Penale");
+            case BusinessInvoice::TYPE_TRIP:
+                return $this->translatorPlugin()->translate("Corsa");
+            case BusinessInvoice::TYPE_SUBSCRIPTION:
+                return $this->translatorPlugin()->translate("Sottoscrizione");
+            default:
+                return $paymentType;
+        }
     }
 
     private function generatePdfResponse(BusinessInvoice $invoice)

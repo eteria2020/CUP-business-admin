@@ -20,14 +20,20 @@ class BusinessInfoPanelHelper extends AbstractHelper
 
     public function __invoke(Business $business)
     {
+        $html = '<div class="row"><div class="col-lg-12"><div>'
+            . $this->getView()->translate("Codice di associazione") . '</div>';
+
+        $html .= '<div class="alert alert-success">' . $business->getAssociationCode();
+
+        $html .= '</div></div></div>';
 
         $subscriptionPayment = $this->businessPaymentService->getBusinessSubscriptionPayment($business);
 
         if (!$subscriptionPayment instanceof SubscriptionPayment) {
-            return '';
+            return $html;
         }
 
-        $html = '<div class="row"><div class="col-lg-12"><div>'
+        $html .= '<div class="row"><div class="col-lg-12"><div>'
             . $this->getView()->translate("Stato abilitazione") . '</div>';
         if ($business->isEnabled()) {
             $html .= '<div class="alert alert-success">' . $this->getView()->translate("Abilitata");
