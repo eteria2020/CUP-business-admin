@@ -35,18 +35,18 @@ $this->headScript()
                     <tr>
                         <th><?= $this->translate("Minuti totali"); ?></th>
                         <th><?= $this->translate("Data acquisto"); ?></th>
+                        <th><?= $this->translate("Data ultimo utilizzo"); ?></th>
                         <th><?= $this->translate("Minuti residui"); ?></th>
                     </tr>
                     </thead>
                     <?php /** @var \BusinessCore\Entity\BusinessTimePackage $businessTimePackage */
                     foreach ($this->businessTimePackages as $businessTimePackage):
-                        $timePackage = $businessTimePackage->getTimePackage()
-                        //@todo calculate residual time?>
-
+                        $timePackage = $businessTimePackage->getTimePackage() ?>
                         <tr>
                             <td><?= $timePackage->getMinutes() ?></td>
                             <td><?= $businessTimePackage->getInsertedTs()->format("d-m-Y H:i:s"); ?></td>
-                            <td><?= $timePackage->getMinutes() ?></td>
+                            <td><?= $businessTimePackage->getUpdatedTs()->format("d-m-Y H:i:s"); ?></td>
+                            <td><?= $businessTimePackage->getResidualMinutes() ?></td>
                         </tr>
                         <?php
                     endforeach; ?>
