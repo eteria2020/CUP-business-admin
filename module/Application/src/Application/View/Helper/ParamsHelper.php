@@ -20,7 +20,16 @@ class ParamsHelper extends AbstractHelper
 
     public function displayPaymentFrequence(Business $business)
     {
-        $frequence = $business->getPaymentFrequence();
+        return $this->displayFrequence($business->getPaymentFrequence());
+    }
+
+    public function displayInvoiceFrequence(Business $business)
+    {
+        return $this->displayFrequence($business->getInvoiceFrequence());
+    }
+
+    private function displayFrequence($frequence)
+    {
         switch ($frequence) {
             case Business::FREQUENCE_WEEKLY:
                 return $this->getView()->translate("Settimanale");
