@@ -2,7 +2,9 @@
 use BusinessCore\Entity\BusinessEmployee;
 use BusinessCore\Entity\Employee;
 
-$this->headLink()->appendStylesheet($this->basePath() .'/js/plugins/bootstrap-clockpicker/css/bootstrap-clockpicker.min.css');
+$this->headLink()
+    ->appendStylesheet($this->basePath() .'/js/plugins/bootstrap-clockpicker/css/bootstrap-clockpicker.min.css')
+    ->appendStylesheet($this->basePath() .'/css/employee-detail.css');
 $this->headScript()
     ->appendFile($this->basePath() .'/js/plugins/bootstrap-clockpicker/js/bootstrap-clockpicker.min.js')
     ->appendFile($this->basePath() .'/js/employee-detail.js');
@@ -26,15 +28,14 @@ $employee = $businessEmployee->getEmployee();
 
                 <div class="row">
                     <div class="col-md-12">
-                        <?php echo $this->partial('partials/employee-time-limits.phtml', [
-                            'businessEmployee' => $businessEmployee,
-                            'limits' => $this->limits
-                        ]); ?>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><?= $this->translate("Dati dipendente"); ?></div>
-                            <div class="panel-body">
+                        <div class="portlet box green">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-users"></i><?= $this->translate("Dati dipendente"); ?>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="row">
                                 <div class="col-sm-6">
                                     <dl class="dl-horizontal">
                                         <dt><?= $this->translate("Nome"); ?></dt>
@@ -69,8 +70,15 @@ $employee = $businessEmployee->getEmployee();
                                         <dd><?= $businessEmployee->getReadableConfirmedDate(); ?></dd>
                                     </dl>
                                 </div>
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        <?php echo $this->partial('partials/employee-time-limits.phtml', [
+                            'businessEmployee' => $businessEmployee,
+                            'limits' => $this->limits
+                        ]); ?>
                     </div>
                 </div>
             </div>

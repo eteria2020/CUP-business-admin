@@ -23,7 +23,7 @@ class BusinessInfoPanelHelper extends AbstractHelper
         $html = '<div class="row"><div class="col-lg-12"><div>'
             . $this->getView()->translate("Codice di associazione") . '</div>';
 
-        $html .= '<div class="alert alert-success">' . $business->getAssociationCode();
+        $html .= '<div class="alert alert-success">' . $business->getCode();
 
         $html .= '</div></div></div>';
 

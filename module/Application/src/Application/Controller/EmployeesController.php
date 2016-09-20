@@ -10,6 +10,7 @@
 namespace Application\Controller;
 
 use Application\Controller\Plugin\TranslatorPlugin;
+use Application\Exception\InvalidTimeLimitsException;
 use BusinessCore\Entity\Business;
 use BusinessCore\Entity\BusinessEmployee;
 use BusinessCore\Helper\EmployeeLimits;
@@ -51,10 +52,15 @@ class EmployeesController extends AbstractActionController
 
         if ($this->getRequest()->isPost()) {
             $limits = $this->params()->fromPost();
-            $employeeLimits = EmployeeLimits::fromArray($limits);
-            $this->businessService->updateEmployeeLimits($businessEmployee, $employeeLimits);
-            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Limiti aggiornati"));
+            try {
+                $employeeLimits = EmployeeLimits::fromArray($limits);
+                $this->businessService->updateEmployeeLimits($businessEmployee, $employeeLimits);
+                $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Limiti aggiornati"));
+            } catch (InvalidTimeLimitsException $e) {
+                $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate("I limiti definiti non sono validi, assicurarsi che l'orario di inizio sia antecedente a quello di fine"));
+            }
             return $this->redirect()->toRoute('employees/employee', ['id' => $employeeId]);
+
         }
 
         $limits = $businessEmployee->getTimeLimits();

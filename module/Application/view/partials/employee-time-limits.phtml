@@ -14,21 +14,42 @@ $limits = $this->limits;
 
         <div class="portlet-body">
             <form method="post">
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th ><?= $this->translate("Giorno"); ?></th>
-                        <th ><?= $this->translate("Corsa abilitata"); ?></th>
-                        <th ><?= $this->translate("Regole"); ?></th>
-                    </tr>
-                </thead>
-                <tr>
-                    <td><?= $this->translate("Lunedì"); ?></td>
-                    <td><input type="checkbox" <?= $limits->isMondayEnabled() ? 'checked' : '' ?> name="mo-cb"></td>
-                    <td>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <?= $this->translate("Qui puoi definire le regole di corsa per i singoli utenti."); ?>
+                            <ul style="list-style: disc">
+                                <li>
+                                    <?= $this->translate("Una spunta sul giorno e nessun filtro aggiuntivo significa che il dipendente potrà correre tutto il giorno.") ?>
+                                </li>
+                                <li>
+                                    <?= $this->translate("Togliendo la spunta un dipendente NON potrà correre per tutto il giorno.") ?>
+                                </li>
+                                <li>
+                                    <?= $this->translate("Una spunta con dei filtri aggiuntivi significa che il dipendente potrà correre quel giorno solamente nei periodi definiti dalle regole.") ?>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Giorno"); ?></div>
+                    <div class="col-md-3"><?= $this->translate("Corsa abilitata"); ?></div>
+                    <div class="col-md-6"><?= $this->translate("Regole"); ?></div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Lunedì"); ?></div>
+                    <div class="col-md-3">
+                        <input type="checkbox" <?= $limits->isMondayEnabled() ? 'checked' : '' ?> name="mo-cb">
+                    </div>
+                    <div class="col-md-6">
                         <input id="mo" type="hidden" name="mo">
                         <div class="input-field-wrap">
-                            <button data-day="mo" class="btn btn-small add-field-btn"><?= $this->translate("Aggiungi regola"); ?></button>
+                            <button data-day="mo" class="btn btn-primary btn-icon-only btn-small add-field-btn">
+                                <i class="fa fa-plus"></i>
+                            </button>
 
                             <?php
                             foreach ($limits->getMondayRanges() as $range) {
@@ -40,16 +61,20 @@ $limits = $this->limits;
                             }
                             ?>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?= $this->translate("Martedì"); ?></td>
-                    <td><input type="checkbox" <?= $limits->isTuesdayEnabled() ? 'checked' : '' ?> name="tu-cb"></td>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Martedì"); ?></div>
+                    <div class="col-md-3">
+                        <input type="checkbox" <?= $limits->isTuesdayEnabled() ? 'checked' : '' ?> name="tu-cb">
+                    </div>
+                    <div class="col-md-6">
                         <input id="tu" type="hidden" name="tu">
                         <div class="input-field-wrap">
-                            <button data-day="tu" class="btn btn-small add-field-btn"><?= $this->translate("Aggiungi regola"); ?></button>
-
+                            <button data-day="tu" class="btn btn-primary btn-icon-only btn-small add-field-btn">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <?php
                             foreach ($limits->getTuesdayRanges() as $range) {
                                 echo $this->partial('partials/time-limit-row.phtml', [
@@ -60,16 +85,20 @@ $limits = $this->limits;
                             }
                             ?>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?= $this->translate("Mercoledì"); ?></td>
-                    <td><input type="checkbox"  <?= $limits->isWednesdayEnabled() ? 'checked' : '' ?> name="we-cb"></td>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Mercoledì"); ?></div>
+                    <div class="col-md-3">
+                        <input type="checkbox"  <?= $limits->isWednesdayEnabled() ? 'checked' : '' ?> name="we-cb">
+                    </div>
+                    <div class="col-md-6">
                         <input id="we" type="hidden" name="we">
                         <div class="input-field-wrap">
-                            <button data-day="we" class="btn btn-small add-field-btn"><?= $this->translate("Aggiungi regola"); ?></button>
-
+                            <button data-day="we" class="btn btn-primary btn-icon-only btn-small add-field-btn">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <?php
                             foreach ($limits->getWednesdayRanges() as $range) {
                                 echo $this->partial('partials/time-limit-row.phtml', [
@@ -80,16 +109,20 @@ $limits = $this->limits;
                             }
                             ?>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?= $this->translate("Giovedì"); ?></td>
-                    <td><input type="checkbox" <?= $limits->isThursdayEnabled() ? 'checked' : '' ?> name="th-cb"></td>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Giovedì"); ?></div>
+                    <div class="col-md-3">
+                        <input type="checkbox" <?= $limits->isThursdayEnabled() ? 'checked' : '' ?> name="th-cb">
+                    </div>
+                    <div class="col-md-6">
                         <input id="th" type="hidden" name="th">
                         <div class="input-field-wrap">
-                            <button data-day="th" class="btn btn-small add-field-btn"><?= $this->translate("Aggiungi regola"); ?></button>
-
+                            <button data-day="th" class="btn btn-primary btn-icon-only btn-small add-field-btn">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <?php
                             foreach ($limits->getThursdayRanges() as $range) {
                                 echo $this->partial('partials/time-limit-row.phtml', [
@@ -100,16 +133,20 @@ $limits = $this->limits;
                             }
                             ?>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?= $this->translate("Venerdì"); ?></td>
-                    <td><input type="checkbox" <?= $limits->isFridayEnabled() ? 'checked' : '' ?> name="fr-cb"></td>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Venerdì"); ?></div>
+                    <div class="col-md-3">
+                        <input type="checkbox" <?= $limits->isFridayEnabled() ? 'checked' : '' ?> name="fr-cb">
+                    </div>
+                    <div class="col-md-6">
                         <input id="fr" type="hidden" name="fr">
                         <div class="input-field-wrap">
-                            <button data-day="fr" class="btn btn-small add-field-btn"><?= $this->translate("Aggiungi regola"); ?></button>
-
+                            <button data-day="fr" class="btn btn-primary btn-icon-only btn-small add-field-btn">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <?php
                             foreach ($limits->getFridayRanges() as $range) {
                                 echo $this->partial('partials/time-limit-row.phtml', [
@@ -120,16 +157,20 @@ $limits = $this->limits;
                             }
                             ?>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?= $this->translate("Sabato"); ?></td>
-                    <td><input type="checkbox" <?= $limits->isSaturdayEnabled() ? 'checked' : '' ?> name="sa-cb"></td>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Sabato"); ?></div>
+                    <div class="col-md-3">
+                        <input type="checkbox" <?= $limits->isSaturdayEnabled() ? 'checked' : '' ?> name="sa-cb">
+                    </div>
+                    <div class="col-md-6">
                         <input id="sa" type="hidden" name="sa">
                         <div class="input-field-wrap">
-                            <button data-day="sa" class="btn btn-small add-field-btn"><?= $this->translate("Aggiungi regola"); ?></button>
-
+                            <button data-day="sa" class="btn btn-primary btn-icon-only btn-small add-field-btn">
+                                <i class="fa fa-plus"></i>
+                            </button>
                             <?php
                             foreach ($limits->getSaturdayRanges() as $range) {
                                 echo $this->partial('partials/time-limit-row.phtml', [
@@ -140,16 +181,22 @@ $limits = $this->limits;
                             }
                             ?>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td><?= $this->translate("Domenica"); ?></td>
-                    <td><input type="checkbox" <?= $limits->isSundayEnabled() ? 'checked' : '' ?> name="su-cb"></td>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3"><?= $this->translate("Domenica"); ?></div>
+                    <div class="col-md-3">
+                        <input type="checkbox" <?= $limits->isSundayEnabled() ? 'checked' : '' ?> name="su-cb">
+                    </div>
+                    <div class="col-md-6">
                         <input id="su" type="hidden" name="su">
                         <div class="input-field-wrap">
-                            <button data-day="su" class="btn btn-small add-field-btn"><?= $this->translate("Aggiungi regola"); ?></button>
-
+                            <div>
+                                <button data-day="su" class="btn btn-primary btn-icon-only btn-small add-field-btn">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
                             <?php
                             foreach ($limits->getSundayRanges() as $range) {
                                 echo $this->partial('partials/time-limit-row.phtml', [
@@ -160,17 +207,16 @@ $limits = $this->limits;
                             }
                             ?>
                         </div>
-                    </td>
-                </tr>
+                    </div>
+                </div>
 
-            </table>
-            <input id="save-limits" type="submit" value="Salva">
-            </form>
+                <input class="btn btn-primary" id="save-limits" type="submit" value="Salva">
+                </form>
         </div>
 
     <!--template for new fields-->
     <div id="rule-template" class="rule-div hide" style="clear: both;">
-        <div class="control-group col-sm-2">
+        <div class="control-group col-sm-3">
             <div class="input-group clockpicker">
                 <input type="text" class="from form-control" placeholder="<?= $this->translate("dalle"); ?>">
                 <span class="input-group-addon">
@@ -178,7 +224,7 @@ $limits = $this->limits;
                 </span>
             </div>
         </div>
-        <div class="control-group col-sm-2">
+        <div class="control-group col-sm-3">
             <div class="input-group clockpicker">
                 <input type="text" class="to form-control" placeholder="<?= $this->translate("alle"); ?>">
                 <span class="input-group-addon">
@@ -186,7 +232,7 @@ $limits = $this->limits;
                 </span>
             </div>
         </div>
-        <div class="control-group col-sm-1">
+        <div class="control-group">
             <div class="remove-times btn btn-icon-only">
                 <i class="glyphicon glyphicon-remove"></i>
             </div>
