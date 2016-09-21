@@ -10,9 +10,8 @@
 namespace Application\Controller;
 
 use Application\Controller\Plugin\TranslatorPlugin;
-use Application\Exception\InvalidTimeLimitsException;
+use BusinessCore\Exception\InvalidTimeLimitsException;
 use BusinessCore\Entity\Business;
-use BusinessCore\Entity\BusinessEmployee;
 use BusinessCore\Helper\EmployeeLimits;
 use BusinessCore\Service\BusinessService;
 use Zend\Mvc\Controller\AbstractActionController;
