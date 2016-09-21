@@ -19,13 +19,15 @@
             </thead>
             <?php /** @var \BusinessCore\Entity\BusinessEmployee $be */
             foreach ($this->list as $be):
-                $employee = $be->getEmployee(); ?>
+                $employee = $be->getEmployee();
+                $companyPinStatus = $employee->isBusinessPinDisabled() ? $this->translate("(disabilitato)") : '';
+                ?>
                 <tr>
                     <td><?= $employee->getName() . " " . $employee->getSurname(); ?></td>
                     <td><?= $employee->getEmail(); ?></td>
                     <td><?= $this->groupLink($be) ?></td>
                     <td><?= $this->businessEmployeeStatus($be->getStatus()); ?></td>
-                    <td><?= $employee->getBusinessPin() ?></td>
+                    <td><?= $employee->getBusinessPin()?> <?= $companyPinStatus ?></td>
                     <td><?= $this->businessEmployeeAvailableActionButtons($be) ?></td>
                 </tr>
                 <?php

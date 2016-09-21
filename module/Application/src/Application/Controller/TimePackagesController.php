@@ -39,16 +39,16 @@ class TimePackagesController extends AbstractActionController
         if ($timePackageId != 0) {
             $timePackage = $this->businessTimePackageService->findTimePackageById($timePackageId);
             if ($business->canBuyTimePackage($timePackage)) {
+                $timePackagePayment = $this->businessTimePackageService->createPackagePayment($business, $timePackage);
                 if ($business->payWithCreditCard()) {
                     if ($business->hasActiveContract()) {
-                        $timePackagePayment = $this->businessTimePackageService->createPackagePayment($business, $timePackage);
                         $this->businessTimePackageService->payTimePackage($business, $timePackagePayment);
                         $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Acquisto pacchetto minuti preso in carico"));
                     } else {
                         $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate("Prima di poter acquistare pacchetti minuti con carta di credito devi pagare l'iscrizione dalla tua dashboard"));
                     }
                 } else {
-                    $this->flashMessenger()->addWarningMessage($this->translatorPlugin()->translate("Pacchetto minuti aggiunto alla lista pagamenti, potrai utilizzarlo solamente quando il suo pagamento verrà confermato da Sharengo"));
+                    $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Pacchetto minuti aggiunto alla lista pagamenti, potrai utilizzarlo solamente quando il suo pagamento verrà confermato da Sharengo"));
                 }
             } else {
                 $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate("Si é verificato un errore"));
