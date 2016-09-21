@@ -10,9 +10,14 @@ $business = $this->business
             <div class="col-lg-9">
 
                 <?= $this->partial('partials/flash-messages.phtml', []); ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading"><?= $this->translate("Dashboard"); ?></div>
-                    <div style="font-size: medium" class="panel-body">
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-home"></i><?= $this->translate("Dashboard"); ?>
+                        </div>
+                    </div>
+                    <div style="font-size: medium" class="portlet-body">
+                        <div class="row">
                         <div class="col-sm-6">
                             <dl class="dl-horizontal">
                                 <dt><?= $this->translate("Ragione Sociale"); ?></dt>
@@ -55,22 +60,24 @@ $business = $this->business
                                 <dd><?= $business->getReadableSubscriptionFee(); ?> €</dd>
                             </dl>
                         </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
 
             <div class="col-lg-3">
-                <div class="panel panel-default">
-
-                    <div class="panel-heading"><?= $this->translate("Altri dati"); ?></div>
-                    <div class="panel-body">
+                <div class="portlet box green">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-random"></i><?= $this->translate("Altri dati"); ?>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
                         <?= $this->infoPanelHelper($business) ?>
                     </div>
-
                 </div>
             </div>
-
         </div>
     </div>
 </div>
