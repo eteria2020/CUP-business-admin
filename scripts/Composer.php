@@ -21,15 +21,17 @@ class Composer
             foreach ($autoloadDevPackages as $name => $folder) {
                 $composerJsonPath = dirname($folder) . '/composer.json';
 
-                $jsonFile = new JsonFile($composerJsonPath);
-                $composerJson = $jsonFile->read();
+                if (file_exists($composerJsonPath)) {
+                    $jsonFile = new JsonFile($composerJsonPath);
+                    $composerJson = $jsonFile->read();
 
-                if (isset($composerJson['require'])) {
-                    $versionsParser = new VersionParser();
+                    if (isset($composerJson['require'])) {
+                        $versionsParser = new VersionParser();
 
-                    foreach ($composerJson['require'] as $package => $version) {
-                        $constraint = $versionsParser->parseConstraints($version);
-                        $event->getRequest()->install($package, $constraint);
+                        foreach ($composerJson['require'] as $package => $version) {
+                            $constraint = $versionsParser->parseConstraints($version);
+                            $event->getRequest()->install($package, $constraint);
+                        }
                     }
                 }
             }
@@ -46,23 +48,25 @@ class Composer
             foreach ($autoloadDevPackages as $name => $folder) {
                 $composerJsonPath = dirname($folder) . '/composer.json';
 
-                $jsonFile = new JsonFile($composerJsonPath);
-                $composerJson = $jsonFile->read();
+                if (file_exists($composerJsonPath)) {
+                    $jsonFile = new JsonFile($composerJsonPath);
+                    $composerJson = $jsonFile->read();
 
-                if (isset($composerJson['repositories'])) {
-                    $composer = $event->getComposer();
-                    $repositoryManager = $composer->getRepositoryManager();
-                    $io = $event->getIo();
-                    $config = Factory::createConfig($io);
+                    if (isset($composerJson['repositories'])) {
+                        $composer = $event->getComposer();
+                        $repositoryManager = $composer->getRepositoryManager();
+                        $io = $event->getIo();
+                        $config = Factory::createConfig($io);
 
-                    foreach ($composerJson['repositories'] as $repositoryData) {
-                        $repository = RepositoryFactory::createRepo(
-                            $io,
-                            $config,
-                            $repositoryData
-                        );
+                        foreach ($composerJson['repositories'] as $repositoryData) {
+                            $repository = RepositoryFactory::createRepo(
+                                $io,
+                                $config,
+                                $repositoryData
+                            );
 
-                        $repositoryManager->addRepository($repository);
+                            $repositoryManager->addRepository($repository);
+                        }
                     }
                 }
             }
