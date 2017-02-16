@@ -1,0 +1,114 @@
+<?php
+use BusinessCore\Entity\BusinessEmployee;
+use BusinessCore\Entity\Employee;
+
+$this->headLink()
+    ->appendStylesheet($this->basePath() .'/js/plugins/bootstrap-clockpicker/css/bootstrap-clockpicker.min.css')
+    ->appendStylesheet($this->basePath() .'/css/employee-detail.css');
+$this->headScript()
+    ->appendFile($this->basePath() .'/js/plugins/bootstrap-clockpicker/js/bootstrap-clockpicker.min.js')
+    ->appendFile($this->basePath() .'/js/employee-detail.js');
+
+/** @var Employee $employee */
+/** @var BusinessEmployee $businessEmployee */
+$businessEmployee = $this->employee;
+$employee = $businessEmployee->getEmployee();
+
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title"><?= $this->translate("Dettagli dipendente"); ?></h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?php echo $this->url('employees'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 pull-right">
+                <div class="employee-detail-buttons">
+                    <?php if ($businessEmployee->isBlocked()) { ?>
+                        <a href="<?= $this->url('employees/employee/unblock', ['id' => $businessEmployee->getEmployee()->getId()]) ?>
+                                        " onclick="return confirm('<?= $this->translate("Sei sicuro di voler sbloccare questo utente?")?>')"
+                           class="btn-margin validation-btn btn btn-primary"> <?= $this->translate("Sblocca"); ?></a>
+                    <?php } else if ($businessEmployee->isApproved()) { ?>
+                        <a href="<?= $this->url('employees/employee/block', ['id' => $businessEmployee->getEmployee()->getId()]) ?>
+                                        " onclick="return confirm('<?= $this->translate("Sei sicuro di voler bloccare questo utente?")?>')"
+                           class="btn-margin validation-btn btn btn-warning"> <?= $this->translate("Blocca"); ?></a>
+                    <?php } else if ($businessEmployee->isPending()) { ?>
+                        <a href="<?= $this->url('employees/employee/approve', ['id' => $businessEmployee->getEmployee()->getId()]) ?>
+                                        " onclick="return confirm('<?= $this->translate("Sei sicuro di voler approvare questo utente?")?>')"
+                           class="btn-margin validation-btn btn btn-success"> <?= $this->translate("Approva"); ?></a>
+                    <?php } ?>
+                    <a href="<?= $this->url('employees/employee/remove', ['id' => $businessEmployee->getEmployee()->getId()]) ?>
+                                        " onclick="return confirm('<?= $this->translate("Sei sicuro di voler eliminare questo utente?")?>')"
+                       class="btn-margin validation-btn btn btn-danger"> <?= $this->translate("Elimina"); ?></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portlet box green">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-users"></i><?= $this->translate("Dati dipendente"); ?>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="row">
+                                <div class="col-sm-6">
+                                    <dl class="dl-horizontal">
+                                        <dt><?= $this->translate("Nome"); ?></dt>
+                                        <dd><?= $employee->getName(); ?></dd>
+                                        <dt><?= $this->translate("Cognome"); ?></dt>
+                                        <dd><?= $employee->getSurname(); ?></dd>
+                                        <dt><?= $this->translate("Data di nascita"); ?></dt>
+                                        <dd><?= $employee->getReadableBirthDate(); ?></dd>
+                                        <dt><?= $this->translate("Telefono"); ?></dt>
+                                        <dd><?= $employee->getPhone(); ?></dd>
+                                        <dt><?= $this->translate("Email"); ?></dt>
+                                        <dd><?= $employee->getEmail(); ?></dd>
+                                    </dl>
+                                    <dl class="dl-horizontal">
+                                        <dt><?= $this->translate("Indirizzo"); ?></dt>
+                                        <dd><?= $employee->getAddress(); ?></dd>
+                                        <dt><?= $this->translate("CAP"); ?></dt>
+                                        <dd><?= $employee->getZipCode(); ?></dd>
+                                        <dt><?= $this->translate("Provincia"); ?></dt>
+                                        <dd><?= $employee->getProvince(); ?></dd>
+                                        <dt><?= $this->translate("Città"); ?></dt>
+                                        <dd><?= $employee->getTown(); ?></dd>
+                                    </dl>
+                                </div>
+                                <div class="col-sm-6">
+                                    <dl class="dl-horizontal">
+                                        <dt><?= $this->translate("Stato"); ?></dt>
+                                        <dd><?= $this->businessEmployeeStatus($businessEmployee->getStatus()); ?></dd>
+                                        <dt><?= $this->translate("Data associazione"); ?></dt>
+                                        <dd><?= $businessEmployee->getReadableInsertDate(); ?></dd>
+                                        <dt><?= $this->translate("Data approvazione"); ?></dt>
+                                        <dd><?= $businessEmployee->getReadableConfirmedDate(); ?></dd>
+                                    </dl>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <?php echo $this->partial('partials/employee-time-limits.phtml', [
+                            'businessEmployee' => $businessEmployee,
+                            'limits' => $this->limits
+                        ]); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

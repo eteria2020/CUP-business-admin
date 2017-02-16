@@ -10,6 +10,9 @@
 namespace Application\Controller;
 
 use Application\Controller\Plugin\TranslatorPlugin;
+use BusinessCore\Exception\InvalidTimeLimitsException;
+use BusinessCore\Entity\Business;
+use BusinessCore\Helper\EmployeeLimits;
 use BusinessCore\Service\BusinessService;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -36,17 +39,49 @@ class EmployeesController extends AbstractActionController
     public function employeesAction()
     {
         return new ViewModel([
-            'business' => $business = $this->identity()->getBusiness()
+            'business' => $this->identity()->getBusiness()
+        ]);
+    }
+
+    public function employeeDetailAction()
+    {
+        $business = $this->identity()->getBusiness();
+        $employeeId = $this->params()->fromRoute('id', 0);
+        $businessEmployee = $this->businessService->getBusinessEmployee($business, $employeeId);
+
+        if ($this->getRequest()->isPost()) {
+            $limits = $this->params()->fromPost();
+            try {
+                $employeeLimits = EmployeeLimits::fromArray($limits);
+                $this->businessService->updateEmployeeLimits($businessEmployee, $employeeLimits);
+                $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Limiti aggiornati"));
+            } catch (InvalidTimeLimitsException $e) {
+                $this->flashMessenger()->addErrorMessage($this->translatorPlugin()->translate("I limiti definiti non sono validi, assicurarsi che l'orario di inizio sia antecedente a quello di fine"));
+            }
+            return $this->redirect()->toRoute('employees/employee', ['id' => $employeeId]);
+
+        }
+
+        $limits = $businessEmployee->getTimeLimits();
+
+        return new ViewModel([
+            'employee' => $businessEmployee,
+            'limits' => EmployeeLimits::fromString($limits)
         ]);
     }
 
     public function approveEmployeeAction()
     {
+        /** @var Business $business */
         $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
-
-        $this->businessService->approveEmployee($business, $employeeId);
-        $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente approvato'));
+        if ($business->isEnabled()) {
+            $this->businessService->approveEmployee($business, $employeeId);
+            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente approvato'));
+        } else {
+            $this->businessService->approveEmployeeWithBusinessNotEnabled($business, $employeeId);
+            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate("Dipendente approvato, in attesa primo pagamento dell'azienda"));
+        }
 
         return $this->redirect()->toRoute('employees');
     }
@@ -78,7 +113,7 @@ class EmployeesController extends AbstractActionController
         $business = $this->identity()->getBusiness();
         $employeeId = $this->params()->fromRoute('id', 0);
 
-        $this->businessService->approveEmployee($business, $employeeId);
+        $this->businessService->unblockEmployee($business, $employeeId);
         $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Dipendente sbloccato con successo'));
 
         return $this->redirect()->toRoute('employees');

@@ -1,13 +1,6 @@
 <?php
 namespace Application;
 
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 use Zend\I18n\Translator\Translator;
 
 $translator = new Translator;
@@ -42,8 +35,11 @@ return [
                             'constraints' => [
                                 'id' => '[0-9]*',
                             ],
+                            'defaults' => [
+                                'action' => 'employee-detail',
+                            ],
                         ],
-                        'may_terminate' => false,
+                        'may_terminate' => true,
                         'child_routes' => [
                             'approve' => [
                                 'type' => 'Segment',
@@ -193,6 +189,41 @@ return [
                     ],
                 ],
             ],
+            'time-packages' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/time-packages',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\TimePackages',
+                        'action'     => 'time-packages',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'buy' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/buy[/:id]',
+                            'constraint' => [
+                                'id' => '[0-9]*',
+                            ],
+                            'defaults' => [
+                                'action' => 'buy',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            'fares' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/fares',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Fares',
+                        'action'     => 'fares',
+                    ],
+                ],
+            ],
             'zfcuser' => [
                 'child_routes' => [
                     'register' => [
@@ -203,6 +234,76 @@ return [
                         ]
                     ]
                 ]
+            ],
+            'subscription' => [
+                'type'    => 'Literal',
+                'options' => [
+                    'route'    => '/subscription',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription',
+                    ],
+                ],
+            ],
+            'subscription-payment-concluded' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/payment-concluded',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription-payment-concluded',
+                    ],
+                ],
+            ],
+            'subscription-payment-cancelled' => [
+                'type' => 'Segment',
+                'options' => [
+                    'route' => '/payment-cancelled',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'subscription-payment-cancelled',
+                    ],
+                ],
+            ],
+            'payments' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route'    => '/payments',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Payments',
+                        'action'     => 'payments',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'datatable' => [
+                        'type'    => 'Literal',
+                        'options' => [
+                            'route'    => '/datatable',
+                            'defaults' => [
+                                'action' => 'datatable',
+                            ],
+                        ],
+                    ],
+                    'flag-as-payed' => [
+                        'type'    => 'Segment',
+                        'options' => [
+                            'route'    => '/flag-as-payed/:type/:id',
+                            'defaults' => [
+                                'action' => 'flag-as-payed',
+                            ],
+                        ],
+                    ],
+                    'report' => [
+                        'type'    => 'literal',
+                        'options' => [
+                            'route'    => '/report',
+                            'defaults' => [
+                                'action' => 'download-report',
+                            ],
+                        ],
+                    ],
+                ],
             ],
             'unauthorized' => [
                 'type'    => 'Literal',
@@ -231,7 +332,8 @@ return [
             'doctrine.connection.orm_default' => 'Application\Service\OrmConnectionFactory',
         ],
         'invokables' => [
-            'Application\Form\GroupForm' => 'Application\Form\GroupForm'
+            'Application\Form\GroupForm' => 'Application\Form\GroupForm',
+            'Application\Form\GroupMinutesLimitForm' => 'Application\Form\GroupMinutesLimitForm',
         ]
     ],
     'controllers' => [
@@ -244,6 +346,10 @@ return [
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
             'Application\Controller\Invoices' => 'Application\Controller\InvoicesControllerFactory',
+            'Application\Controller\TimePackages' => 'Application\Controller\TimePackagesControllerFactory',
+            'Application\Controller\Fares' => 'Application\Controller\FaresControllerFactory',
+            'Application\Controller\Payments' => 'Application\Controller\PaymentsControllerFactory',
+            'Application\Controller\Subscription' => 'Application\Controller\SubscriptionControllerFactory',
         ]
     ],
     'controller_plugins' => [
@@ -252,8 +358,12 @@ return [
         ]
     ],
     'view_helpers'    => [
+        'invokables' => [
+            'ParamsHelper' => 'Application\View\Helper\ParamsHelper',
+        ],
         'factories' => [
             'languageMenuHelper' => 'Application\View\Helper\LanguageMenuHelperFactory',
+            'infoPanelHelper' => 'Application\View\Helper\BusinessInfoPanelHelperFactory',
         ],
     ],
     'translator' => [
@@ -399,6 +509,10 @@ return [
                 ['controller' => 'Application\Controller\Groups', 'roles' => ['superadmin', 'business']],
                 ['controller' => 'Application\Controller\Trips', 'roles' => ['superadmin', 'business']],
                 ['controller' => 'Application\Controller\Invoices', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\TimePackages', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Fares', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Payments', 'roles' => ['superadmin', 'business']],
+                ['controller' => 'Application\Controller\Subscription', 'roles' => ['superadmin', 'business']],
             ],
         ],
     ],
@@ -416,6 +530,11 @@ return [
     'navigation' => [
         'default' => [
             [
+                'label'     => $translator->translate('Dashboard'),
+                'route'     => 'home',
+                'icon'      => 'fa fa-briefcase',
+            ],
+            [
                 'label'     => $translator->translate('Dipendenti'),
                 'route'     => 'employees',
                 'icon'      => 'fa fa-users',
@@ -429,7 +548,7 @@ return [
                     [
                         'label' => $translator->translate('Gestione gruppi'),
                         'route' => 'groups',
-                        'isVisible' => true,
+                        'isVisible' => true
                     ],
                     [
                         'route' => 'groups/add',
@@ -471,6 +590,50 @@ return [
                     ],
                 ],
             ],
-        ]
-    ]
+            [
+                'label'     => $translator->translate('Pacchetti minuti'),
+                'route'     => 'time-packages',
+                'icon'      => 'fa fa-gift',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'time-packages',
+                        'isVisible' => true
+                    ],
+                    [
+                        'label' => $translator->translate('Acquista'),
+                        'route' => 'time-packages/buy',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Tariffa'),
+                'route'     => 'fares',
+                'icon'      => 'fa fa-bar-chart',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Visualizza'),
+                        'route' => 'fares',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Pagamenti'),
+                'route'     => 'payments',
+                'icon'      => 'fa fa-money',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Lista pagamenti'),
+                        'route' => 'payments',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+        ],
+    ],
 ];

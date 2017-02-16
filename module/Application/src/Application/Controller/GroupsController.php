@@ -3,6 +3,7 @@ namespace Application\Controller;
 
 use Application\Controller\Plugin\TranslatorPlugin;
 use Application\Form\GroupForm;
+use Application\Form\GroupMinutesLimitForm;
 use BusinessCore\Entity\Group;
 use BusinessCore\Service\BusinessService;
 use BusinessCore\Service\GroupService;
@@ -28,27 +29,34 @@ class GroupsController extends AbstractActionController
      * @var GroupForm
      */
     private $groupForm;
+    /**
+     * @var GroupMinutesLimitForm
+     */
+    private $groupMinutesLimitForm;
 
     /**
      * GroupsController constructor.
      * @param BusinessService $businessService
      * @param GroupService $groupService
      * @param GroupForm $groupForm
+     * @param GroupMinutesLimitForm $groupMinutesLimitForm
      */
     public function __construct(
         BusinessService $businessService,
         GroupService $groupService,
-        GroupForm $groupForm
+        GroupForm $groupForm,
+        GroupMinutesLimitForm $groupMinutesLimitForm
     ) {
         $this->businessService = $businessService;
         $this->groupService = $groupService;
         $this->groupForm = $groupForm;
+        $this->groupMinutesLimitForm = $groupMinutesLimitForm;
     }
 
     public function groupsAction()
     {
         return new ViewModel([
-            'business' => $business = $this->identity()->getBusiness()
+            'business' => $this->identity()->getBusiness()
         ]);
     }
 
@@ -57,7 +65,7 @@ class GroupsController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $data = $this->getRequest()->getPost();
             try {
-                $business = $business = $this->identity()->getBusiness();
+                $business = $this->identity()->getBusiness();
                 $this->groupService->createNewGroup($business, $data);
                 $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Gruppo creato con successo'));
                 return $this->redirect()->toRoute('groups');
@@ -73,8 +81,16 @@ class GroupsController extends AbstractActionController
 
     public function detailsAction()
     {
+        $currentGroup = $this->getCurrentGroup();
+        if ($this->getRequest()->isPost()) {
+            $data = $this->getRequest()->getPost();
+            $this->groupService->setGroupLimit($currentGroup, $data);
+            $this->flashMessenger()->addSuccessMessage($this->translatorPlugin()->translate('Limite minuti del gruppo aggiornati'));
+            return $this->redirect()->toRoute('groups/details', ['id' => $currentGroup->getId()]);
+        }
         return new ViewModel([
-            'group' => $this->getCurrentGroup()
+            'group' => $currentGroup,
+            'form' => $this->groupMinutesLimitForm
         ]);
     }
 

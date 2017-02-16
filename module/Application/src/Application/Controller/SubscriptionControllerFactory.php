@@ -1,24 +1,23 @@
 <?php
-
 namespace Application\Controller;
 
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class EmployeesControllerFactory implements FactoryInterface
+class SubscriptionControllerFactory implements FactoryInterface
 {
     /**
-     * Create service
-     *
      * @param ServiceLocatorInterface|ServiceLocatorAwareInterface $serviceLocator
-     * @return EmployeesController
+     * @return SubscriptionController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $sharedServiceManager = $serviceLocator->getServiceLocator();
-        $businessService = $sharedServiceManager->get('BusinessCore\Service\BusinessService');
 
-        return new EmployeesController($businessService);
+        $businessPaymentService = $sharedServiceManager->get('BusinessCore\Service\BusinessPaymentService');
+        $subscriptionService = $sharedServiceManager->get('BusinessCore\Service\SubscriptionService');
+
+        return new SubscriptionController($subscriptionService, $businessPaymentService);
     }
 }

@@ -46,13 +46,14 @@ class TripsController extends AbstractActionController
         $business = $this->identity()->getBusiness();
         $searchCriteria = $this->datatableService->getSearchCriteria($filters);
         $businessTrips = $this->businessTripService->searchTripsByBusiness($business, $searchCriteria);
+        $businessTripsNumber = $this->businessTripService->countFilteredTripsByBusiness($business, $searchCriteria);
         $dataDataTable = $this->mapBusinessTripsToDatatable($businessTrips);
         $totalTrips = $this->businessTripService->getTotalTripsByBusiness($business);
 
         return new JsonModel([
             'draw'            => $this->params()->fromQuery('sEcho', 0),
             'recordsTotal'    => $totalTrips,
-            'recordsFiltered' => count($dataDataTable),
+            'recordsFiltered' => $businessTripsNumber,
             'data'            => $dataDataTable
         ]);
     }
@@ -65,7 +66,7 @@ class TripsController extends AbstractActionController
             $groupName = is_null($businessTrip->getGroup()) ? '-' : $businessTrip->getGroup()->getName();
             return [
                 'e' => [
-                    'name' => $employee->getId(),
+                    'name' => $employee->getName(),
                     'surname' => $employee->getSurname(),
                 ],
                 'g' => [
@@ -74,11 +75,12 @@ class TripsController extends AbstractActionController
                 't' => [
                     'carPlate' => $trip->getCarPlate(),
                     'distance' => $trip->getKmEnd() - $trip->getKmBeginning(),
-                    'duration' => date_diff($trip->getTimestampEnd(), $trip->getTimestampBeginning())->format("%i min."),
+                    'duration' => ($trip->getTimestampEnd()->format('U') - $trip->getTimestampBeginning()->format('U')) / 60 . " min",
                     'parkSeconds' => $trip->getParkSeconds(),
                     'timestampBeginning' => $trip->getTimestampBeginning()->format('d-m-Y H:i:s'),
                 ],
             ];
         }, $businessTrips);
     }
+
 }

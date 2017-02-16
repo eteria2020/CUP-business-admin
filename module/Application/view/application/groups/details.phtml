@@ -4,6 +4,7 @@ $this->headScript()
     ->appendFile($this->basePath() .'/js/datatables/media/js/jquery.dataTables.min.js')
     ->appendFile($this->basePath() .'/js/datatables/plugins/bootstrap/dataTables.bootstrap.js')
     ->appendFile($this->basePath() .'/js/group-details.js');
+$form = $this->form->prepare();
 ?>
 <div class="page-content-wrapper">
     <div class="page-content">
@@ -20,11 +21,64 @@ $this->headScript()
                 <a href="<?php echo $this->url('groups'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
-                <a href="<?= $this->url('groups/details/add-employees', ['id' => $this->group->getId()]); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> <?= $this->translate("Aggiungi Dipendenti"); ?></a>
+                <?= $this->form()->openTag($form); ?>
+                <div><?= $this->translate("Limite minuti:"); ?></div>
+                <div class="row">
+                    <div class="col-lg-2 col-xs-12">
+                        <div class="form-group">
+                            <label for="daily"><?= $this->translate("Giornaliero"); ?></label>
+                            <?php
+                            $field = $form->get('daily');
+                            $field->setValue($this->group->getDailyMinutesLimit());
+                            echo $this->formElement($field);
+                            echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-xs-12">
+                        <div class="form-group">
+                            <label for="weekly"><?= $this->translate("Settimanale"); ?></label>
+                            <?php
+                            $field = $form->get('weekly');
+                            $field->setValue($this->group->getWeeklyMinutesLimit());
+                            echo $this->formElement($field);
+                            echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+
+                            ?>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-xs-12">
+                        <div class="form-group">
+                            <label for="monthly"><?= $this->translate("Mensile"); ?></label>
+                            <?php
+                            $field = $form->get('monthly');
+                            $field->setValue($this->group->getMonthlyMinutesLimit());
+                            echo $this->formElement($field);
+                            echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+
+                            ?>
+                        </div>
+                    </div>
+                </div>
+                <small><?= $this->translate("Lasciare vuoto per togliere il limite"); ?></small>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button type="submit" class="btn btn-success"><?= $this->translate("Salva nuovi limiti"); ?></button>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="<?= $this->url('groups/details/add-employees', ['id' => $this->group->getId()]); ?>" class="btn green pull-right"><i class="fa fa-plus"></i> <?= $this->translate("Aggiungi Dipendenti"); ?></a>
+                    </div>
+                </div>
+                <?= $this->form()->closeTag(); ?>
             </div>
+        </div>
+        <div class="row">
+
         </div>
         <hr>
         <div class="portlet box green">

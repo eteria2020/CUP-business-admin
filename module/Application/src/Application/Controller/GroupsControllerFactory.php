@@ -17,7 +17,8 @@ class GroupsControllerFactory implements FactoryInterface
         $businessService = $sharedServiceManager->get('BusinessCore\Service\BusinessService');
         $groupService = $sharedServiceManager->get('BusinessCore\Service\GroupService');
         $groupForm = $serviceLocator->getServiceLocator()->get('Application\Form\GroupForm');
+        $groupMinutesLimitForm = $serviceLocator->getServiceLocator()->get('Application\Form\GroupMinutesLimitForm');
 
-        return new GroupsController($businessService, $groupService, $groupForm);
+        return new GroupsController($businessService, $groupService, $groupForm, $groupMinutesLimitForm);
     }
 }

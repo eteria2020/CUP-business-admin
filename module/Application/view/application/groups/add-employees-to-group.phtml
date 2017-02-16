@@ -46,7 +46,7 @@ $this->headScript()
                         </tr>
                         </thead>
                         <?php /** @var \BusinessCore\Entity\BusinessEmployee $be */
-                        foreach ($this->group->getBusiness()->getEnabledBusinessEmployeesWithoutGroup() as $be):
+                        foreach ($this->group->getBusiness()->getApprovedBusinessEmployeesWithoutGroup() as $be):
                             $employee = $be->getEmployee(); ?>
                             <tr>
                                 <td>

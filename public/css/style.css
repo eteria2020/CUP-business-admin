@@ -50,9 +50,14 @@ div.container a.brand {
 
 .validation-btn, .validation-btn-info {
     text-align: center;
-    width: 100%;
 }
 
-.validation-btn-info {
-    margin-bottom: 2px;
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li > a > i,
+.page-sidebar .page-sidebar-menu > li > a > i {
+    color: #FFFFFF !important;
+}
+
+.employee-detail-buttons {
+    float: right;
+    margin-bottom: 3px;
 }

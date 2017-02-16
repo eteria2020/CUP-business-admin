@@ -6,19 +6,16 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class EmployeesControllerFactory implements FactoryInterface
+class FaresControllerFactory implements FactoryInterface
 {
     /**
      * Create service
      *
      * @param ServiceLocatorInterface|ServiceLocatorAwareInterface $serviceLocator
-     * @return EmployeesController
+     * @return FaresController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $sharedServiceManager = $serviceLocator->getServiceLocator();
-        $businessService = $sharedServiceManager->get('BusinessCore\Service\BusinessService');
-
-        return new EmployeesController($businessService);
+        return new FaresController();
     }
 }
