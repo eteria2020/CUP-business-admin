@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3ffb454cebb8da6aba4d34487d271a54",
-    "content-hash": "e77930d703e5d354bcee07d6ffce29b5",
+    "hash": "37c837cc85f7509fa37a9fc3d8c27a54",
+    "content-hash": "97b494ec0a5893bad6a1997b722a2ea1",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -134,26 +134,32 @@
         },
         {
             "name": "cup-web/core-business",
-            "version": "dev-master",
+            "version": "dev-convenzioni-aziendali",
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
-                "reference": "2cafcb542c0ad113ec4840b83e747979cc8506e9"
+                "reference": "dc229c72d51bd5607b69c6dbc9b18a11f999fb3f"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
                 "doctrine/migrations": "^1.2",
+                "h4cc/wkhtmltopdf-amd64": "0.12.0",
+                "mvlabs/mvlabs-snappy": "0.2.*",
                 "php": ">=5.4",
+                "rwoverdijk/assetmanager": "1.4.*",
                 "zendframework/zendframework": "2.4.*"
             },
             "type": "library",
             "autoload": {
                 "classmap": [
                     "./Module.php"
-                ]
+                ],
+                "psr-4": {
+                    "BusinessCore\\": "src/"
+                }
             },
             "description": "Business Core module",
-            "time": "2016-04-22 14:23:37"
+            "time": "2017-02-15 14:14:25"
         },
         {
             "name": "doctrine/annotations",

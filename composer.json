@@ -41,7 +41,7 @@
         "natxet/CssMin": "3.0.*",
         "mvlabs/zf2-multilanguage": "dev-master",
         "sharengo-web/admin-ui": "dev-master",
-        "cup-web/core-business": "dev-master",
+        "cup-web/core-business": "dev-convenzioni-aziendali",
         "mvlabs/mvlabs-payments": "dev-master",
         "mvlabs/omnipay-cartasi": "@dev"
     },
