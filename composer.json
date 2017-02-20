@@ -41,7 +41,7 @@
         "natxet/CssMin": "3.0.*",
         "mvlabs/zf2-multilanguage": "dev-master",
         "sharengo-web/admin-ui": "dev-master",
-        "cup-web/core-business": "dev-convenzioni-aziendali",
+        "cup-web/core-business": "dev-master",
         "mvlabs/mvlabs-payments": "dev-master",
         "mvlabs/omnipay-cartasi": "@dev"
     },
@@ -63,7 +63,7 @@
             "MvlabsPayments\\": "module/MvlabsPayments/src/"
         }
     },
-    "scripts": {
+    "scriptss": {
         "pre-dependencies-solving": "Scripts\\Composer::addSubreposDependencies",
         "pre-install-cmd": "Scripts\\Composer::addSubreposRepositories",
         "pre-update-cmd": "Scripts\\Composer::addSubreposRepositories"
