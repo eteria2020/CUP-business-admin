@@ -16,6 +16,9 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        $business = $this->identity()->getBusiness();
+        return new ViewModel([
+            'business' => $business
+        ]);
     }
 }

@@ -8,11 +8,13 @@ use Zend\View\Model\ViewModel;
 class ErrorController extends AbstractActionController
 {
 
-	public function indexAction() {
+    public function indexAction()
+    {
 
     }
     
-    public function unauthorizedAction() {
+    public function unauthorizedAction()
+    {
 
         $this->getResponse()->setStatusCode(403);
         
@@ -23,5 +25,4 @@ class ErrorController extends AbstractActionController
         return $I_view;
         
     }
-
 }

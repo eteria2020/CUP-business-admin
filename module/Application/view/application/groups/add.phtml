@@ -1,0 +1,56 @@
+<?php
+$form = $this->form->prepare();
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title"><?= $this->translate("CREA NUOVO GRUPPO"); ?></h3>
+            </div>
+            <div class="col-lg-6">
+                <a href="<?php echo $this->url('groups'); ?>" class="btn btn-success pull-right"><i class="fa fa-arrow-left"></i> <?= $this->translate("Torna alla lista"); ?></a>
+            </div>
+        </div>
+
+        <div class="page-bar">
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <?= $this->form()->openTag($form); ?>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="name"><?= $this->translate("Nome gruppo"); ?></label>
+                            <?php
+                                $field = $form->get('name');
+                                echo $this->formElement($field);
+                                echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+
+                            ?>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="form-group">
+                            <label for="description"><?= $this->translate("Descrizione"); ?></label>
+                            <?php
+                            $field = $form->get('description');
+                            echo $this->formElement($field);
+                            echo $this->formElementErrors($field, array('class' => 'text-danger list-unstyled'));
+                            ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-success"><?= $this->translate("Crea nuovo Gruppo"); ?></button>
+                    </div>
+                </div>
+                <?= $this->form()->closeTag(); ?>
+            </div>
+        </div>
+    </div>
+</div>

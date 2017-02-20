@@ -14,9 +14,10 @@ $config = [
         'BjyAuthorize',
         'AssetManager',
         'MvLabsMultilanguage',
-        
+        'MvlabsSnappy',
+        'BusinessCore',
         'Application',
-        'SharengoAdminUI',
+        'SharengoAdminUI'
     ],
 
     // These are various options for the listeners attached to the ModuleManager

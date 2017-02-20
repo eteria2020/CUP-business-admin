@@ -1,0 +1,56 @@
+<?php
+?>
+<div class="page-content-wrapper">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="page-title"><?= $this->translate("TARIFFA ATTUALE"); ?></h3>
+            </div>
+        </div>
+        <div class="portlet box green">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-calendar"></i><?= $this->translate("Tariffa attuale"); ?>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <?php if ($this->businessFare instanceof \BusinessCore\Entity\BusinessFare) {
+                    $parkDiscount = $this->businessFare->getParkDiscount();
+                    $motionDiscount = $this->businessFare->getMotionDiscount();
+                    $motionCostPerMinute = $this->businessFare->getBaseFareMotionCostPerMinute();
+                    $parkCostPerMinute = $this->businessFare->getBaseFareParkCostPerMinute(); ?>
+                    <h3><?= $this->translate("Valido dal: ") . $this->businessFare->getInsertedTs()->format('Y-m-d H:i:s'); ?></h3>
+                    <h3><?= $this->translate("Sconto sosta: ") . sprintf("%s%%", $parkDiscount); ?></h3>
+                    <h3><?= $this->translate("Sconto corsa: ") . sprintf("%s%%", $motionDiscount) ?></h3>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th><?= $this->translate('Le tue tariffe') ?></th>
+                            <th><?= $this->translate('Invece di') ?></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><?= $this->translate('Tariffa base della corsa') ?></td>
+                            <td>€ <?= number_format($motionCostPerMinute / 100 * (1 - $motionDiscount / 100), 2, ',', '.') ?></td>
+                            <td>€ <?= number_format($motionCostPerMinute / 100, 2, ',', '.') ?></td>
+                        <tr>
+                        <tr>
+                            <td><?= $this->translate('Tariffa di sosta') ?></td>
+                            <td>€ <?= number_format($parkCostPerMinute / 100 * (1 - $parkDiscount / 100), 2, ',', '.') ?></td>
+                            <td>€ <?= number_format($parkCostPerMinute / 100, 2, ',', '.') ?></td>
+                        <tr>
+
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <h3><?= $this->translate("Nessuna tariffia associata")?></h3>
+                <?php } ?>
+
+            </div>
+        </div>
+
+        <!-- END PAGE CONTENT-->
+    </div>
+</div>

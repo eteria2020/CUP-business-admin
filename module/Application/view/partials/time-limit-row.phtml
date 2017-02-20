@@ -1,0 +1,25 @@
+<?php
+?>
+<div class="rule-div limit-rules <?= $this->class ?>" style="clear: both;">
+    <div class="control-group col-sm-3">
+        <div class="input-group clockpicker">
+            <input type="text" class="from form-control" placeholder="<?= $this->translate("dalle"); ?>" value="<?= $this->from ?>">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+    </div>
+    <div class="control-group col-sm-3">
+        <div class="input-group clockpicker">
+            <input type="text" class="to form-control" placeholder="<?= $this->translate("alle"); ?>" value="<?= $this->to ?>">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-time"></span>
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="remove-times btn btn-icon-only">
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
+    </div>
+</div>
