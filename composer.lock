@@ -138,7 +138,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
-                "reference": "1b8ba36ad7b1ded7f6d53bcdbc921f08d17e7d18"
+                "reference": "90e6f17941c64bb3969a0ddec8b88ac6f7d92522"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -159,7 +159,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-02-16 18:19:46"
+            "time": "2017-02-24 08:47:00"
         },
         {
             "name": "doctrine/annotations",
@@ -2793,19 +2793,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "6c52c2722f8460122f96f86346600e1077ce22cb"
+                "reference": "6b1c0f4dde65880ed7da62387248e5baee576d88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/6c52c2722f8460122f96f86346600e1077ce22cb",
-                "reference": "6c52c2722f8460122f96f86346600e1077ce22cb",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/6b1c0f4dde65880ed7da62387248e5baee576d88",
+                "reference": "6b1c0f4dde65880ed7da62387248e5baee576d88",
                 "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.2",
                 "php": "^5.3|^7.0",
                 "phpdocumentor/reflection-docblock": "^2.0|^3.0.2",
-                "sebastian/comparator": "^1.1",
+                "sebastian/comparator": "^1.1|^2.0",
                 "sebastian/recursion-context": "^1.0|^2.0"
             },
             "require-dev": {
@@ -2848,7 +2848,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2016-11-21 14:58:47"
+            "time": "2017-02-23 12:56:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3046,16 +3046,16 @@
         },
         {
             "name": "phpunit/php-token-stream",
-            "version": "dev-master",
+            "version": "1.4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-token-stream.git",
-                "reference": "3b402f65a4cc90abf6e1104e388b896ce209631b"
+                "reference": "284fb0679dd25fb5ffb56dad92c72860c0a22f1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/3b402f65a4cc90abf6e1104e388b896ce209631b",
-                "reference": "3b402f65a4cc90abf6e1104e388b896ce209631b",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/284fb0679dd25fb5ffb56dad92c72860c0a22f1b",
+                "reference": "284fb0679dd25fb5ffb56dad92c72860c0a22f1b",
                 "shasum": ""
             },
             "require": {
@@ -3091,7 +3091,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2016-11-15 14:06:22"
+            "time": "2017-02-23 06:14:45"
         },
         {
             "name": "phpunit/phpunit",
@@ -3471,16 +3471,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "dev-master",
+            "version": "1.2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4"
+                "reference": "7dfcd2418aacbdb5e123fb23ac735acfdd6c588d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/42c4c2eec485ee3e159ec9884f95b431287edde4",
-                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/7dfcd2418aacbdb5e123fb23ac735acfdd6c588d",
+                "reference": "7dfcd2418aacbdb5e123fb23ac735acfdd6c588d",
                 "shasum": ""
             },
             "require": {
@@ -3534,7 +3534,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2016-06-17 09:04:28"
+            "time": "2016-10-03 07:44:30"
         },
         {
             "name": "sebastian/global-state",
@@ -3681,12 +3681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "df3f2a53ac9571d088561095b36c3a4ab60b9851"
+                "reference": "284c23a90ca0876381dc3285e97d0aafd79e44bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/df3f2a53ac9571d088561095b36c3a4ab60b9851",
-                "reference": "df3f2a53ac9571d088561095b36c3a4ab60b9851",
+                "url": "https://api.github.com/repos/symfony/config/zipball/284c23a90ca0876381dc3285e97d0aafd79e44bf",
+                "reference": "284c23a90ca0876381dc3285e97d0aafd79e44bf",
                 "shasum": ""
             },
             "require": {
@@ -3729,7 +3729,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-18 17:06:33"
+            "time": "2017-02-21 09:00:26"
         },
         {
             "name": "symfony/dependency-injection",
@@ -3737,12 +3737,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "e724cb9600356677e45ad4f06eba6d1a6b46d0ce"
+                "reference": "c2202bbd81aa1ef49e61656885fe208f5134366c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/e724cb9600356677e45ad4f06eba6d1a6b46d0ce",
-                "reference": "e724cb9600356677e45ad4f06eba6d1a6b46d0ce",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/c2202bbd81aa1ef49e61656885fe208f5134366c",
+                "reference": "c2202bbd81aa1ef49e61656885fe208f5134366c",
                 "shasum": ""
             },
             "require": {
@@ -3792,7 +3792,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-19 17:43:44"
+            "time": "2017-02-21 08:33:48"
         },
         {
             "name": "symfony/filesystem",
