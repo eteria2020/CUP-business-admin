@@ -75,7 +75,7 @@ class TripsController extends AbstractActionController
                 't' => [
                     'carPlate' => $trip->getCarPlate(),
                     'distance' => $trip->getKmEnd() - $trip->getKmBeginning(),
-                    'duration' => ($trip->getTimestampEnd()->format('U') - $trip->getTimestampBeginning()->format('U')) / 60 . " min",
+                    'duration' => $trip->getReadableTripLengthInMin(),
                     'parkSeconds' => $trip->getParkSeconds(),
                     'timestampBeginning' => $trip->getTimestampBeginning()->format('d-m-Y H:i:s'),
                 ],
