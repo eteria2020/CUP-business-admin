@@ -17,15 +17,15 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
+            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@git.mvlabs.it:4222/internals/payments.git",
+            "url": "https://git.mvlabs.it/internals/payments.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@git.mvlabs.it:4222/internals/omnipay-cartasi.git",
+            "url": "https://git.mvlabs.it/internals/omnipay-cartasi.git",
             "type": "git"
         }
     ],
@@ -43,7 +43,7 @@
         "sharengo-web/admin-ui": "dev-master",
         "cup-web/core-business": "dev-master",
         "mvlabs/mvlabs-payments": "dev-master",
-        "mvlabs/omnipay-cartasi": "@dev"
+        "mvlabs/omnipay-cartasi": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",
@@ -63,7 +63,7 @@
             "MvlabsPayments\\": "module/MvlabsPayments/src/"
         }
     },
-    "scriptss": {
+    "scripts": {
         "pre-dependencies-solving": "Scripts\\Composer::addSubreposDependencies",
         "pre-install-cmd": "Scripts\\Composer::addSubreposRepositories",
         "pre-update-cmd": "Scripts\\Composer::addSubreposRepositories"
