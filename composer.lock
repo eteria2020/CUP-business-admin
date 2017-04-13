@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "958b60bfee474603d657c6d749af0b73",
-    "content-hash": "e77930d703e5d354bcee07d6ffce29b5",
+    "hash": "05a69b4a3eea17bc81dd7d33fb604038",
+    "content-hash": "7a77ffc43945487a9484dd88752c1199",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -137,7 +137,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@gitlab.bulweria.com/cup-web/core-business.git",
+                "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
                 "reference": "1f3268f59a89efafc020f19b41452748bb06e7e9"
             },
             "require": {
@@ -1388,7 +1388,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.mvlabs.it:4222/internals/payments.git",
+                "url": "https://git.mvlabs.it/internals/payments.git",
                 "reference": "7ff26873007c9331c3f3e4423f88fe280f775abb"
             },
             "require": {
@@ -1475,7 +1475,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.mvlabs.it:4222/internals/omnipay-cartasi.git",
+                "url": "https://git.mvlabs.it/internals/omnipay-cartasi.git",
                 "reference": "10873be4c3ed27ce55caa7c9fd8acf65cefa17ac"
             },
             "require": {
@@ -3681,12 +3681,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "06ce6bb46c24963ec09323da45d0f4f85d3cecd2"
+                "reference": "35b7dfa089d7605eb1fdd46281b3070fb9f38750"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/06ce6bb46c24963ec09323da45d0f4f85d3cecd2",
-                "reference": "06ce6bb46c24963ec09323da45d0f4f85d3cecd2",
+                "url": "https://api.github.com/repos/symfony/config/zipball/35b7dfa089d7605eb1fdd46281b3070fb9f38750",
+                "reference": "35b7dfa089d7605eb1fdd46281b3070fb9f38750",
                 "shasum": ""
             },
             "require": {
@@ -3729,7 +3729,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-01 18:13:50"
+            "time": "2017-04-04 15:24:26"
         },
         {
             "name": "symfony/dependency-injection",
@@ -3737,12 +3737,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "a5f3f1265731c33906a725c6f321cb93c2b49f67"
+                "reference": "e5a5c1c7b70649a356a53923c892156aea780c18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/a5f3f1265731c33906a725c6f321cb93c2b49f67",
-                "reference": "a5f3f1265731c33906a725c6f321cb93c2b49f67",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/e5a5c1c7b70649a356a53923c892156aea780c18",
+                "reference": "e5a5c1c7b70649a356a53923c892156aea780c18",
                 "shasum": ""
             },
             "require": {
@@ -3792,7 +3792,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-21 21:39:01"
+            "time": "2017-04-11 09:19:47"
         },
         {
             "name": "symfony/filesystem",
