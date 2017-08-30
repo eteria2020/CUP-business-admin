@@ -64,6 +64,7 @@ class TripsController extends AbstractActionController
             $trip = $businessTrip->getTrip();
             $employee = $trip->getEmployee();
             $groupName = is_null($businessTrip->getGroup()) ? '-' : $businessTrip->getGroup()->getName();
+
             return [
                 'e' => [
                     'name' => $employee->getName(),
@@ -73,11 +74,15 @@ class TripsController extends AbstractActionController
                     'name' => $groupName,
                 ],
                 't' => [
+                    'id' => $trip->getId(),
                     'carPlate' => $trip->getCarPlate(),
                     'distance' => $trip->getKmEnd() - $trip->getKmBeginning(),
-                    'duration' => $trip->getReadableTripLengthInMin(),
-                    'parkSeconds' => $trip->getParkSeconds(),
+                    'duration' => $trip->getTripLengthInMin(),
+                    'parkSeconds' => round($trip->getParkSeconds() /60),
                     'timestampBeginning' => $trip->getTimestampBeginning()->format('d-m-Y H:i:s'),
+                    'timestampEnd' => $trip->getTimestampEnd()->format('d-m-Y H:i:s'),
+                    'addressBeginning' => $trip->getAddressBeginning(),
+                    'addressEnd' => $trip->getAddressEnd(),
                 ],
             ];
         }, $businessTrips);
