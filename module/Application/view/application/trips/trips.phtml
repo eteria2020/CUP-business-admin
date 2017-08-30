@@ -84,18 +84,22 @@ $this->headScript()
                     </div>
 
                     <div class="portlet-body">
-                        <table class="table table-striped table-bordered table-hover" id="js-business-trips-table">
-                            <thead>
-                            <tr>
-                                <th><?= $this->translate("Cognome"); ?></th>
-                                <th><?= $this->translate("Nome"); ?></th>
-                                <th><?= $this->translate("Gruppo"); ?></th>
-                                <th><?= $this->translate("Targa auto"); ?></th>
-                                <th><?= $this->translate("Distanza"); ?></th>
-                                <th><?= $this->translate("Durata"); ?></th>
-                                <th><?= $this->translate("Sosta"); ?></th>
-                                <th><?= $this->translate("Data inizio"); ?></th>
-                            </tr>
+                        <table class="table table-striped table-bordered table-hover" id="js-business-trips-table" style="overflow:hidden; white-space:nowrap">
+                            <thead style="text-align-last: center">
+                                <tr>
+                                    <th><?= $this->translate("Id"); ?></th>
+                                    <th><?= $this->translate("Cognome"); ?></th>
+                                    <th><?= $this->translate("Nome"); ?></th>
+                                    <th><?= $this->translate("Gruppo"); ?></th>
+                                    <th><?= $this->translate("Targa auto"); ?></th>
+                                    <th><?= $this->translate("Durata (min)"); ?></th>
+                                    <th><?= $this->translate("Sosta (min)"); ?></th>
+                                    <th><?= $this->translate("Data inizio"); ?></th>
+                                    <th><?= $this->translate("Data fine"); ?></th>
+                                    <th><?= $this->translate("Luogo inizio"); ?></th>
+                                    <th><?= $this->translate("Luogo fine"); ?></th>
+                                    
+                                </tr>
                             </thead>
                         </table>
                     </div>
