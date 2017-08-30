@@ -36,15 +36,17 @@ $(function() {
         },
         "order": [[7, 'desc']],
         "columns": [
+            {data: 't.id'},
             {data: 'e.surname'},
             {data: 'e.name'},
             {data: 'g.name'},
             {data: 't.carPlate'},
-            {data: 't.distance'},
             {data: 't.duration'},
             {data: 't.parkSeconds'},
-            {data: 't.timestampBeginning'}
-
+            {data: 't.timestampBeginning'},
+            {data: 't.timestampEnd'},
+            {data: 't.addressBeginning'},
+            {data: 't.addressEnd'}
         ],
         "columnDefs": [
             {
