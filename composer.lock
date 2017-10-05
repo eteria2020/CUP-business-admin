@@ -138,7 +138,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
-                "reference": "616ec0dec4ba9b09652c7608b600acaa13e02348"
+                "reference": "516f55184d09c1902ea02ba41bab83d63b4bd615"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -159,7 +159,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-04-14 12:36:02"
+            "time": "2017-10-05 08:12:00"
         },
         {
             "name": "doctrine/annotations",
