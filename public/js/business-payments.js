@@ -69,8 +69,9 @@ $(function() {
             aoData.push({ "name": "columnFromDate", "value": "created_ts"});
             aoData.push({ "name": "columnToDate", "value": "created_ts"});
         },
-        "order": [[0, 'asc']],
+        "order": [[0, 'desc']],
         "columns": [
+            {data: 'fk_id'},
             {data: 'created_ts'},
             {data: 'type'},
             {data: 'amount'},
@@ -80,8 +81,12 @@ $(function() {
         ],
         "columnDefs": [
             {
-                targets: 5,
-                sortable: false
+                targets: 3,
+                className: 'text-right'
+            },
+            {
+                targets: 6,
+                sortable: false,
             }
         ],
         "lengthMenu": [
