@@ -120,6 +120,7 @@ class PaymentsController extends AbstractActionController
 
             $payedOn = empty($businessPayment['payed_on_ts']) ? '-' : date_create($businessPayment['payed_on_ts'])->format('d-m-Y H:i:s');
             return [
+                'fk_id' => $businessPayment['fk_id'],
                 'created_ts' => date_create($businessPayment['created_ts'])->format('d-m-Y H:i:s'),
                 'type' => $this->formatPaymentType($businessPayment['type']),
                 'amount' => $this->formatAmount($businessPayment['amount'], $businessPayment['currency']),
@@ -136,6 +137,7 @@ class PaymentsController extends AbstractActionController
 
             $payedOn = empty($businessPayment['payed_on_ts']) ? '-' : date_create($businessPayment['payed_on_ts'])->format('d-m-Y H:i:s');
             return [
+                'fk_id' => $businessPayment['fk_id'],
                 'created_ts' => date_create($businessPayment['created_ts'])->format('d-m-Y H:i:s'),
                 'type' => $this->formatPaymentType($businessPayment['type']),
                 'amount' => $this->formatAmount($businessPayment['amount'], $businessPayment['currency']),
