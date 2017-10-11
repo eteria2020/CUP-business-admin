@@ -577,37 +577,24 @@ return [
                     ],
                 ],
             ],
-            [
-                'label'     => $translator->translate('Fatture'),
-                'route'     => 'invoices',
-                'icon'      => 'fa fa-file-o',
-                'isRouteJs' => true,
-                'pages'     => [
-                    [
-                        'label' => $translator->translate('Elenco'),
-                        'route' => 'invoices',
-                        'isVisible' => true
-                    ],
-                ],
-            ],
-            [
-                'label'     => $translator->translate('Pacchetti minuti'),
-                'route'     => 'time-packages',
-                'icon'      => 'fa fa-gift',
-                'isRouteJs' => true,
-                'pages'     => [
-                    [
-                        'label' => $translator->translate('Elenco'),
-                        'route' => 'time-packages',
-                        'isVisible' => true
-                    ],
-                    [
-                        'label' => $translator->translate('Acquista'),
-                        'route' => 'time-packages/buy',
-                        'isVisible' => true
-                    ],
-                ],
-            ],
+//            [
+//                'label'     => $translator->translate('Pacchetti minuti'),
+//                'route'     => 'time-packages',
+//                'icon'      => 'fa fa-gift',
+//                'isRouteJs' => true,
+//                'pages'     => [
+//                    [
+//                        'label' => $translator->translate('Elenco'),
+//                        'route' => 'time-packages',
+//                        'isVisible' => true
+//                    ],
+//                    [
+//                        'label' => $translator->translate('Acquista'),
+//                        'route' => 'time-packages/buy',
+//                        'isVisible' => true
+//                    ],
+//                ],
+//            ],
             [
                 'label'     => $translator->translate('Tariffa'),
                 'route'     => 'fares',
@@ -630,6 +617,19 @@ return [
                     [
                         'label' => $translator->translate('Lista pagamenti'),
                         'route' => 'payments',
+                        'isVisible' => true
+                    ],
+                ],
+            ],
+            [
+                'label'     => $translator->translate('Fatture'),
+                'route'     => 'invoices',
+                'icon'      => 'fa fa-file-o',
+                'isRouteJs' => true,
+                'pages'     => [
+                    [
+                        'label' => $translator->translate('Elenco'),
+                        'route' => 'invoices',
                         'isVisible' => true
                     ],
                 ],
