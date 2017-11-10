@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c02cbfee1dece3fa489952e3b31a1b36",
     "content-hash": "7a77ffc43945487a9484dd88752c1199",
     "packages": [
         {
@@ -75,7 +74,7 @@
                 "zf2",
                 "zfc-user"
             ],
-            "time": "2013-07-05 11:59:46"
+            "time": "2013-07-05T11:59:46+00:00"
         },
         {
             "name": "creof/doctrine2-spatial",
@@ -130,7 +129,7 @@
                 "postgresql",
                 "spatial"
             ],
-            "time": "2014-03-17 13:45:28"
+            "time": "2014-03-17T13:45:28+00:00"
         },
         {
             "name": "cup-web/core-business",
@@ -138,7 +137,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
-                "reference": "516f55184d09c1902ea02ba41bab83d63b4bd615"
+                "reference": "6c8f541ab83674145a63e91c526a74855616cf7c"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -159,7 +158,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-10-05 08:12:00"
+            "time": "2017-11-10T13:41:55+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -227,7 +226,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2016-03-24 07:09:52"
+            "time": "2016-03-24T07:09:52+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -297,7 +296,7 @@
                 "cache",
                 "caching"
             ],
-            "time": "2015-12-19 05:04:23"
+            "time": "2015-12-19T05:04:23+00:00"
         },
         {
             "name": "doctrine/collections",
@@ -363,7 +362,7 @@
                 "collections",
                 "iterator"
             ],
-            "time": "2016-07-15 10:02:57"
+            "time": "2016-07-15T10:02:57+00:00"
         },
         {
             "name": "doctrine/common",
@@ -436,7 +435,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-12-25 13:10:52"
+            "time": "2015-12-25T13:10:52+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -507,7 +506,7 @@
                 "persistence",
                 "queryobject"
             ],
-            "time": "2016-07-15 21:22:45"
+            "time": "2016-07-15T21:22:45+00:00"
         },
         {
             "name": "doctrine/doctrine-module",
@@ -585,7 +584,7 @@
                 "module",
                 "zf2"
             ],
-            "time": "2015-12-01 22:04:42"
+            "time": "2015-12-01T22:04:42+00:00"
         },
         {
             "name": "doctrine/doctrine-orm-module",
@@ -663,7 +662,7 @@
                 "orm",
                 "zf2"
             ],
-            "time": "2015-10-05 23:06:08"
+            "time": "2015-10-05T23:06:08+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -730,7 +729,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2016-05-12 17:23:41"
+            "time": "2016-05-12T17:23:41+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -784,7 +783,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2016-03-31 10:24:22"
+            "time": "2016-03-31T10:24:22+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -838,7 +837,7 @@
                 "lexer",
                 "parser"
             ],
-            "time": "2014-09-09 13:34:57"
+            "time": "2014-09-09T13:34:57+00:00"
         },
         {
             "name": "doctrine/migrations",
@@ -906,7 +905,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2016-01-07 21:28:50"
+            "time": "2016-01-07T21:28:50+00:00"
         },
         {
             "name": "doctrine/orm",
@@ -982,7 +981,7 @@
                 "database",
                 "orm"
             ],
-            "time": "2016-06-19 10:48:28"
+            "time": "2016-06-19T10:48:28+00:00"
         },
         {
             "name": "guzzle/guzzle",
@@ -1078,7 +1077,7 @@
                 "web service"
             ],
             "abandoned": "guzzlehttp/guzzle",
-            "time": "2015-04-29 17:06:53"
+            "time": "2015-04-29T17:06:53+00:00"
         },
         {
             "name": "h4cc/wkhtmltopdf-amd64",
@@ -1118,7 +1117,7 @@
                 "thumbnail",
                 "wkhtmltopdf"
             ],
-            "time": "2014-02-11 21:33:07"
+            "time": "2014-02-11T21:33:07+00:00"
         },
         {
             "name": "ircmaxell/password-compat",
@@ -1160,7 +1159,7 @@
                 "hashing",
                 "password"
             ],
-            "time": "2014-11-20 19:18:42"
+            "time": "2014-11-20T19:18:42+00:00"
         },
         {
             "name": "knplabs/knp-snappy",
@@ -1221,7 +1220,7 @@
                 "thumbnail",
                 "wkhtmltopdf"
             ],
-            "time": "2015-05-07 07:43:07"
+            "time": "2015-05-07T07:43:07+00:00"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -1295,7 +1294,7 @@
                 "compression",
                 "minification"
             ],
-            "time": "2014-12-12 05:04:05"
+            "time": "2014-12-12T05:04:05+00:00"
         },
         {
             "name": "leafo/lessphp",
@@ -1336,7 +1335,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2014-11-24 18:39:20"
+            "time": "2014-11-24T18:39:20+00:00"
         },
         {
             "name": "mrclay/minify",
@@ -1381,7 +1380,7 @@
             ],
             "description": "Minify is a PHP5 app that helps you follow several rules for client-side performance. It combines multiple CSS or Javascript files, removes unnecessary whitespace and comments, and serves them with gzip encoding and optimal client-side cache headers",
             "homepage": "http://code.google.com/p/minify/",
-            "time": "2014-10-30 22:58:02"
+            "time": "2014-10-30T22:58:02+00:00"
         },
         {
             "name": "mvlabs/mvlabs-payments",
@@ -1414,7 +1413,7 @@
             "keywords": [
                 "payment"
             ],
-            "time": "2017-02-15 13:31:28"
+            "time": "2017-02-15T13:31:28+00:00"
         },
         {
             "name": "mvlabs/mvlabs-snappy",
@@ -1468,7 +1467,7 @@
                 "wkhtmltopdf",
                 "zf2"
             ],
-            "time": "2015-03-30 15:54:03"
+            "time": "2015-03-30T15:54:03+00:00"
         },
         {
             "name": "mvlabs/omnipay-cartasi",
@@ -1522,7 +1521,7 @@
                 "cartasi",
                 "omnipay"
             ],
-            "time": "2016-07-22 09:03:51"
+            "time": "2016-07-22T09:03:51+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
@@ -1559,7 +1558,7 @@
                 "multilanguage",
                 "zf2"
             ],
-            "time": "2016-03-08 15:35:31"
+            "time": "2016-03-08T15:35:31+00:00"
         },
         {
             "name": "natxet/CssMin",
@@ -1606,7 +1605,7 @@
                 "css",
                 "minify"
             ],
-            "time": "2015-10-13 07:27:08"
+            "time": "2015-10-13T07:27:08+00:00"
         },
         {
             "name": "omnipay/common",
@@ -1704,7 +1703,7 @@
                 "payment",
                 "purchase"
             ],
-            "time": "2016-07-07 09:52:09"
+            "time": "2016-07-07T09:52:09+00:00"
         },
         {
             "name": "rwoverdijk/assetmanager",
@@ -1765,7 +1764,7 @@
                 "zend framework 2",
                 "zf2"
             ],
-            "time": "2015-03-12 07:10:33"
+            "time": "2015-03-12T07:10:33+00:00"
         },
         {
             "name": "sharengo-web/admin-ui",
@@ -1787,7 +1786,7 @@
                 }
             },
             "description": "UI branding for admin interface",
-            "time": "2016-04-04 09:18:08"
+            "time": "2016-04-04T09:18:08+00:00"
         },
         {
             "name": "symfony/console",
@@ -1847,7 +1846,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-19 10:40:24"
+            "time": "2016-07-19T10:40:24+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1907,7 +1906,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-18 07:09:40"
+            "time": "2016-07-18T07:09:40+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -1962,7 +1961,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-17 09:06:15"
+            "time": "2016-07-17T09:06:15+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2021,7 +2020,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-06-29 14:58:48"
+            "time": "2016-06-29T14:58:48+00:00"
         },
         {
             "name": "symfony/polyfill-php54",
@@ -2079,7 +2078,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-05-18 14:26:46"
+            "time": "2016-05-18T14:26:46+00:00"
         },
         {
             "name": "symfony/polyfill-php55",
@@ -2135,7 +2134,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-05-18 14:26:46"
+            "time": "2016-05-18T14:26:46+00:00"
         },
         {
             "name": "symfony/process",
@@ -2184,7 +2183,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-29 05:29:29"
+            "time": "2016-06-29T05:29:29+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -2233,7 +2232,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-07-17 09:06:15"
+            "time": "2016-07-17T09:06:15+00:00"
         },
         {
             "name": "zendframework/zendframework",
@@ -2350,7 +2349,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2016-05-09 20:54:25"
+            "time": "2016-05-09T20:54:25+00:00"
         },
         {
             "name": "zendframework/zendxml",
@@ -2395,7 +2394,7 @@
                 "xml",
                 "zf2"
             ],
-            "time": "2016-03-05 20:48:47"
+            "time": "2016-03-05T20:48:47+00:00"
         },
         {
             "name": "zf-commons/zfc-base",
@@ -2448,7 +2447,7 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2013-05-02 12:33:49"
+            "time": "2013-05-02T12:33:49+00:00"
         },
         {
             "name": "zf-commons/zfc-user",
@@ -2525,7 +2524,7 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2016-07-08 22:36:53"
+            "time": "2016-07-08T22:36:53+00:00"
         },
         {
             "name": "zf-commons/zfc-user-doctrine-orm",
@@ -2581,7 +2580,7 @@
             "keywords": [
                 "zf2"
             ],
-            "time": "2015-07-20 20:10:49"
+            "time": "2015-07-20T20:10:49+00:00"
         }
     ],
     "packages-dev": [
@@ -2631,7 +2630,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-04-03 06:00:07"
+            "time": "2016-04-03T06:00:07+00:00"
         },
         {
             "name": "pdepend/pdepend",
@@ -2671,7 +2670,7 @@
                 "BSD-3-Clause"
             ],
             "description": "Official version of pdepend to be handled with Composer",
-            "time": "2016-03-10 15:15:04"
+            "time": "2016-03-10T15:15:04+00:00"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -2720,7 +2719,7 @@
                     "email": "mike.vanriel@naenius.com"
                 }
             ],
-            "time": "2015-02-03 12:10:50"
+            "time": "2015-02-03T12:10:50+00:00"
         },
         {
             "name": "phpmd/phpmd",
@@ -2785,7 +2784,7 @@
                 "phpmd",
                 "pmd"
             ],
-            "time": "2016-04-04 11:52:04"
+            "time": "2016-04-04T11:52:04+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -2848,7 +2847,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-03-03 17:09:02"
+            "time": "2017-03-03T17:09:02+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2910,7 +2909,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-10-06 15:47:00"
+            "time": "2015-10-06T15:47:00+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -2957,7 +2956,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2016-10-03 07:40:28"
+            "time": "2016-10-03T07:40:28+00:00"
         },
         {
             "name": "phpunit/php-text-template",
@@ -2998,7 +2997,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2015-06-21 13:50:34"
+            "time": "2015-06-21T13:50:34+00:00"
         },
         {
             "name": "phpunit/php-timer",
@@ -3042,7 +3041,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2016-05-12 18:03:57"
+            "time": "2016-05-12T18:03:57+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -3091,7 +3090,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2017-03-07 08:21:50"
+            "time": "2017-03-07T08:21:50+00:00"
         },
         {
             "name": "phpunit/phpunit",
@@ -3163,7 +3162,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-04 06:40:26"
+            "time": "2017-03-04T06:40:26+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3219,7 +3218,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-10-02 06:51:40"
+            "time": "2015-10-02T06:51:40+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -3301,7 +3300,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2017-03-26 21:03:42"
+            "time": "2017-03-26T21:03:42+00:00"
         },
         {
             "name": "sebastian/comparator",
@@ -3365,7 +3364,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-03-07 10:34:43"
+            "time": "2017-03-07T10:34:43+00:00"
         },
         {
             "name": "sebastian/diff",
@@ -3417,7 +3416,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2017-03-07 07:26:53"
+            "time": "2017-03-07T07:26:53+00:00"
         },
         {
             "name": "sebastian/environment",
@@ -3467,7 +3466,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2017-02-28 08:18:59"
+            "time": "2017-02-28T08:18:59+00:00"
         },
         {
             "name": "sebastian/exporter",
@@ -3534,7 +3533,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2017-02-26 13:09:30"
+            "time": "2017-02-26T13:09:30+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -3585,7 +3584,7 @@
             "keywords": [
                 "global state"
             ],
-            "time": "2015-10-12 03:26:01"
+            "time": "2015-10-12T03:26:01+00:00"
         },
         {
             "name": "sebastian/recursion-context",
@@ -3638,7 +3637,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2016-10-03 07:41:43"
+            "time": "2016-10-03T07:41:43+00:00"
         },
         {
             "name": "sebastian/version",
@@ -3673,7 +3672,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2015-06-21 13:59:46"
+            "time": "2015-06-21T13:59:46+00:00"
         },
         {
             "name": "symfony/config",
@@ -3729,7 +3728,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:07:15"
+            "time": "2017-04-12T14:07:15+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -3792,7 +3791,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:07:15"
+            "time": "2017-04-12T14:07:15+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -3841,7 +3840,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-04-12 14:07:15"
+            "time": "2017-04-12T14:07:15+00:00"
         }
     ],
     "aliases": [],
