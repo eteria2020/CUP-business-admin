@@ -65,6 +65,10 @@ class TripsController extends AbstractActionController
             $employee = $trip->getEmployee();
             $groupName = is_null($businessTrip->getGroup()) ? '-' : $businessTrip->getGroup()->getName();
 
+            $distance = is_null($trip->getKmEnd()) || is_null($trip->getKmBeginning()) ? '-' : $trip->getKmEnd() - $trip->getKmBeginning();
+            $timestampBeginning = is_null($trip->getTimestampBeginning()) ? '-' : $trip->getTimestampBeginning()->format('d-m-Y H:i:s');
+            $timestampEnd = is_null($trip->getTimestampEnd()) ? '-' : $trip->getTimestampEnd()->format('d-m-Y H:i:s');
+
             return [
                 'e' => [
                     'name' => $employee->getName(),
@@ -76,11 +80,11 @@ class TripsController extends AbstractActionController
                 't' => [
                     'id' => $trip->getId(),
                     'carPlate' => $trip->getCarPlate(),
-                    'distance' => $trip->getKmEnd() - $trip->getKmBeginning(),
+                    'distance' => $distance,
                     'duration' => $trip->getTripLengthInMin(),
                     'parkSeconds' => round($trip->getParkSeconds() /60),
-                    'timestampBeginning' => $trip->getTimestampBeginning()->format('d-m-Y H:i:s'),
-                    'timestampEnd' => $trip->getTimestampEnd()->format('d-m-Y H:i:s'),
+                    'timestampBeginning' => $timestampBeginning,
+                    'timestampEnd' => $timestampEnd,
                     'addressBeginning' => $trip->getAddressBeginning(),
                     'addressEnd' => $trip->getAddressEnd(),
                 ],
