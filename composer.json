@@ -9,23 +9,23 @@
     "homepage": "http://framework.zend.com/",
     "repositories": [
         {
-            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/admin-ui.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/admin-ui.git",
             "type": "git"
         },
         {
-            "url": "https://git.mvlabs.it/internals/zf2-multilanguage.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/zf2-multilanguage.git",
             "type": "git"
         },
         {
-            "url": "ssh://git@gitlab.bulweria.com/sharengo-web/core-business.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/business-core.git",
             "type": "git"
         },
         {
-            "url": "https://git.mvlabs.it/internals/payments.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/payments.git",
             "type": "git"
         },
         {
-            "url": "https://git.mvlabs.it/internals/omnipay-cartasi.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/cartasi-omnipay.git",
             "type": "git"
         }
     ],
