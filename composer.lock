@@ -1475,7 +1475,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/cartasi-omnipay.git",
-                "reference": "10873be4c3ed27ce55caa7c9fd8acf65cefa17ac"
+                "reference": "8f2ff0712b5187241f5b51d95fa6ef7b43bf7f27"
             },
             "require": {
                 "omnipay/common": "~2.0"
@@ -1521,7 +1521,7 @@
                 "cartasi",
                 "omnipay"
             ],
-            "time": "2016-07-22T09:03:51+00:00"
+            "time": "2017-12-01T16:25:57+00:00"
         },
         {
             "name": "mvlabs/zf2-multilanguage",
