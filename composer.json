@@ -17,7 +17,7 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@git.sharengo.it/cup-it/business-core.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
             "type": "git"
         },
         {
@@ -25,7 +25,7 @@
             "type": "git"
         },
         {
-            "url": "ssh://git@git.sharengo.it/cup-it/cartasi-omnipay.git",
+            "url": "ssh://git@git.sharengo.it/cup-it/omnipay-cartasi.git",
             "type": "git"
         }
     ],
