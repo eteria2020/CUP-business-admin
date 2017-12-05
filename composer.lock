@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "248997562b0f4dfbb0e8d35b16091c5a",
+    "content-hash": "701147627c47655ad646d4b0e8e6ddb6",
     "packages": [
         {
             "name": "bjyoungblood/bjy-authorize",
@@ -136,8 +136,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.sharengo.it/cup-it/business-core.git",
-                "reference": "8adf957d348858afdd3a31ee4bf5993e38b65fed"
+                "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
+                "reference": "8612fa0bd7ebeda9ee3ba572f60db123dde368c6"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -158,7 +158,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-11-06T16:56:39+00:00"
+            "time": "2017-11-16T10:58:03+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -1474,7 +1474,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "ssh://git@git.sharengo.it/cup-it/cartasi-omnipay.git",
+                "url": "ssh://git@git.sharengo.it/cup-it/omnipay-cartasi.git",
                 "reference": "8f2ff0712b5187241f5b51d95fa6ef7b43bf7f27"
             },
             "require": {
