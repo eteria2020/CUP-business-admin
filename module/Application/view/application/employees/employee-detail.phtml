@@ -91,9 +91,9 @@ $employee = $businessEmployee->getEmployee();
                                     <dl class="dl-horizontal">
                                         <dt><?= $this->translate("Stato"); ?></dt>
                                         <dd><?= $this->businessEmployeeStatus($businessEmployee->getStatus()); ?></dd>
-                                        <dt><?= $this->translate("Data associazione"); ?></dt>
+                                        <dt><?= $this->translate("Data inserimento"); ?></dt>
                                         <dd><?= $businessEmployee->getReadableInsertDate(); ?></dd>
-                                        <dt><?= $this->translate("Data approvazione"); ?></dt>
+                                        <dt><?= $this->translate("Data conferma"); ?></dt>
                                         <dd><?= $businessEmployee->getReadableConfirmedDate(); ?></dd>
                                     </dl>
                                 </div>
