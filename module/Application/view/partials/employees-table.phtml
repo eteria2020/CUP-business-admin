@@ -13,6 +13,8 @@
                 <th class="email-column"><?= $this->translate("Email"); ?></th>
                 <th class="group-column"><?= $this->translate("Gruppo"); ?></th>
                 <th class="status-column"><?= $this->translate("Stato"); ?></th>
+                <th class="status-column"><?= $this->translate("Inserimento"); ?></th>
+                <th class="status-column"><?= $this->translate("Confermato"); ?></th>
                 <th class="pin-column"><?= $this->translate("PIN Aziendale"); ?></th>
                 <th class="button-column"><?= $this->translate("Azioni"); ?></th>
             </tr>
@@ -27,6 +29,8 @@
                     <td><?= $employee->getEmail(); ?></td>
                     <td><?= $this->groupLink($be) ?></td>
                     <td><?= $this->businessEmployeeStatus($be->getStatus()); ?></td>
+                    <td><?= $be->getReadableInsertDate() ?></td>
+                    <td><?= $be->getReadableConfirmedDate() ?></td>
                     <td><?= $employee->getBusinessPin()?> <?= $companyPinStatus ?></td>
                     <td><?= $this->businessEmployeeAvailableActionButtons($be) ?></td>
                 </tr>
