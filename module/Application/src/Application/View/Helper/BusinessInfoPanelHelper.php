@@ -59,10 +59,10 @@ class BusinessInfoPanelHelper extends AbstractHelper {
         } elseif ($subscriptionPayment->isExpectedPayed()) {
             $html .= '<div class="alert alert-info">' . $this->getView()->translate("In attesa di conferma da parte di sharengo") .'</div>';
         } else {
-            $html .= '<div class="alert alert-warning col-sm-12">';
+            $html .= '<div class="alert alert-warning col-sm-12" style="text-align: justify">';
             if ($business->payWithCreditCard() && !$business->hasActiveContract()) {
-                 $html .= sprintf('%s %s', 
-                         $this->getView()->translate("Per attivare l'azienda devi pagare la quota di iscrizione di euro "),
+                 $html .= sprintf('%s %s &euro;.', 
+                         $this->getView()->translate("Per attivare l'azienda devi pagare la quota di iscrizione di "),
                          $business->getReadableSubscriptionFee());
 
                  $html .= sprintf('<br><br><a href="%s" /> <input class="btn btn-success col-sm-12" type="submit" value="%s"> </a>',
@@ -70,7 +70,7 @@ class BusinessInfoPanelHelper extends AbstractHelper {
                          $this->getView()->translate("Paga con carta di credito")
                          );
             } else {
-                $html .= '<br>' . $this->getView()->translate("Una volta pagato l'importo attraverso bonifico bancario, vai nel menu pagamenti e segnalalo come pagato ");
+                $html .= '<br>' . $this->getView()->translate("Una volta pagato l'importo attraverso bonifico bancario, vai nel menu pagamenti e segnalalo come pagato.");
             }
 
             $html .= '</div>';
