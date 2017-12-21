@@ -245,6 +245,16 @@ return [
                     ],
                 ],
             ],
+            'credit_card_change' => [
+                'type'    => 'Literal',
+                'options' => [
+                    'route'    => '/credit_card_change',
+                    'defaults' => [
+                        'controller' => 'Application\Controller\Subscription',
+                        'action' => 'creditCardChange',
+                    ],
+                ],
+            ],
             'subscription-payment-concluded' => [
                 'type' => 'Segment',
                 'options' => [
