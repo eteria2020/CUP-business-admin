@@ -558,7 +558,7 @@ return [
                     [
                         'label' => $translator->translate('Gestione gruppi'),
                         'route' => 'groups',
-                        'isVisible' => true
+                        'isVisible' => false
                     ],
                     [
                         'route' => 'groups/add',
