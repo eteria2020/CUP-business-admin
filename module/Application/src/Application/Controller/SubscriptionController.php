@@ -86,7 +86,7 @@ class SubscriptionController extends AbstractActionController {
      */
     public function creditCardChangeAction() {
         $business = $this->identity()->getBusiness();
-        if ($business->payWithCreditCard() && $business->hasActiveContract()) {
+        if ($business->payWithCreditCard()) {
             $extraPayment = $this->businessPaymentService->getBusinessExtraPaymentCreditCardChange($business);
             $this->extraPaymentService->payCreditCardChange($extraPayment);
         } else {
