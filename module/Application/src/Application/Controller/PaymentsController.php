@@ -163,7 +163,7 @@ class PaymentsController extends AbstractActionController
             case BusinessPayment::TYPE_PACKAGE:
                 return $this->translatorPlugin()->translate("Pacchetto minuti");
             case BusinessPayment::TYPE_EXTRA:
-                return $this->translatorPlugin()->translate("Extra / Penale");
+                return $this->translatorPlugin()->translate("Extra");
             case BusinessPayment::TYPE_TRIP:
                 return $this->translatorPlugin()->translate("Corsa");
             case BusinessPayment::TYPE_SUBSCRIPTION:
