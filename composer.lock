@@ -74,6 +74,7 @@
                 "zf2",
                 "zfc-user"
             ],
+            "abandoned": true,
             "time": "2013-07-05T11:59:46+00:00"
         },
         {
@@ -137,7 +138,7 @@
             "source": {
                 "type": "git",
                 "url": "ssh://git@git.sharengo.it/cup-it/core-business.git",
-                "reference": "24e037a55f4b705ccfc581a5e62814fb876999fe"
+                "reference": "61114b9f8b21ea39bfb23c844ab3aa2eeb6a79a9"
             },
             "require": {
                 "doctrine/doctrine-orm-module": "0.9.*",
@@ -158,7 +159,7 @@
                 }
             },
             "description": "Business Core module",
-            "time": "2017-12-27T11:56:38+00:00"
+            "time": "2018-08-07T12:48:23+00:00"
         },
         {
             "name": "doctrine/annotations",
