@@ -1,6 +1,9 @@
 <?php
 use BusinessCore\Entity\Business;
 
+$this->headScript()->appendFile('/js/recipient-code.js');
+$this->headScript()->appendFile('/js/vat-number.js');
+
 /** @var Business $business */
 $business = $this->business
 ?>
@@ -32,6 +35,12 @@ $business = $this->business
                                 <dd><?= $business->getFax(); ?></dd>
                                 <dt><?= $this->translate("Partita IVA"); ?></dt>
                                 <dd><?= $business->getVatNumber(); ?></dd>
+
+                                <dt><?= $this->translate("Cod. destinatario"); ?></dt>
+                                <dd><?= $business->getRecipientCode() ?></dd>
+                                <dt><?= $this->translate("PEC"); ?></dt>
+                                <dd><?= $business->getCem() ?></dd>
+
                                 <dt><?= $this->translate("Email"); ?></dt>
                                 <dd><?= $business->getEmail(); ?></dd>
                             </dl>
@@ -81,3 +90,7 @@ $business = $this->business
         </div>
     </div>
 </div>
+
+
+
+<?php echo $this->partial('partials/business-edit.phtml', ['business' => $business]); ?>

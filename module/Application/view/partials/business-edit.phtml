@@ -1,0 +1,153 @@
+<?
+
+$recipientCodeType = "recipientCode";
+$recipientCodeLabel = $this->translate('Cod. destinatario');
+
+$cemType = "cem";
+$cemLabel = $this->translate('PEC');
+
+if(!is_null($business->getRecipientCode())) {
+    $eInvoiceRecipientCodeType = $recipientCodeType;
+    $eInvoiceRecipientCodeLabel = $recipientCodeLabel;
+    $eInvoiceRecipientCodeValue = $business->getRecipientCode();
+} else {
+    $eInvoiceRecipientCodeType = $cemType;
+    $eInvoiceRecipientCodeLabel = $cemLabel;
+    $eInvoiceRecipientCodeValue = $business->getCem();
+}
+?>
+
+<!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#businessEditModal">
+        <?= $this->translate('Modifica') ?>
+    </button>
+
+
+<!-- Modal -->
+    <div class="modal fade" id="businessEditModal" tabindex="-1" role="dialog" aria-labelledby="businessEditModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="business-edit-form" name="business-edit-form" method="post" action="/">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="businessEditModalLabel"><?= $this->translate('Modifica dati aziendali') ?></h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div  class="col-md-4" style="text-align: center;">
+                                    <label for="vatNumber">
+                                        <?= $this->translate('P. IVA') ?>
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="vatNumber" name="vatNumber" value="<?= $business->getVatNumber() ?>">
+                                    <div class="alert alert-danger" id="vatNumberError" role="alert" style="display: none"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="einvoice-recipient-code-value">
+                                         <ul class="nav navbar-nav pull-right">
+                                            <li class="dropdown dropdown-user">
+                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                                <span class="username" id="einvoice-recipient-code-label">
+                                                     <?= $eInvoiceRecipientCodeLabel?>
+                                                </span>
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+                                                <input type="hidden" id="einvoice-recipient-code-type" name="recipientCodeType" value="<?= $eInvoiceRecipientCodeType ?>">
+                                                <ul class="dropdown-menu dropdown-menu-default">
+                                                    <li><a id="einvoice-recipient-selected"><?= $this->translate('Cod. destinatario') ?></a></li>
+                                                    <li><a id="einvoice-cem-selected"><?= $this->translate('PEC') ?></a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="einvoice-recipient-code-value" name="recipientCodeValue" value="<?= $eInvoiceRecipientCodeValue ?>">
+                                    <div id="einvoice-recipient-code-error" class="alert alert-danger" role="alert" style="display: none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= $this->translate('Annulla') ?></button>
+                        <button type="button" class="btn btn-primary" id="save"><?= $this->translate('Salva') ?></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    $("#einvoice-recipient-selected").click(function() {
+        $("#einvoice-recipient-code-type").val('<?=$recipientCodeType ?>');
+        $("#einvoice-recipient-code-label").text('<?=$recipientCodeLabel ?>');
+        $("#einvoice-recipient-code-value").val('');
+        $("#einvoice-recipient-code-error").hide();
+    });
+
+    $("#einvoice-cem-selected").click(function() {
+        $("#einvoice-recipient-code-type").val('<?=$cemType ?>');
+        $("#einvoice-recipient-code-label").text('<?=$cemLabel ?>');
+        $("#einvoice-recipient-code-value").val('');
+        $("#einvoice-recipient-code-error").hide();
+    });
+
+    $( "#save" ).click(function() {
+        var errorCount = 0;
+
+        var vatNumber = $("#vatNumber").val();
+        var recipientCodeType = $("#einvoice-recipient-code-type").val();
+        var recipientCodeValue = $("#einvoice-recipient-code-value").val();
+
+        var vatNumberError = IsVatNumber(vatNumber);
+        if(vatNumberError!=='') {
+            errorCount++;
+            $("#vatNumberError").text(vatNumberError);
+            $("#vatNumberError").show();
+        } else {
+            $("#vatNumberError").text('');
+            $("#vatNumberError").hide();
+        }
+
+        if (recipientCodeType=="<?=$recipientCodeType ?>") {
+            if(!isRecipientCode(recipientCodeValue)) {
+                errorCount++;
+                $("#einvoice-recipient-code-error").text('<?= $this->translate('Codice destinatario errato\r\n') ?>');
+                $("#einvoice-recipient-code-error").show();
+            } else {
+                $("#einvoice-recipient-code-error").text('');
+                $("#einvoice-recipient-code-error").hide();
+            }
+        } else {
+            if(!checkEmail(recipientCodeValue)) {
+                errorCount++;
+                $("#einvoice-recipient-code-error").text('<?= $this->translate('PEC errata\r\n') ?>');
+                $("#einvoice-recipient-code-error").show();
+            } else {
+                $("#einvoice-recipient-code-error").text('');
+                $("#einvoice-recipient-code-error").hide();
+            }
+        }
+
+        if(errorCount>0){
+
+        } else {
+            document.getElementById("business-edit-form").submit();
+        }
+
+    });
+    
+    function checkEmail(email)
+    {
+        return email.match(/\S+@\S+\.\S+/);
+    }
+</script>
