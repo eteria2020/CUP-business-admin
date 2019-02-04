@@ -348,10 +348,10 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Error' => 'Application\Controller\ErrorController',
         ],
         'factories' => [
+            'Application\Controller\Index' => 'Application\Controller\IndexControllerFactory',
             'Application\Controller\Employees' => 'Application\Controller\EmployeesControllerFactory',
             'Application\Controller\Groups' => 'Application\Controller\GroupsControllerFactory',
             'Application\Controller\Trips' => 'Application\Controller\TripsControllerFactory',
