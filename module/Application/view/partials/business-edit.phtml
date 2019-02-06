@@ -10,10 +10,12 @@ if(!is_null($business->getRecipientCode())) {
     $eInvoiceRecipientCodeType = $recipientCodeType;
     $eInvoiceRecipientCodeLabel = $recipientCodeLabel;
     $eInvoiceRecipientCodeValue = $business->getRecipientCode();
+    $eInvoiceRecipientCodeMaxLength = 7;
 } else {
     $eInvoiceRecipientCodeType = $cemType;
     $eInvoiceRecipientCodeLabel = $cemLabel;
     $eInvoiceRecipientCodeValue = $business->getCem();
+    $eInvoiceRecipientCodeMaxLength = 64;
 }
 ?>
 
@@ -69,7 +71,7 @@ if(!is_null($business->getRecipientCode())) {
                                     </label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" id="einvoice-recipient-code-value" name="recipientCodeValue" value="<?= $eInvoiceRecipientCodeValue ?>">
+                                    <input type="text" class="form-control" id="einvoice-recipient-code-value" name="recipientCodeValue" maxlength="<?= $eInvoiceRecipientCodeMaxLength ?>" value="<?= $eInvoiceRecipientCodeValue ?>">
                                     <div id="einvoice-recipient-code-error" class="alert alert-danger" role="alert" style="display: none"></div>
                                 </div>
                             </div>
@@ -91,6 +93,7 @@ if(!is_null($business->getRecipientCode())) {
         $("#einvoice-recipient-code-type").val('<?=$recipientCodeType ?>');
         $("#einvoice-recipient-code-label").text('<?=$recipientCodeLabel ?>');
         $("#einvoice-recipient-code-value").val('');
+        $("#einvoice-recipient-code-value").attr("maxlength", 7);
         $("#einvoice-recipient-code-error").hide();
     });
 
@@ -98,6 +101,7 @@ if(!is_null($business->getRecipientCode())) {
         $("#einvoice-recipient-code-type").val('<?=$cemType ?>');
         $("#einvoice-recipient-code-label").text('<?=$cemLabel ?>');
         $("#einvoice-recipient-code-value").val('');
+        $("#einvoice-recipient-code-value").attr("maxlength", 64);
         $("#einvoice-recipient-code-error").hide();
     });
 

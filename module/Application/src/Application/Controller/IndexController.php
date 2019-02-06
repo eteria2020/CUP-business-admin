@@ -70,7 +70,7 @@ class IndexController extends AbstractActionController
             $cem = $business->getCem();
 
             if(isset($received['vatNumber'])) {
-                $vatNumber = $received['vatNumber'];
+                $vatNumber = strtoupper($received['vatNumber']);
                 $vatNumberValidator = new VatNumber();
                 if($vatNumberValidator->isValid($vatNumber)) {
 
@@ -81,7 +81,7 @@ class IndexController extends AbstractActionController
 
             if(isset($received['recipientCodeType'])) {
                 if($received['recipientCodeType']=="recipientCode") {
-                    $recipientCode = $received['recipientCodeValue'];
+                    $recipientCode = strtoupper($received['recipientCodeValue']);
                     $cem = null;
 
                     $recipientCodeValidator = new RecipientCode();
@@ -92,7 +92,7 @@ class IndexController extends AbstractActionController
                     }
                 } else if($received['recipientCodeType']=="cem") {
                     $recipientCode = null;
-                    $cem = $received['recipientCodeValue'];
+                    $cem = strtolower($received['recipientCodeValue']);
 
                     $emailValidator = new \Zend\Validator\EmailAddress();
                     if($emailValidator->isValid($cem)) {

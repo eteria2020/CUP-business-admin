@@ -5,9 +5,7 @@
  */
 function isRecipientCode(recipientCode)
 {
-    if(recipientCode==="XXXXXXX") { // foreign customer
-        return true;
-    } else {
-        return recipientCode.match(/^([0-9]){7}$/);
-    }
+    recipientCode = recipientCode.toUpperCase();
+
+    return recipientCode.match(/^([A-Z0-9]){7}$/);
 }
